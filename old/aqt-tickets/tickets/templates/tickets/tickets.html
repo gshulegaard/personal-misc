@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Review Tickets
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Ticket Index</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+            <li><a href="{% url 'customer:customer' %}">Member Area</a></li>
+	    <li>Tickets</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container">
+
+    <!-- Left Bar -->
+    <div class="four alt columns" style="padding-right: 25px;">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Search</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <form method="post" action="{% url 'tickets:tickets' %}">
+        {% csrf_token %}
+        
+        <fieldset>
+
+          <div>
+            <label><strong style="color: #888;">Issue ID:</strong></label>
+            <input type="text" name="issue_id" value="{{ issue_id }}"
+                   style="width: 100%;"
+                   placeholder='e.g. "6497".  Leave blank for all.'/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label><strong style="color: #888;">Status:</strong></label>
+            <select name="status">
+              {% if status == "Open" %}
+              <option value="Open" selected>Open</option>
+              {% else %}
+              <option value="Open">Open</option>
+              {% endif %}
+
+              {% if status == "Closed" %}
+              <option value="Closed" selected>Closed</option>
+              {% else %}
+              <option value="Closed">Closed</option>
+              {% endif %}
+
+              {% if status == "All" %}
+              <option value="All" selected>All</option>
+              {% else %}
+              <option value="All">All</option>
+              {% endif %}
+            </select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label><strong style="color: #888;">Release:</strong></label>
+            <select name="release">
+              {% if release == "All" %}
+              <option value="All" selected>All</option>
+              {% else %}
+              <option value="All">All</option>
+              {% endif %}
+
+              {% if release == "5.10" %}
+              <option value="5.10" selected>5.10</option>
+              {% else %}
+              <option value="5.10">5.10</option>
+              {% endif %}
+
+              {% if release == "5.01" %}
+              <option value="5.01" selected>5.01</option>
+              {% else %}
+              <option value="5.01">5.01</option>
+              {% endif %}
+
+              {% if release == "5.00" %}
+              <option value="5.00" selected>5.00</option>
+              {% else %}
+              <option value="5.00">5.00</option>
+              {% endif %}
+
+              {% if release == "4.95" %}
+              <option value="4.95" selected>4.95</option>
+              {% else %}
+              <option value="4.95">4.95</option>
+              {% endif %}
+
+              {% if release == "4.93" %}
+              <option value="4.93" selected>4.93</option>
+              {% else %}
+              <option value="4.93">4.93</option>
+              {% endif %}
+
+              {% if release == "4.92" %}
+              <option value="4.92" selected>4.92</option>
+              {% else %}
+              <option value="4.92">4.92</option>
+              {% endif %}
+
+            </select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label><strong style="color: #888;">Keywords:</strong></label>
+            <textarea name="keywords" style="resize: vertical; width: 100%; height: 85px;"
+                      placeholder="Enter keywords separated by spaces. Leave blank for no keywords.">{{ keywords }}</textarea>
+          </div>
+
+        </fieldset>
+
+        <div class="clearfix"></div>
+        <div style="margin: 20px 0 0 0;"></div>
+
+        <input type="submit" name="search" value="Search" />
+        <input type="submit" name="clear" value="Clear" 
+               class="button gray" style="margin-left: 8px;"/>
+
+      </form>
+
+      <p style="text-align: center; margin: 27.5px 0 0 145px;">
+        <strong style="color: #888;">Ticket Count:</strong> {{ ticket_count }}
+      </p>
+
+
+      <!-- Create a new ticket... -->
+      <div class="clearfix" style="margin-bottom: 15px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Create a new ticket</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <a href="{% url 'tickets:ticket_create' %}" class="button color" 
+         style="width: 90%; text-align: center;">
+        Create Ticket <i class="icon-file white"></i>
+      </a>
+
+      <!-- End four alt columns (search) -->
+    </div>
+
+    <!-- Tickets -->
+    <div class="eleven columns" style="min-height: 70.39%;">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Tickets</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div> 
+
+      <!-- Ticket list -->
+      {% for key, ticket in tickets %}
+
+      <div id="footer">
+        <!-- Container -->
+        <div class="container">
+          
+          <!-- Left side of ticket (information) -->
+          <div class="four columns" style="padding: 0 15px 0 30px; margin: 0;">
+            <h3>Ticket {{ ticket.ticket_number }}</h3>
+
+            <ul class="get-in-touch">
+
+              <li style="margin-bottom: 2px;">
+                <p>
+                  <strong style="margin-bottom: 0px;">
+                    Reported by:
+                  </strong>
+                  {{ ticket.reported_by }}
+                </p>
+              </li>
+
+              <li style="margin-bottom: 2px;">
+                <p>
+                  <strong style="margin-bottom: 0px;">
+                    Reported date:
+                  </strong>
+                  {{ ticket.reported_date }}
+                </p>
+              </li>
+
+              <li style="margin-bottom: 2px;">
+                <p>
+                  <strong style="margin-bottom: 0px;">
+                    Issue type:
+                  </strong>
+                  {{ ticket.issue_type }}
+                </p>
+              </li>
+
+              <div style="margin: 15px 0 0 0;"></div>
+              
+              <li style="margin-bottom: 2px;">
+                <p>
+                  <strong style="margin-bottom: 0px;">
+                    Product:
+                  </strong>
+                  {{ ticket.product }}
+                </p>
+              </li>
+
+              <li style="margin-bottom: 2px;">
+                <p>
+                  <strong style="margin-bottom: 0px;">
+                    Release:
+                  </strong>
+                  {{ ticket.release }}
+                </p>
+              </li>
+
+              <div style="margin: 15px 0 0 0;"></div>
+
+              <li style="margin-bottom: 2px;">
+                <p>
+                  <strong style="margin-bottom: 0px;">
+                    Assigned to:
+                  </strong>
+                  {{ ticket.assigned_to }}
+                </p>
+              </li>
+
+              <li style="margin-bottom: 2px;">
+                <p>
+                  <strong style="margin-bottom: 0px;">
+                    Priority:
+                  </strong>
+                  {{ ticket.priority }}
+                </p>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Right side of ticket (description) -->
+          <div class="six columns" style="padding: 32px 0 0 15px; margin: 0;
+          width: 25rem;">
+            <ul class="get-in-touch">
+              <li>
+                <strong style="color: #888; margin-bottom: 0px;">
+                  Description:
+                </strong>
+                
+                <div style="margin: 5px 0 0 0;"></div>
+                
+                {{ ticket.description }}
+              </li>
+            </ul>
+
+            <a href="{% url 'tickets:ticket_detail' ticket_id=ticket.ticket_number %}" 
+               class="button color" style="float: right; margin-top: 20px;">
+              View Ticket <i class="icon-file-alt white"></i>
+            </a>
+
+          </div>
+
+        <!-- End container -->
+        </div>
+
+      <!-- End footer -->
+      </div>
+
+      <div class="clearfix" style="margin-bottom: 30px;"></div>
+      {% endfor %}
+
+      <!-- End eleven columns (ticket list) -->
+    </div>
+    
+    <div class="clearfix" style="margin-bottom: 80px;"></div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}
+

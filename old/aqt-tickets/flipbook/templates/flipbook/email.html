@@ -1,0 +1,16 @@
+{% autoescape off %}
+A new user has signed up to view a flipbook.
+
+     Name:     {{ fname }} {{ lname }}
+     Company:     {{ company }}
+     Position:     {{ position }}
+     E-mail:     {{ email }}
+     Phone:     {{ phone }}
+
+     Source:     {{ source }}
+
+     Subscribed?     {% if subscribe %}Yes{% else %}No{% endif %}
+
+     Flipbook viewed:     {{ header }} [{{ url }}]
+
+{% endautoescape %}

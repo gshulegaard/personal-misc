@@ -1,0 +1,31 @@
+## This is an example network configuration file for configuring a NAT
+## virbr0.
+##
+## THIS FILE SHOULD NOT BE USED DIRECTLY ON A KVM HOST.
+##
+## Instead, copy /etc/lib/libvirt/network/default.xml and alter it in /tmp. Then
+## run:
+##
+##   $ sudo virsh net-destroy default
+##   $ sudo virsh net-define /tmp/default.xml
+##   $ sudo virsh net-start default
+##   $ sudo virsh net-autostart default
+##
+## http://askubuntu.com/questions/246343/what-is-the-virbr0-interface-used-for
+## http://blog.gadi.cc/routed-subnet-libvirt-kvm/
+
+<network>
+  <name>default</name>
+  <uuid>0a0a2955-3fa7-4320-8d2a-bebbde7f85cc</uuid>
+  <forward mode='nat'>
+    <nat>
+      <port start='2048' end='65535'/>
+    </nat>
+  </forward>
+  <bridge name='virbr0' stp='on' delay='0'/>
+  <ip address='10.1.1.1' netmask='255.255.255.0'>
+    <dhcp>
+      <range start='10.1.1.2' end='10.1.1.254'/>
+    </dhcp>
+  </ip>
+</network>

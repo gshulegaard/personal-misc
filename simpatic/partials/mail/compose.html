@@ -1,0 +1,60 @@
+<div class="template-container" ng-controller="mailComposeController as mailComposeController">
+
+  <!-- Top spacer -->
+  <div style="height: 5%; max-height: 60px;"></div>
+
+  <!-- Green Compose header -->
+  <div class="compose-header">
+    <h4 style="margin: 8px 0px;">Compose</h4>
+  </div>
+
+  <div class="compose-message">
+    
+    <!-- Begin Form -->
+    <form>
+
+    <!-- Security row -->
+    <div class="compose-message-row">
+      <label for="security">Security</label>
+      <input type="text" class="form-control" id="security" placeholder="Jane Doe">
+    </div>
+
+    <!-- To row -->
+    <div class="compose-message-row">
+      <label for="security">To</label>
+      <input type="text" class="form-control" id="to" placeholder="john.doe@example.com">
+    </div>
+
+    <!-- Cc -->
+
+    <!-- Bcc -->
+
+    <hr>
+
+    <!-- Subject -->
+    <div class="compose-message-row">
+      <div class="subject-placeholder">Subject</div>
+      <div class="subject" role="textbox" contenteditable="true">Subject</div>
+    </div>
+
+    <!-- Message -->
+    <div class="compose-message-row">
+      <div class="message" role="textbox" contenteditable="true">Message...</div>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="compose-message-row bottom-controls">
+      <div style="float: right;">
+        <a class="btn btn-teal-ltd stylish" style="width: 80px;"
+           ng-click="mailComposeController.debugSend()">Send</a>
+      </div>
+    </div>
+
+    </form>
+
+  </div>
+
+  <!-- Bottom spacer -->
+  <div style="height: 5%; max-height: 60px;"></div>
+
+</div>

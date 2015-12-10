@@ -1,0 +1,6 @@
+Django==1.7.4
+argparse==1.2.1
+psycopg2==2.5.4
+suds==0.4
+uWSGI==2.0.9
+wsgiref==0.1.2

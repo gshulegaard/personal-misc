@@ -1,0 +1,936 @@
+<script language="javascript">
+	function doHourglass() {
+		document.body.style.cursor = 'wait';
+	}
+</script>
+
+<div style="overflow: hidden; margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px; padding: 0"
+     oncontextmenu="return false;" onbeforeunload="doHourglass();"
+     onunload="doHourglass();">
+
+	<script language="javascript">
+		var api_debug = "0";
+		var log_level = "0";
+		var test_mode = "0";
+
+		var cmi_session_changed = 0;
+		var cmi_session_xml = "<Session><Session_Row><cmi._version>AICC CMI001 4.0/SCORM 1.3 (2004)</cmi._version><cmi.core._children>learner_id, learner_name, location, credit, completion_status, success_status, exit, entry, score.scaled, score.raw, score.max, score.min, session_time, total_time, mode, progress_measure, completion_threshold, scaled_passing_score</cmi.core._children><cmi._children>learner_id, learner_name, location, credit, completion_status, success_status, exit, entry, score.scaled, score.raw, score.max, score.min, session_time, total_time, mode, progress_measure, completion_threshold, scaled_passing_score</cmi._children><cmi.core.student_id>10000</cmi.core.student_id><cmi.core.learner_id>10000</cmi.core.learner_id><cmi.student_id>10000</cmi.student_id><cmi.learner_id>10000</cmi.learner_id><cmi.core.student_name>Ackerman, William</cmi.core.student_name><cmi.core.learner_name>Ackerman, William</cmi.core.learner_name><cmi.student_name>Ackerman, William</cmi.student_name><cmi.learner_name>Ackerman, William</cmi.learner_name><cmi.core.lesson_location></cmi.core.lesson_location><cmi.core.location></cmi.core.location><cmi.lesson_location></cmi.lesson_location><cmi.location></cmi.location><cmi.core.credit>credit</cmi.core.credit><cmi.credit>credit</cmi.credit><cmi_session_cms_credit>credit</cmi_session_cms_credit><cmi.core.lesson_status>unknown</cmi.core.lesson_status><cmi.lesson_status>unknown</cmi.lesson_status><cmi.core.completion_status>unknown</cmi.core.completion_status><cmi.completion_status>unknown</cmi.completion_status><cmi.core.success_status>unknown</cmi.core.success_status><cmi.success_status>unknown</cmi.success_status><cmi.core.entry></cmi.core.entry><cmi.core.exit></cmi.core.exit><cmi.entry></cmi.entry><cmi.exit></cmi.exit><cmi.core.file_path></cmi.core.file_path><cmi.file_path></cmi.file_path><cmi.core.score._children>scaled, raw, max, min</cmi.core.score._children><cmi.score._children>scaled, raw, max, min</cmi.score._children><cmi.core.score.scaled></cmi.core.score.scaled><cmi.score.scaled></cmi.score.scaled><cmi.core.score.raw></cmi.core.score.raw><cmi.score.raw></cmi.score.raw><cmi.core.score.min></cmi.core.score.min><cmi.score.min></cmi.score.min><cmi.core.score.max>100.00</cmi.core.score.max><cmi.score.max>100.00</cmi.score.max><cmi.core.session_time>0000:00:00.00</cmi.core.session_time><cmi.session_time>0000:00:00.00</cmi.session_time><cmi.core.total_time>0000:00:00.00</cmi.core.total_time><cmi.total_time>0000:00:00.00</cmi.total_time><cmi.core.lesson_mode>normal</cmi.core.lesson_mode><cmi.lesson_mode>normal</cmi.lesson_mode><cmi.core.mode>normal</cmi.core.mode><cmi.mode>normal</cmi.mode><cmi.suspend_data></cmi.suspend_data><cmi.launch_data></cmi.launch_data><cmi.comments></cmi.comments><cmi.comments_from_learner></cmi.comments_from_learner><cmi.scaled_passing_score>65.00</cmi.scaled_passing_score><cmi.progress_measure>0</cmi.progress_measure><cmi.completion_threshold></cmi.completion_threshold><cmi.student_preference._children>audio_level, audio_captioning, language, lesson_type, delivery_speed, text, text_color, text_location, text_size, video, windows</cmi.student_preference._children><cmi.learner_preference._children>audio_level, audio_captioning, language, lesson_type, delivery_speed, text, text_color, text_location, text_size, video, windows</cmi.learner_preference._children><cmi.student_preference.audio>0</cmi.student_preference.audio><cmi.learner_preference.audio>0</cmi.learner_preference.audio><cmi.student_preference.audio_level>0</cmi.student_preference.audio_level><cmi.learner_preference.audio_level>0</cmi.learner_preference.audio_level><cmi.student_preference.audio_captioning>0</cmi.student_preference.audio_captioning><cmi.learner_preference.audio_captioning>0</cmi.learner_preference.audio_captioning><cmi.student_preference.language></cmi.student_preference.language><cmi.learner_preference.language></cmi.learner_preference.language><cmi.student_preference.lesson_type></cmi.student_preference.lesson_type><cmi.learner_preference.lesson_type></cmi.learner_preference.lesson_type><cmi.student_preference.speed>0</cmi.student_preference.speed><cmi.learner_preference.speed>0</cmi.learner_preference.speed><cmi.student_preference.delivery_speed>0</cmi.student_preference.delivery_speed><cmi.learner_preference.delivery_speed>0</cmi.learner_preference.delivery_speed><cmi.student_preference.text>0</cmi.student_preference.text><cmi.learner_preference.text>0</cmi.learner_preference.text><cmi.student_preference.text_color></cmi.student_preference.text_color><cmi.learner_preference.text_color></cmi.learner_preference.text_color><cmi.student_preference.text_location></cmi.student_preference.text_location><cmi.learner_preference.text_location></cmi.learner_preference.text_location><cmi.student_preference.text_size></cmi.student_preference.text_size><cmi.learner_preference.text_size></cmi.learner_preference.text_size><cmi.student_preference.video></cmi.student_preference.video><cmi.learner_preference.video></cmi.learner_preference.video></Session_Row></Session>";
+
+		var cmi_demographics_changed = 0;
+		var cmi_demographics_xml = "<Demographics><Demographics_Row><cmi.student_demographics._children>city, class, company, country, experience, familiar_name, instructor_name, title, native_language, state, street_address, telephone, years_experience</cmi.student_demographics._children><cmi.learner_demographics._children>city, class, company, country, experience, familiar_name, instructor_name, title, native_language, state, street_address, telephone, years_experience</cmi.learner_demographics._children><cmi.student_demographics.company>AQT Aviation</cmi.student_demographics.company><cmi.learner_demographics.company>AQT Aviation</cmi.learner_demographics.company><cmi.student_demographics.class>Pilot</cmi.student_demographics.class><cmi.learner_demographics.class>Pilot</cmi.learner_demographics.class><cmi.student_demographics.familiar_name>Bill</cmi.student_demographics.familiar_name><cmi.learner_demographics.familiar_name>Bill</cmi.learner_demographics.familiar_name><cmi.student_demographics.title>First Officer</cmi.student_demographics.title><cmi.learner_demographics.title>First Officer</cmi.learner_demographics.title><cmi.student_demographics.years_experience>3</cmi.student_demographics.years_experience><cmi.learner_demographics.years_experience>3</cmi.learner_demographics.years_experience><cmi.student_demographics.native_language>English</cmi.student_demographics.native_language><cmi.learner_demographics.native_language>English</cmi.learner_demographics.native_language><cmi.student_demographics.instructor_name>(None)</cmi.student_demographics.instructor_name><cmi.learner_demographics.instructor_name>(None)</cmi.learner_demographics.instructor_name><cmi.student_demographics.telephone>(None)</cmi.student_demographics.telephone><cmi.learner_demographics.telephone>(None)</cmi.learner_demographics.telephone><cmi.student_demographics.street_address>(None)</cmi.student_demographics.street_address><cmi.learner_demographics.street_address>(None)</cmi.learner_demographics.street_address><cmi.student_demographics.city>(None)</cmi.student_demographics.city><cmi.learner_demographics.city>(None)</cmi.learner_demographics.city><cmi.student_demographics.state>(None)</cmi.student_demographics.state><cmi.learner_demographics.state>(None)</cmi.learner_demographics.state><cmi.student_demographics.country>(None)</cmi.student_demographics.country><cmi.learner_demographics.country>(None)</cmi.learner_demographics.country></Demographics_Row></Demographics>";
+
+		var cmi_objectives_changed = 0;
+		var cmi_objectives_xml = "<Objectives><Objectives_Row><objective_id></objective_id><objective_idx></objective_idx><cmi.objectives._children>id, score, completion_status, success_status, progress_measure, description, date, time, mastery_time</cmi.objectives._children><cmi.objectives._count>0</cmi.objectives._count><cmi.objectives.n.id></cmi.objectives.n.id><cmi.objectives.n.description></cmi.objectives.n.description><cmi.objectives.score._children>scaled, raw, max, min</cmi.objectives.score._children><cmi.objectives.score._count>4</cmi.objectives.score._count><cmi.objectives.n.score.scaled></cmi.objectives.n.score.scaled><cmi.objectives.n.score.raw></cmi.objectives.n.score.raw><cmi.objectives.n.score.max></cmi.objectives.n.score.max><cmi.objectives.n.score_min></cmi.objectives.n.score_min><cmi.objectives.n.status>unknown</cmi.objectives.n.status><cmi.objectives.n.completion_status>unknown</cmi.objectives.n.completion_status><cmi.objectives.n.success_status>unknown</cmi.objectives.n.success_status><cmi.objectives.n.progress_measure></cmi.objectives.n.progress_measure><cmi.objectives.n.date></cmi.objectives.n.date><cmi.objectives.n.time>0000:00:00.00</cmi.objectives.n.time><cmi.objectives.n.mastery_time>0000:00:00.00</cmi.objectives.n.mastery_time></Objectives_Row></Objectives>";
+
+		var cmi_paths_changed = 0;
+		var cmi_paths_xml = "<Paths><Paths_Row><path_id></path_id><path_idx></path_idx><cmi.paths._children>location_id, date, time, status, why_left, time_in_element</cmi.paths._children><cmi.paths.n.location_id></cmi.paths.n.location_id><cmi.paths.n.date></cmi.paths.n.date><cmi.paths.n.time>0000:00:00.00</cmi.paths.n.time><cmi.paths.n.status></cmi.paths.n.status><cmi.paths.n.why_left></cmi.paths.n.why_left><cmi.paths.n.time_in_element>0000:00:00.00</cmi.paths.n.time_in_element></Paths_Row></Paths>";
+
+		var cmi_windows_changed = 0;
+		var cmi_windows_xml = "<Windows><Windows_Row><window_id></window_id><window_idx></window_idx><cmi.student_preference.windows._count>0</cmi.student_preference.windows._count><cmi.learner_preference.windows._count>0</cmi.learner_preference.windows._count><cmi.student_preference.windows.n></cmi.student_preference.windows.n><cmi.learner_preference.windows.n></cmi.learner_preference.windows.n></Windows_Row></Windows>";
+
+		var cmi_evaluations_changed = 0;
+		var cmi_evaluations_xml = "<Evaluations><Evaluations_Row><evaluation_id></evaluation_id><evaluation_idx></evaluation_idx><cmi.evaluation.comments._children>timestamp, date, time, location, comment, lesson_id</cmi.evaluation.comments._children><cmi.comments_from_learner._children>timestamp, date, time, location, comment, lesson_id</cmi.comments_from_learner._children><cmi.evaluation.comments._count>0</cmi.evaluation.comments._count><cmi.comments_from_learner._count>0</cmi.comments_from_learner._count><cmi.comments_from_learner.n.timestamp>T00:00:00</cmi.comments_from_learner.n.timestamp><cmi.evaluation.comments.n.date></cmi.evaluation.comments.n.date><cmi.comments_from_learner.n.date></cmi.comments_from_learner.n.date><cmi.evaluation.comments.n.time>0000:00:00.00</cmi.evaluation.comments.n.time><cmi.comments_from_learner.n.time>0000:00:00.00</cmi.comments_from_learner.n.time><cmi.evaluation.comments.n.location></cmi.evaluation.comments.n.location><cmi.comments_from_learner.n.location></cmi.comments_from_learner.n.location><cmi.evaluation.comments.n.content></cmi.evaluation.comments.n.content><cmi.comments_from_learner.n.comment></cmi.comments_from_learner.n.comment><cmi.evaluation.comments.n.lesson_id></cmi.evaluation.comments.n.lesson_id><cmi.comments_from_learner.n.lesson_id></cmi.comments_from_learner.n.lesson_id><cmi.comments_from_lms></cmi.comments_from_lms><cmi.comments_from_lms._children></cmi.comments_from_lms._children><cmi.comments_from_lms._count></cmi.comments_from_lms._count><cmi.comments_from_lms.comment></cmi.comments_from_lms.comment><cmi.comments_from_lms.location></cmi.comments_from_lms.location><cmi.comments_from_lms.timestamp></cmi.comments_from_lms.timestamp></Evaluations_Row></Evaluations>";
+
+		var cmi_attempts_changed = 0;
+		var cmi_attempts_xml = "<Attempts><Attempts_Row><attempts_id></attempts_id><attempts_idx></attempts_idx><cmi.student_data._children>attempt_number, tries, mastery_score, max_time_allowed, time_limit_action, tries_during_lesson, attempt_records</cmi.student_data._children><cmi.student_data.attempt_number>0</cmi.student_data.attempt_number><cmi.student_data.tries>0</cmi.student_data.tries><cmi.student_data.tries_during_lesson>0</cmi.student_data.tries_during_lesson><cmi.student_data.tries._count>0</cmi.student_data.tries._count><cmi.student_data.tries._children>status, score, time</cmi.student_data.tries._children><cmi.student_data.attempt_records._children>status, score, time</cmi.student_data.attempt_records._children><cmi.student_data.tries.score._children>raw, max, min</cmi.student_data.tries.score._children><cmi.student_data.attempt_records.score._children>raw, max, min</cmi.student_data.attempt_records.score._children><cmi.student_data.tries.n.score></cmi.student_data.tries.n.score><cmi.student_data.tries.n.score.raw></cmi.student_data.tries.n.score.raw><cmi.student_data.attempt_records.n.score></cmi.student_data.attempt_records.n.score><cmi.student_data.attempt_records.n.score.raw></cmi.student_data.attempt_records.n.score.raw><cmi.student_data.tries.n.score.max></cmi.student_data.tries.n.score.max><cmi.student_data.attempt_records.n.score.max></cmi.student_data.attempt_records.n.score.max><cmi.student_data.tries.n.score.min></cmi.student_data.tries.n.score.min><cmi.student_data.attempt_records.n.score.min></cmi.student_data.attempt_records.n.score.min><cmi.student_data.tries.n.status></cmi.student_data.tries.n.status><cmi.student_data.attempt_records.n.lesson_status></cmi.student_data.attempt_records.n.lesson_status><cmi.student_data.tries.n.time>0000:00:00.00</cmi.student_data.tries.n.time><cmi.student_data.mastery_score></cmi.student_data.mastery_score><cmi.student_data.max_time_allowed>0000:00:00.00</cmi.student_data.max_time_allowed><cmi.max_time_allowed>0000:00:00.00</cmi.max_time_allowed><cmi.student_data.time_limit_action></cmi.student_data.time_limit_action><cmi.time_limit_action></cmi.time_limit_action><cmi.student_data.attempt_records._children>score, lesson_status</cmi.student_data.attempt_records._children><cmi.student_data.attempt_records.n.score._children>raw, max, min</cmi.student_data.attempt_records.n.score._children></Attempts_Row></Attempts>";
+
+		var cmi_interactions_changed = 0;
+		var cmi_interactions_xml = "<Interactions><Interactions_Row><interaction_id></interaction_id><interaction_idx></interaction_idx><cmi.interactions._children>id, timestamp, type, correct_responses, weighting, learner_response, result, latency, description</cmi.interactions._children><cmi.interactions._count>0</cmi.interactions._count><cmi.interactions.n.id></cmi.interactions.n.id><cmi.interactions.n.description></cmi.interactions.n.description><cmi.interactions.n.timestamp>T00:00:00</cmi.interactions.n.timestamp><cmi.interactions.n.date></cmi.interactions.n.date><cmi.interactions.n.time>0000:00:00.00</cmi.interactions.n.time><cmi.interactions.n.type></cmi.interactions.n.type><cmi.interactions.n.weighting></cmi.interactions.n.weighting><cmi.interactions.n.student_response></cmi.interactions.n.student_response><cmi.interactions.n.learner_response></cmi.interactions.n.learner_response><cmi.interactions.n.result></cmi.interactions.n.result><cmi.interactions.n.latency>0000:00:00.00</cmi.interactions.n.latency></Interactions_Row></Interactions>";
+
+		var cmi_interactions_resp_changed = 0;
+		var cmi_interactions_resp_xml = "<InteractionResp><InteractionResp_Row><interaction_id></interaction_id><interaction_idx></interaction_idx><interaction_response_id></interaction_response_id><interaction_response_idx></interaction_response_idx><cmi.interactions.n.correct_responses.n.pattern></cmi.interactions.n.correct_responses.n.pattern></InteractionResp_Row></InteractionResp>";
+
+		var cmi_log_changed = 0;
+		var cmi_log_xml = "<Log><Log_Row><FunctionName></FunctionName><ElementName></ElementName><ElementValue></ElementValue><ErrorCode></ErrorCode><ErrorMessage></ErrorMessage></Log_Row></Log>";
+
+		var STRING_NOT_FOUND = -1;
+		var ZERO_VALUE = 0;
+		var ONE_VALUE = 1;
+		var LOG_MAX_IDX = 4;
+		var GARBAGE_CODE = "401";
+		var UNSUPPORTED_CODE = "404";
+		var EMPTY_STRING = "";
+		var N_CHAR = 'n';
+		var US_COUNT = "_count";
+		var SESSION_ROOT = "Session";
+		var DEMOGRAPHICS_ROOT = "Demographics";
+		var OBJECTIVES_ROOT = "Objectives";
+		var OBJECTIVES_IDX = "objective_idx";
+		var PATHS_ROOT = "Paths";
+		var PATHS_IDX = "path_idx";
+		var WINDOWS_ROOT = "Windows";
+		var WINDOWS_IDX = "window_idx";
+		var EVALUATIONS_ROOT = "Evaluations";
+		var EVALUATIONS_ID1 = "evaluation";
+		var EVALUATIONS_ID2 = "comments_from_learner";
+		var EVALUATIONS_ID3 = "comments_from_lms";
+		var EVALUATIONS_IDX = "evaluation_idx";
+		var ATTEMPTS_ROOT = "Attempts";
+		var ATTEMPTS_ID = "student_data";
+		var ATTEMPTS_IDX = "attempts_idx";
+		var INTERACTIONS_ROOT = "Interactions";
+		var INTERACTIONS_IDX = "interaction_idx";
+		var INTERACTIONS_RESP_ROOT = "InteractionResp";
+		var INTERACTIONS_RESP_ID = "pattern";
+		var INTERACTIONS_RESP_IDX = "interaction_response_idx";
+		var LOG_ROOT = "Log";
+		var LOG_CODE_ELEMENT = "ErrorCode";
+		var LOG_ERMSG_ELEMENT = "ErrorMessage";
+		var GV_FUNCNAME = "LMSGETVALUE";
+		var SV_FUNCNAME = "LMSSETVALUE";
+		var UNSUPPORTED = new Array("cmi.student_data._children",
+				"cmi.student_data.attempt_number",
+				"cmi.student_data.tries._count",
+				"cmi.student_data.tries._children",
+				"cmi.student_data.attempt_records._children",
+				"cmi.student_data.tries.score._children",
+				"cmi.student_data.attempt_records.score._children",
+				"cmi.student_data.max_time_allowed", "cmi.max_time_allowed",
+				"cmi.student_data.time_limit_action", "cmi.time_limit_action",
+				"cmi.student_data.attempt_records._children",
+				"cmi.student_data.attempt_records.n.score._children",
+				"cmi.student_data.tries",
+				"cmi.student_data.tries_during_lesson");
+		var xmlObjIdx;
+		var parseXml, usingDOMParser;
+
+		if (typeof window.DOMParser != "undefined") {
+			parseXml = function(xmlStr) {
+				return (new window.DOMParser()).parseFromString(xmlStr,
+						"text/xml");
+			};
+			usingDOMParser = true;
+		} else if (typeof window.ActiveXObject != "undefined"
+				&& new window.ActiveXObject("Microsoft.XMLDOM")) {
+			parseXml = function(xmlStr) {
+				var xmlDoc = new window.ActiveXObject("Microsoft.XMLDOM");
+				xmlDoc.async = "false";
+				xmlDoc.loadXML(xmlStr);
+				return xmlDoc;
+			};
+			usingDOMParser = false;
+		} else {
+			throw new Error("No XML parser found");
+		}
+
+		var SessionXML = parseXml(cmi_session_xml);
+		var DemographicsXML = parseXml(cmi_demographics_xml);
+		var ObjectivesXML = parseXml(cmi_objectives_xml);
+		var PathsXML = parseXml(cmi_paths_xml);
+		var WindowsXML = parseXml(cmi_windows_xml);
+		var EvaluationsXML = parseXml(cmi_evaluations_xml);
+		var AttemptsXML = parseXml(cmi_attempts_xml);
+		var InteractionsXML = parseXml(cmi_interactions_xml);
+		var InteractionsRespXML = parseXml(cmi_interactions_resp_xml);
+		var LogXML = parseXml(cmi_log_xml);
+
+		function GetXMLValue(param) {
+			var xmlObj = returnXMLobject(param);
+			var rNodeName = xmlObj.documentElement.nodeName;
+			var numExtract = param.replace(/\D/g, EMPTY_STRING);
+
+			if (numExtract != EMPTY_STRING) {
+				if (rNodeName == INTERACTIONS_RESP_ROOT) {
+					var NumsExtract = extractNumbers(param);
+					var paramStep = param.replace(NumsExtract[0], N_CHAR);
+					param = paramStep.replace(NumsExtract[1], N_CHAR);
+					numExtract = NumsExtract[0];
+				} else {
+					param = param.replace(numExtract, N_CHAR);
+				}
+			}
+
+			var isValidTag = validateTag(xmlObj, param, GV_FUNCNAME);
+
+			if (!isValidTag) {
+				return true;
+			}
+
+			if (param.indexOf(US_COUNT) == STRING_NOT_FOUND
+					&& numExtract == EMPTY_STRING) {
+				return getNodeValue(
+						xmlObj.getElementsByTagName(param)[ZERO_VALUE].childNodes[ZERO_VALUE],
+						ZERO_VALUE);
+			} else if (param.indexOf(US_COUNT) > STRING_NOT_FOUND) {
+				return xmlObj.getElementsByTagName(param).length;
+			} else {
+				var idxNum;
+				var numRows = xmlObj.getElementsByTagName(xmlObjIdx).length;
+
+				if (numRows > ONE_VALUE) {
+					for (var count = ONE_VALUE; count < numRows; count++) {
+						var idxValue = getNodeValue(xmlObj
+								.getElementsByTagName(xmlObjIdx)[count],
+								ONE_VALUE);
+						if (idxValue == numExtract.toString()) {
+							if (rNodeName != INTERACTIONS_RESP_ROOT) {
+								idxNum = count;
+								break;
+							} else {
+								var nextIdxValue = getNodeValue(
+										xmlObj
+												.getElementsByTagName(INTERACTIONS_RESP_IDX)[count],
+										ONE_VALUE);
+								if (nextIdxValue == NumsExtract[1].toString()) {
+									idxNum = count;
+									break;
+								}
+							}
+						}
+					}
+					if (idxNum != null) {
+						return getNodeValue(
+								xmlObj.getElementsByTagName(param)[idxNum],
+								ONE_VALUE);
+					}
+				}
+				return EMPTY_STRING;
+			}
+		}
+
+		function SetXMLValue(param, value) {
+			var xmlObj = returnXMLobject(param);
+			var rNodeName = xmlObj.documentElement.nodeName;
+
+			if (rNodeName == DEMOGRAPHICS_ROOT) {
+				if (parseInt(log_level) > ZERO_VALUE) {
+					var ErrorMessage = GetErrorString(UNSUPPORTED_CODE);
+					var LogRow = [ SV_FUNCNAME, param, EMPTY_STRING,
+							UNSUPPORTED_CODE, ErrorMessage ];
+
+					createLogEntry(LogRow);
+				}
+				return false;
+			}
+
+			var numExtract = param.replace(/\D/g, EMPTY_STRING);
+
+			if (numExtract != EMPTY_STRING) {
+				if (rNodeName == INTERACTIONS_RESP_ROOT) {
+					var NumsExtract = extractNumbers(param);
+					var paramStep = param.replace(NumsExtract[0], N_CHAR);
+
+					param = paramStep.replace(NumsExtract[1], N_CHAR);
+					numExtract = NumsExtract[0];
+				} else {
+					param = param.replace(numExtract, N_CHAR);
+				}
+			}
+
+			var isValidTag = validateTag(xmlObj, param, SV_FUNCNAME);
+
+			if (!isValidTag) {
+				return true;
+			}
+
+			if (numExtract == EMPTY_STRING) {
+				putNodeValue(xmlObj, param, ZERO_VALUE, value);
+			} else {
+				var numRows = xmlObj.getElementsByTagName(xmlObjIdx).length;
+
+				if (numRows > ONE_VALUE) {
+					var idxNum;
+
+					for (var count = ONE_VALUE; count < numRows; count++) {
+						var idxValue = getNodeValue(xmlObj
+								.getElementsByTagName(xmlObjIdx)[count],
+								ONE_VALUE);
+						if (idxValue == numExtract.toString()) {
+							if (rNodeName != INTERACTIONS_RESP_ROOT) {
+								idxNum = count;
+								break;
+							} else {
+								var nextIdxValue = getNodeValue(
+										xmlObj
+												.getElementsByTagName(INTERACTIONS_RESP_IDX)[count],
+										ONE_VALUE);
+								if (nextIdxValue == NumsExtract[1].toString()) {
+									idxNum = count;
+									break;
+								}
+							}
+						}
+					}
+					if (idxNum != null) {
+						putNodeValue(xmlObj, param, idxNum, value);
+					} else {
+						if (rNodeName != INTERACTIONS_RESP_ROOT)
+							CreateXMLRow(xmlObj, numExtract, param, value);
+						else
+							CreateXMLRow(xmlObj, NumsExtract, param, value);
+					}
+				} else {
+					if (rNodeName != INTERACTIONS_RESP_ROOT)
+						CreateXMLRow(xmlObj, numExtract, param, value);
+					else
+						CreateXMLRow(xmlObj, NumsExtract, param, value);
+				}
+			} 
+			commitToXML_STRUCT(xmlObj);
+			return true;
+		}
+
+		function CreateXMLRow(xmlObj, idx, param, value) {
+			var rNode = xmlObj.documentElement;
+			var pRow = rNode.firstChild;
+			var pCol = pRow.firstChild;
+			var newRow = xmlObj.createElement(pRow.nodeName);
+			var multipleIdxs = (idx.constructor == Array) ? true : false;
+
+			rNode.appendChild(newRow);
+
+			if (!multipleIdxs) {
+				while (pCol != null) {
+					var newCol = xmlObj.createElement(pCol.nodeName);
+
+					newRow.appendChild(newCol);
+					
+					if (newCol.nodeName == xmlObjIdx) {
+						if (usingDOMParser) {
+							newRow.lastChild.textContent = idx;
+						} else {
+							newRow.lastChild.text = idx;
+						}
+					} else if (newCol.nodeName == param) {
+						if (usingDOMParser) {
+							newRow.lastChild.textContent = value;
+						} else {
+							newRow.lastChild.text = value;
+						}
+					} else {
+						if (pCol.childNodes[ZERO_VALUE] != null) {
+							if (usingDOMParser) {
+								newRow.lastChild.textContent = pCol.childNodes[ZERO_VALUE].nodeValue;
+							} else {
+								newRow.lastChild.text = pCol.childNodes[ZERO_VALUE].nodeValue;
+							}
+						} else {
+							if (usingDOMParser) {
+								newRow.lastChild.textContent = EMPTY_STRING;
+							} else {
+								newRow.lastChild.text = EMPTY_STRING;
+							}
+						}
+					}
+					pCol = pCol.nextSibling;
+				}
+
+			} else {
+				while (pCol != null) {
+					var newCol = xmlObj.createElement(pCol.nodeName);
+
+					newRow.appendChild(newCol);
+					
+					if (newCol.nodeName == xmlObjIdx) {
+						if (usingDOMParser) {
+							newRow.lastChild.textContent = idx[0];
+						} else {
+							newRow.lastChild.text = idx[0];
+						}
+					} else if (newCol.nodeName == INTERACTIONS_RESP_IDX) {
+						if (usingDOMParser) {
+							newRow.lastChild.textContent = idx[1];
+						} else {
+							newRow.lastChild.text = idx[1];
+						}
+					} else if (newCol.nodeName == param) {
+						if (usingDOMParser) {
+							newRow.lastChild.textContent = value;
+						} else {
+							newRow.lastChild.text = value;
+						}
+					} else {
+						if (pCol.childNodes[ZERO_VALUE] != null) {
+							if (usingDOMParser) {
+								newRow.lastChild.textContent = pCol.childNodes[ZERO_VALUE].nodeValue;
+							} else {
+								newRow.lastChild.text = pCol.childNodes[ZERO_VALUE].nodeValue;
+							}
+						} else {
+							if (usingDOMParser) {
+								newRow.lastChild.textContent = EMPTY_STRING;
+							} else {
+								newRow.lastChild.text = EMPTY_STRING;
+							}
+						}
+					}
+					pCol = pCol.nextSibling;
+				}
+			}
+		}
+
+		function returnXMLobject(param) {
+			if (param.indexOf(INTERACTIONS_RESP_ID) > STRING_NOT_FOUND) {
+				xmlObjIdx = INTERACTIONS_IDX;
+				return InteractionsRespXML;
+			} else if (param.indexOf(INTERACTIONS_ROOT.toLowerCase()) > STRING_NOT_FOUND) {
+				xmlObjIdx = INTERACTIONS_IDX;
+				return InteractionsXML;
+			} else if (param.indexOf(ATTEMPTS_ID) > STRING_NOT_FOUND) {
+				xmlObjIdx = ATTEMPTS_IDX;
+				return AttemptsXML;
+			} else if (param.indexOf(EVALUATIONS_ID1) > STRING_NOT_FOUND
+					|| param.indexOf(EVALUATIONS_ID2) > STRING_NOT_FOUND
+					|| param.indexOf(EVALUATIONS_ID3) > STRING_NOT_FOUND) {
+				xmlObjIdx = EVALUATIONS_IDX;
+				return EvaluationsXML;
+			} else if (param.indexOf(WINDOWS_ROOT.toLowerCase()) > STRING_NOT_FOUND) {
+				xmlObjIdx = WINDOWS_IDX;
+				return WindowsXML;
+			} else if (param.indexOf(PATHS_ROOT.toLowerCase()) > STRING_NOT_FOUND) {
+				xmlObjIdx = PATHS_IDX;
+				return PathsXML;
+			} else if (param.indexOf(OBJECTIVES_ROOT.toLowerCase()) > STRING_NOT_FOUND) {
+				xmlObjIdx = OBJECTIVES_IDX;
+				return ObjectivesXML;
+			} else if (param.indexOf(DEMOGRAPHICS_ROOT.toLowerCase()) > STRING_NOT_FOUND)
+				return DemographicsXML;
+			else
+				return SessionXML;
+		}
+
+		function getNodeValue(element, ind) {
+			if (element != null) {
+				if (ind == ZERO_VALUE)
+					return element.nodeValue;
+				return element.childNodes[ZERO_VALUE].nodeValue;
+			}
+			return EMPTY_STRING;
+		}
+
+		function putNodeValue(xmlObj, param, index, value) {
+			if (xmlObj.getElementsByTagName(param)[index].childNodes[ZERO_VALUE] == null) {
+				var xmlElement = xmlObj.getElementsByTagName(param)[index];
+				var newValue = xmlObj.createTextNode(value);
+				xmlElement.appendChild(newValue);
+			} else {
+				xmlObj.getElementsByTagName(param)[index].childNodes[ZERO_VALUE].nodeValue = value;
+			}
+		}
+
+		function commitToXML_STRUCT(xmlObj) {
+			var xmlstr = xmlObj.xml ? xmlObj.xml : (new XMLSerializer())
+					.serializeToString(xmlObj);
+			var rNodeName = xmlObj.documentElement.nodeName;
+			
+			switch (rNodeName) {
+			case SESSION_ROOT:
+				cmi_session_xml = xmlstr;
+				cmi_session_changed = ONE_VALUE;
+				break;
+			case DEMOGRAPHICS_ROOT:
+				cmi_demographics_xml = xmlstr;
+				cmi_demographics_changed = ONE_VALUE;
+				break;
+			case OBJECTIVES_ROOT:
+				cmi_objectives_xml = xmlstr;
+				cmi_objectives_changed = ONE_VALUE;
+				break;
+			case PATHS_ROOT:
+				cmi_paths_xml = xmlstr;
+				cmi_paths_changed = ONE_VALUE;
+				break;
+			case WINDOWS_ROOT:
+				cmi_windows_xml = xmlstr;
+				cmi_windows_changed = ONE_VALUE;
+				break;
+			case EVALUATIONS_ROOT:
+				cmi_evaluations_xml = xmlstr;
+				cmi_evaluations_changed = ONE_VALUE;
+				break;
+			case ATTEMPTS_ROOT:
+				cmi_attempts_xml = xmlstr;
+				cmi_attempts_changed = ONE_VALUE;
+				break;
+			case INTERACTIONS_ROOT:
+				cmi_interactions_xml = xmlstr;
+				cmi_interactions_changed = ONE_VALUE;
+				break;
+			case INTERACTIONS_RESP_ROOT:
+				cmi_interactions_resp_xml = xmlstr;
+				cmi_interactions_resp_changed = ONE_VALUE;
+			}
+		}
+
+		function validateTag(xmlObj, param, funcName) {
+			if (UNSUPPORTED.indexOf(param) > STRING_NOT_FOUND) {
+				if (parseInt(log_level) > ZERO_VALUE) {
+					var ErrorMessage = GetErrorString(UNSUPPORTED_CODE);
+					var LogRow = [ funcName, param, EMPTY_STRING,
+							UNSUPPORTED_CODE, ErrorMessage ];
+
+					createLogEntry(LogRow);
+				}
+				return false;
+			} else if (xmlObj.getElementsByTagName(param).length == ZERO_VALUE) {
+				var ErrorMessage = GetErrorString(GARBAGE_CODE);
+				var LogRow = [ funcName, param, EMPTY_STRING, GARBAGE_CODE,
+						ErrorMessage ];
+
+				createLogEntry(LogRow);
+				return false;
+			}
+			return true;
+		}
+
+		function createLogEntry(LogRow) {
+			var rNode = LogXML.documentElement;
+			var pRow = rNode.firstChild;
+			var pCol = pRow.firstChild;
+			var newRow = LogXML.createElement(pRow.nodeName);
+
+			rNode.appendChild(newRow);
+
+			for (var idx = ZERO_VALUE; idx <= LOG_MAX_IDX; idx++) {
+				var newCol = LogXML.createElement(pCol.nodeName);
+
+				newRow.appendChild(newCol);
+
+				if (usingDOMParser) {
+					newRow.lastChild.textContent = LogRow[idx];
+				} else {
+					newRow.lastChild.text = LogRow[idx]
+				}
+				pCol = pCol.nextSibling;
+			}
+			var xmlstr = LogXML.xml ? LogXML.xml : (new XMLSerializer())
+					.serializeToString(LogXML);
+			cmi_log_xml = xmlstr;
+			cmi_log_changed = ONE_VALUE;
+			if (parseInt(test_mode) > ZERO_VALUE) {
+				document.title = "test";
+			}
+		}
+
+		if (!Array.prototype.indexOf) {
+			Array.prototype.indexOf = function(searchElement /*, fromIndex */) {
+				"use strict";
+				if (this == null) {
+					throw new TypeError();
+				}
+				var t = Object(this);
+				var len = t.length >>> 0;
+
+				if (len === 0) {
+					return -1;
+				}
+				var n = 0;
+				if (arguments.length > 1) {
+					n = Number(arguments[1]);
+					if (n != n) { // shortcut for verifying if it's NaN
+						n = 0;
+					} else if (n != 0 && n != Infinity && n != -Infinity) {
+						n = (n > 0 || -1) * Math.floor(Math.abs(n));
+					}
+				}
+				if (n >= len) {
+					return -1;
+				}
+				var k = n >= 0 ? n : Math.max(len - Math.abs(n), 0);
+				for (; k < len; k++) {
+					if (k in t && t[k] === searchElement) {
+						return k;
+					}
+				}
+				return -1;
+			}
+		}
+
+		function extractNumbers(param) {
+			var numbers = param.match(/(\d[\d\.]*)/g);
+			numbers[ZERO_VALUE] = numbers[ZERO_VALUE].replace(/\./g,
+					EMPTY_STRING);
+			numbers[ONE_VALUE] = numbers[ONE_VALUE]
+					.replace(/\./g, EMPTY_STRING);
+			return numbers;
+		}
+
+		API_1484_11 = InitializeAPI();
+		API = InitializeAPI();
+
+		function InitializeAPI() {
+			theAPI = new DefineAPI();
+			return theAPI
+		}
+
+		function DefineAPI() {
+			this.name = "API";
+			this.LMSInitialize = LMSInitialize;
+			this.LMSFinish = LMSFinish;
+			this.LMSCommit = LMSCommit;
+			this.LMSGetValue = LMSGetValue;
+			this.LMSSetValue = LMSSetValue;
+			this.LMSGetLastError = LMSGetLastError;
+			this.LMSGetErrorString = LMSGetErrorString;
+			this.LMSGetDiagnostic = LMSGetDiagnostic;
+			this.Initialize = Initialize;
+			this.Terminate = Terminate;
+			this.Commit = Commit;
+			this.GetValue = GetValue;
+			this.SetValue = SetValue;
+			this.GetLastError = GetLastError;
+			this.GetErrorString = GetErrorString;
+			this.GetDiagnostic = GetDiagnostic;
+		}
+
+		function Initialize(param) {
+			if (api_debug == '1') {
+				alert("API called Initialize(" + param + ")");
+			}
+
+			var result = "true";
+			if (api_debug == '1') {
+				alert("Returning: " + result);
+			}
+
+			return result;
+		}
+
+		function Terminate(param) {
+			if (api_debug == '1') {
+				alert("API called Terminate(" + param + ")");
+			}
+
+			document.title = "terminate";
+
+			var result = "true";
+			if (api_debug == '1') {
+				alert("Returning: " + result);
+			}
+
+			return result;
+		}
+
+		function Commit(param) {
+			if (api_debug == '1') {
+				alert("API called Commit(" + param + ")");
+			}
+
+			document.title = "commit";
+
+			var result = "true";
+			if (api_debug == '1') {
+				alert("Returning: " + result);
+			}
+
+			return result;
+		}
+
+		function GetValue(param) {
+			if (api_debug == '1') {
+				alert("API called GetValue(" + param + ")");
+			}
+
+			if (parseInt(log_level) > ONE_VALUE) {
+				var LogRow = [ GV_FUNCNAME, param, EMPTY_STRING, EMPTY_STRING,
+						EMPTY_STRING ];
+				createLogEntry(LogRow);
+			}
+
+			result = GetXMLValue(param);
+                        result = result.toString();
+  
+			if (result.indexOf('^') != STRING_NOT_FOUND) {
+				result = result.replace(/\^/g, '"');
+			}
+
+			if (api_debug == '1')
+				alert("Returning: " + result);
+
+			return result;
+		}
+
+		function SetValue(param, value) {
+			if (api_debug == '1') {
+				alert("API called SetValue(" + param + ", " + value + ")");
+			}
+			
+			// If the value coming from the content contains a quotation mark,
+			// replace with a caret.
+			
+			if (value.indexOf('"') != STRING_NOT_FOUND) {
+				value = value.replace(/\"/g, '^');
+			}
+
+			if (parseInt(log_level) > ONE_VALUE) {
+				var LogRow = [ SV_FUNCNAME, param, value, EMPTY_STRING,
+						EMPTY_STRING ];
+				createLogEntry(LogRow);
+			}
+
+			result = SetXMLValue(param, value);
+			if (api_debug == '1') {
+				alert("Returning: " + result);
+			}
+
+			return result;
+		}
+
+		function GetLastError() {
+			if (api_debug == '1') {
+				alert("API called GetLastError()");
+			}
+
+			var numRows = LogXML.getElementsByTagName(LOG_CODE_ELEMENT).length;
+			if (numRows == ONE_VALUE) {
+				if (api_debug == '1') {
+					alert("Returning: " + ZERO_VALUE.toString());
+				}
+				return ZERO_VALUE.toString();
+			}
+			for (var idx = numRows - ONE_VALUE; idx > ZERO_VALUE; idx--) {
+				var errorCode = getNodeValue(
+						LogXML.getElementsByTagName(LOG_CODE_ELEMENT)[idx].childNodes[ZERO_VALUE],
+						ZERO_VALUE);
+				var numExtract = errorCode.replace(/\D/g, EMPTY_STRING);
+
+				if (numExtract != EMPTY_STRING) {
+					if (api_debug == '1') {
+						alert("Returning: " + errorCode);
+					}
+
+					return errorCode;
+				}
+			}
+			if (api_debug == '1') {
+				alert("Returning: " + ZERO_VALUE.toString());
+			}
+
+			return ZERO_VALUE.toString();
+		}
+
+		function GetErrorString(param) {
+			switch (param) {
+			case "0":
+				return "No error";
+			case "100":
+				return "General Errors";
+			case "101":
+				return "General Exception";
+			case "102":
+				return "General Initialization Failure";
+			case "103":
+				return "Already Initialized";
+			case "104":
+				return "Content Instance Terminated";
+			case "111":
+				return "General Termination Failure";
+			case "112":
+				return "Termination Before Initialization";
+			case "113":
+				return "Termination After Termination";
+			case "122":
+				return "Retrieve Data Before Initialization";
+			case "123":
+				return "Retrieve Data After Termination";
+			case "132":
+				return "Store Data Before Initialization";
+			case "133":
+				return "Store Data After Termination";
+			case "142":
+				return "Commit Before Initialization";
+			case "143":
+				return "Commit After Termination";
+			case "200":
+				return "Syntax Errors";
+			case "201":
+				return "General Argument Error";
+			case "202":
+				return "Element Cannot Have Children";
+			case "203":
+				return "Element Not An Array. Cannot Have Count";
+			case "204":
+				return "Element Cannot Have Value";
+			case "300":
+				return "CMI/RTS Errors";
+			case "301":
+				return "General GET Failure";
+			case "351":
+				return "General SET Failure";
+			case "391":
+				return "General COMMIT Failure";
+			case "400":
+				return "Data Model Errors";
+			case "401":
+				return "Undefined Data Model Element";
+			case "402":
+				return "Unimplemented Data Model Element";
+			case "403":
+				return "Data Model Element Value Not Initialized";
+			case "404":
+				return "Data Model Element Is Read Only";
+			case "405":
+				return "Data Model Element Is Write Only";
+			case "406":
+				return "Data Model Element Type Mismatch";
+			case "407":
+				return "Data Model Element Out Of Range";
+			case "408":
+				return "Data Model Dependency Not Established";
+			default:
+				return "No Error String Found";
+			}
+		}
+
+		function GetDiagnostic(param) {
+			if (api_debug == '1') {
+				alert("API called GetDiagnostic(" + param + ")");
+			}
+
+			var numRows = LogXML.getElementsByTagName(LOG_CODE_ELEMENT).length;
+			if (numRows == ONE_VALUE) {
+				if (api_debug == '1') {
+					alert("Returning: " + EMPTY_STRING);
+				}
+
+				return EMPTY_STRING;
+			}
+			if (param != null) {
+				for (var idx = numRows - ONE_VALUE; idx > ZERO_VALUE; idx--) {
+					var errorCode = getNodeValue(
+							LogXML.getElementsByTagName(LOG_CODE_ELEMENT)[idx].childNodes[ZERO_VALUE],
+							ZERO_VALUE);
+					if (errorCode = param) {
+						var errorMsg = getNodeValue(
+								LogXML.getElementsByTagName(LOG_ERMSG_ELEMENT)[idx].childNodes[ZERO_VALUE],
+								ZERO_VALUE);
+						if (api_debug) {
+							alert("Returning: " + errorMsg);
+						}
+
+						return errorMsg;
+					}
+				}
+				if (api_debug == '1') {
+					alert("Returning: " + EMPTY_STRING);
+				}
+
+				return EMPTY_STRING;
+			}
+			var lastErrorCode = GetLastError();
+
+			if (lastErrorCode != ZERO_VALUE.toString()) {
+				if (api_debug == '1') {
+					alert("Returning: " + lastErrorCode);
+				}
+
+				return lastErrorCode;
+			}
+			if (api_debug == '1') {
+				alert("Returning: " + EMPTY_STRING);
+			}
+
+			return EMPTY_STRING;
+		}
+
+		function LMSInitialize(param) {
+			return Initialize(param);
+		}
+
+		function LMSFinish(param) {
+			return Terminate(param);
+		}
+
+		function LMSCommit(param) {
+			return Commit(param);
+		}
+
+		function LMSGetValue(param) {
+			return GetValue(param);
+		}
+
+		function LMSSetValue(param, value) {
+			return SetValue(param, value);
+		}
+
+		function LMSGetLastError() {
+			return GetLastError();
+		}
+
+		function LMSGetErrorString(param) {
+			return GetErrorString(param);
+		}
+
+		function LMSGetDiagnostic(param) {
+			return GetDiagnostic(param);
+		}
+
+		// These last two functions are Mobile-only.
+
+		function setLaunchpageVariable(varName, value) {
+
+			switch (varName) {
+				case 'api_debug':
+					api_debug = value;
+					break;
+				case 'log_level':
+					log_level = value;
+					break;
+				case 'test_mode':
+					test_mode = value;
+					break;
+				case 'cmi_session_xml':
+					cmi_session_xml = value;
+					break;
+				case 'cmi_demographics_xml':
+					cmi_demographics_xml = value;
+					break;
+				case 'cmi_objectives_xml':
+					cmi_objectives_xml = value;
+					break;
+				case 'cmi_paths_xml':
+					cmi_paths_xml = value;
+					break;
+				case 'cmi_windows_xml':
+					cmi_windows_xml = value;
+					break;
+				case 'cmi_evaluations_xml':
+					cmi_evaluations_xml = value;
+					break;
+				case 'cmi_attempts_xml':
+					cmi_attempts_xml = value;
+					break;
+				case 'cmi_interactions_xml':
+					cmi_interactions_xml = value;
+					break;
+				case 'cmi_interactions_resp_xml':
+					cmi_interactions_resp_xml = value;
+					break;
+				case 'cmi_log_xml':
+					cmi_log_xml = value;
+			}
+
+		}
+
+		function launchContent(pathToContent) {
+
+			// When this function is called, the XML data 
+			// will be loaded. We need to re-create our
+			// XML parsers with the new data.
+
+			SessionXML = parseXml(cmi_session_xml);
+			DemographicsXML = parseXml(cmi_demographics_xml);
+			ObjectivesXML = parseXml(cmi_objectives_xml);
+			PathsXML = parseXml(cmi_paths_xml);
+			WindowsXML = parseXml(cmi_windows_xml);
+			EvaluationsXML = parseXml(cmi_evaluations_xml);
+			AttemptsXML = parseXml(cmi_attempts_xml);
+			InteractionsXML = parseXml(cmi_interactions_xml);
+			InteractionsRespXML = parseXml(cmi_interactions_resp_xml);
+			LogXML = parseXml(cmi_log_xml);
+
+			document.getElementById('content').src = pathToContent;
+		}
+	</script>
+
+	<!-- page content -->
+	<table cellSpacing="0" cellPadding="0" width="100%" height="100%">
+		<tr>
+			<td width="100%"><iframe id="content" marginWidth="0" marginHeight="0"
+					ng-src="{{launchpageController.contentPath}}" frameBorder="no"
+					width="100%" height="100%"></iframe></td>
+		</tr>
+	</table>
+
+</div>
+

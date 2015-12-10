@@ -1,0 +1,36 @@
+#!/bin/sh -e                                                                   
+#                                                                              
+# rc.local                                                                     
+#                                                                              
+# This script is executed at the end of each multiuser runlevel.               
+# Make sure that the script will "exit 0" on success or any other              
+# value on error.                                                              
+#                                                                              
+# In order to enable or disable this script just change the execution          
+# bits.                                                                        
+#                                                                              
+# By default this script does nothing.                                         
+#                                                                              
+# 20150120 SCH Added the following stanza to ensure 32                         
+#              that at least 32 loop(back) devices exist.                      
+#              This is important for vmbuilder (esp. when                      
+#              used to create VMs with many partitions).                       
+#                                                                              
+#              Rather than mess with grub2 boot parameter                      
+#              additions, I decided it is safer to just                        
+#              go through these mknod motions here.  Also,                     
+#              the default use of shebang:  #!/binsh -e                        
+#              for /etc/rc.local (by Ubuntu) prompts me to                     
+#              explicitly test each command run (to prevent                    
+#              premature abort of the entire rc.local script).                 
+#              Some errors are to be expected for the default                  
+#              number of loop devices.                                         
+
+for i in $(seq 0 32); do
+  mknod -m0660 /dev/loop$i b 7 $i || \
+    echo Cannot mknod for /dev/loop$i.  It probably exists already, so ignoring
+  chown root.disk /dev/loop$i || \
+    echo Cannot chown root.disk /dev/loop$i, so ignoring
+done
+
+exit 0

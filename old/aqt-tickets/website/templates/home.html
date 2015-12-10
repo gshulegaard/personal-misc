@@ -1,0 +1,562 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- Sets page title to the one defined in the CMS. -->
+<!-- {% page_attribute 'slug' %} may also come in handy.-->
+{% block title %}
+  {% page_attribute 'page_title' %}
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Slider
+  ================================================== -->
+  <div class="fullwidthbanner-container" style="max-height: 500px;">
+    <div class="fullwidthbanner">
+      <ul>
+        
+	<!-- Slide 1 -->
+	<li data-fstransition="fade" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+	  <img src=
+               "{% static 'images/stock/shutterstock/aqt-airline-training.jpg' %}"
+               alt="" style="width: 100%;">
+	  <div class="caption light text sfb" data-x="-30" data-y="210" data-speed="400"
+	       data-start="800"  data-easing="easeOutExpo">
+            <h2 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px
+	        30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              Advanced Training. Superior Results.
+            </h2>
+          </div>
+	  <div class="caption light text sfb" data-x="440" data-y="270" data-speed="400"
+	       data-start="1000" data-easing="easeOutExpo">
+            <h3 style="color: #FFF; text-shadow: 0px 0px 20px rgba(0, 0, 0,
+	        0.7), 0px 0px 30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              Leaders in Aviation Training Solutions
+            </h3>
+          </div>
+	</li>
+
+	<!-- Slide 2 -->
+	<li data-transition="fade" data-slotamount="10" data-masterspeed="300">
+          <img src=
+               "{% static 'images/stock/shutterstock/medical-training-management-software-small.jpg' %}"
+               alt="" style="width: 100%;">
+	  <div class="caption sfb" data-x="590" data-y="60" data-speed="600"
+	       data-start="1100" data-easing="easeOutExpo">
+            <img src="{% static 'images/slider-10.png' %}" alt="">
+          </div>
+	  <div class="caption sfb video" data-autoplay="false" data-x="772"
+	       data-y="96" data-speed="500" data-start="1100"
+	       data-easing="easeOutExpo">
+            <iframe
+	      src="http://player.vimeo.com/video/22775048?title=0&amp;byline=0&amp;portrait=0;api=1&amp;color=ffffff"
+              width="396" height="298"></iframe>
+          </div>
+	  <div class="caption light text sfb" data-x="-30" data-y="170"
+	       data-speed="400" data-start="800"  data-easing="easeOutExpo">
+            <h2 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px
+	        30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              Innovation in Hospital Training
+            </h2>
+          </div>
+	  <div class="caption light text sfb" data-x="-29" data-y="210"
+	       data-speed="400" data-start="1000" data-easing="easeOutExpo">
+            <h3 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px
+	        30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824); color: #FFF;">
+              Quality & Safety
+            </h3>
+          </div>
+	  <div class="caption light text sfb" data-x="-29" data-y="266"
+	       data-speed="400" data-start="1200" data-easing="easeOutExpo">
+            <p style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px
+	        30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824); color: #FFF;">
+              Preparing hospitals with integrated quality training<br>
+	      technologies for improve patient safety
+            </p>
+          </div>
+	</li>
+        
+      </ul>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="twelve columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+      
+      <!-- Text Summary -->
+      <!-- Section Title -->
+      <h3 class="headline" style="color: #0f2743;">WE KNOW AVIATION</h3>
+      <span class="line" style="margin-bottom: 35px; border-bottom-color: #0f2743;"></span>
+      <div class="clearfix"></div>
+      
+      <!-- Text -->
+      <p>
+        AQT Solutions is a leading provider of comprehensive and cost-effective
+        aviation training management software to commercial airlines, military,
+        and third-party training operations.  Our ATMS is a leading
+        aviation training management system designed by AQT for commercial
+        airlines, military, and other pilot training certifications and
+        regulations. 
+      </p>
+      <p style="margin-top: 30px;">
+        <span class="highlight color">
+          We enable our customers to manage the end-to-end
+          training and certification process.
+        </span>
+      </p>
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+      
+      <!-- Industries -->
+      <!-- Section Title -->
+      <h3 class="headline" style="color: #0f2743;">INDUSTRIES</h3>
+      <span class="line" style="margin-bottom: 35px; border-bottom-color: #0f2743;"></span>
+      <div class="clearfix"></div>
+      
+      <div class="five columns">
+        <a href="#" style="color: #888;">
+          <div class="featured-box">
+            <div class="circle">
+              <i class="icon-plane"></i>
+              <span></span>
+            </div>
+            <div class="featured-desc">
+              <h3>
+                Civil Aviation
+              </h3>
+              <p>
+                Our innovative, comprehensive aviation training management
+                system …
+              </p>
+            </div>
+          </div>          
+        </a>
+      </div>
+
+      <div class="five columns">
+        <a href="#" style="color: #888;">
+          <div class="featured-box">
+            <div class="circle">
+              <i class="icon-fighter-jet"></i>
+              <span></span>
+            </div>
+            <div class="featured-desc">
+              <h3>
+                Defense
+              </h3>
+              <p>
+                AQT Solutions is a leading provider of comprehensive and
+                cost-effective …
+              </p>
+            </div>
+          </div>    
+        </a>      
+      </div>
+
+      <div class="five columns">
+        <a href="#" style="color: #888;">
+          <div class="featured-box">
+            <div class="circle">
+              <i class="icon-warning-sign"></i>
+              <span></span>
+            </div>
+            <div class="featured-desc">
+              <h3>
+                Dangerous Goods
+              </h3>
+              <p>
+                The rapidly changing hazmat and pipeline operations … 
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="five columns">
+        <a href="#" style="color: #888;">
+          <div class="featured-box">
+            <div class="circle">
+              <i class="icon-stethoscope"></i>
+              <span></span>
+            </div>
+            <div class="featured-desc">
+              <h3>
+                Health
+              </h3>
+              <p>
+                Keeping doctors and nurses current is a vital process for
+                healthcare providers …
+              </p>
+            </div>
+          </div>
+        </a>          
+      </div>
+
+    <!-- End of twelve columns -->
+    </div>
+  
+    <div class="four columns">
+      
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Social Bar -->
+      
+      <ul class="social-icons">
+        <li>
+          <a class="twitter" href="#">
+            <i class="icon-twitter"></i>
+          </a>
+        </li>
+        <li>
+          <a class="facebook" href="#">
+            <i class="icon-facebook"></i>
+          </a>
+        </li>
+        <li>
+          <a class="dribbble" href="#">
+            <i class="icon-dribbble"></i>
+          </a>
+        </li>
+        <li>
+          <a class="linkedin" href="#">
+            <i class="icon-linkedin"></i>
+          </a>
+        </li>
+        <li>
+          <a class="rss" href="#">
+            <i class="icon-rss"></i>
+          </a>
+        </li>
+      </ul>
+      <div class="clearfix"></div>
+
+      <!-- Blog roll -->
+      
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline" style="color: #0f2743;">NEWS AND ARTICLES</h3>
+      <span class="line" style="margin-bottom: 35px; border-bottom-color: #0f2743;"></span>
+      <div class="clearfix"></div>
+
+      <ul class="widget-tabs">
+        <!-- Post 1 -->
+        <li>
+          <div class="widget-thumb">
+            <a href="#">
+              <img alt="" src="{% static 'images/blog/aviation-learning-management-systems-70x70.jpg' %}">
+            </a>
+          </div>
+          <div class="widget-text">
+            <h4>
+              <a href="#">
+                New ATMS Products Shown at WATS 2014
+              </a>
+            </h4>
+            <span>
+              31 Oct 2014
+            </span>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+        <!-- Post 2 -->
+        <li>
+          <div class="widget-thumb">
+            <a href="#">
+              <img alt="" style="height: 70px;"  
+                   src="{% static 'images/blog/K-C135ReaperDrone-100x100.png' %}">
+            </a>
+          </div>
+          <div class="widget-text">
+            <h4>
+              <a href="#">
+                CAE Chooses ATMS Again
+              </a>
+            </h4>
+            <span>
+              30 Sep 2014
+            </span>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+        <!-- Post 3 -->
+        <li>
+          <div class="widget-thumb">
+            <a href="#">
+              <img alt="" src="{% static 'images/blog/spirit-airlines-flight-100x100.jpg' %}">
+            </a>
+          </div>
+          <div class="widget-text">
+            <h4>
+              <a href="#">
+                Spirit Airlines Goes With ATMS!
+              </a>
+            </h4>
+            <span>
+              29 Jul 2014
+            </span>
+          </div>
+          <div class="clearfix"></div>
+        </li>
+      </ul>
+
+      <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+      <a class="button gray" href="#" style="margin-left: 135px;">
+        <i class="icon-group"></i>
+        Read the blog
+      </a>
+      
+      <div class="clearfix" style="margin-bottom: 10px;"></div>
+
+    <!-- End four columns -->
+    </div>
+  <!-- End container -->
+  </div>
+
+  <div class="container">
+    <div class="sixteen columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline" style="color: #0f2743;">TRAINING MANAGEMENT SYSTEMS</h3>
+      <span class="line" style="margin-bottom: 35px; border-bottom-color: #0f2743;"></span>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="four columns">
+      <a href="#">
+        <div class="notice-box">
+          <h3>
+            Training & Curriculum Design
+          </h3>
+          <i class="icon-book"></i>
+          <p>
+            Integer ultrices scelerisque nulla fringilla. Prae…
+          </p>
+        </div>
+      </a>
+    </div>
+    
+    <div class="four columns">
+      <a href="#">
+        <div class="notice-box">
+          <h3>
+            Automated Resource Management
+          </h3>
+          <i class="icon-bolt"></i>
+          <p>
+            Integer ultrices scelerisque nulla fringilla. Prae…
+          </p>
+        </div>
+      </a>
+    </div>
+    
+    <div class="four columns">
+      <a href="#">
+        <div class="notice-box">
+          <h3>
+            Provisioning & Course Management
+          </h3>
+          <i class="icon-calendar"></i>
+          <p>
+            Integer ultrices scelerisque nulla fringilla. Prae…
+          </p>
+        </div>
+      </a>
+    </div>
+    
+    <div class="four columns">
+      <a href="#">
+        <div class="notice-box">
+          <h3>
+            Training Evalutation & Grading Analysis
+          </h3>
+          <i class="icon-bar-chart"></i>
+          <p>
+            Integer ultrices scelerisque nulla fringilla. Prae…
+          </p>
+        </div>
+      </a>
+    </div>
+    
+  <!-- End container -->
+  </div>
+
+  <div class="container">
+    <div class="sixteen columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline" style="color: #0f2743;">SUCCESS STORIES</h3>
+      <span class="line" style="margin-bottom: 35px; border-bottom-color: #0f2743;"></span>
+      <div class="clearfix"></div>
+    <!-- End sixteen columns -->
+    </div>
+
+    <!-- Navigation / Left -->
+    <div id="showbiz_left_3" class="sb-navigation-left-2 alt notclickable">
+      <i class="icon-angle-left"></i>
+    </div>
+
+    <!-- ShowBiz Carousel -->
+    <div id="happy-clients" class="showbiz-container sixteen carousel columns">
+
+      <!-- Portfolio Entries -->
+      <div id="sbiz2934" class="showbiz our-clients" data-right="#showbiz_right_3" data-left="#showbiz_left_3">
+        <div class="overflowholder" style="height: 217px;">
+          <ul style="width: 3701px; left: 0px; height: 217px;">
+
+            <li style="width: 1180px;">
+              <div class="happy-clients-photo">
+                <a href="#">
+                  <img alt="" src="{% static 'images/happy-clients-01.jpg' %}"></img>
+                </a>
+              </div>
+              <div class="happy-clients-cite">
+                <a href="#" style="color: #888;">
+                  "ATMS is taking Copa’s aircrew and maintenance training program
+                  to new heights with an integrated approach to qualification
+                  training."
+                </a>
+              </div>
+              <div class="happy-clients-author">
+                <a href="#">
+                  Mr. Pedro Heilbron, CEO, Copa Airlines, Panama City, Panama
+                </a>
+              </div>
+            </li>
+
+            <li style="width: 1180px;">
+              <div class="happy-clients-photo">
+                <a href="#">
+                  <img alt="" src="{% static 'images/happy-clients-02.jpg' %}"></img>
+                </a>
+              </div>
+              <div class="happy-clients-cite">
+                <a href="#" style="color: #888;">
+                  "Without moving to an automated, modern system for our  military
+                  training program, we could not launch the MQ 1/9 Program."
+                </a>
+              </div>
+              <div class="happy-clients-author">
+                <a href="#">
+                  Air Force Chief of Staff (AF/CC), Gen. Mark A. Welsh III
+                </a>
+              </div>
+            </li>
+
+          </ul>
+
+          <div class="clearfix"></div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+      </div>
+    </div>
+
+    <!-- Navigation / Right -->
+    <div id="showbiz_right_3" class="sb-navigation-right-2 alt">
+      <i class="icon-angle-right"></i>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 55px;"></div>
+
+  <!-- End container -->
+  </div>
+
+  <div class="container">
+    <div class="sixteen columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline" style="color: #0f2743;">OUR CLIENTS</h3>
+      <span class="line" style="margin-bottom: 35px; border-bottom-color: #0f2743;"></span>
+      <div class="clearfix"></div>
+    <!-- End sixteen columns -->
+    </div>
+
+    <!-- Navigation / Left -->
+    <div class="one carousel column">
+      <div id="showbiz_left_2" class="sb-navigation-left-2 notclickable">
+        <i class="icon-angle-left"></i>
+      </div>
+    </div>
+
+    <!-- ShowBiz Carousel -->
+    <div id="our-clients" class="showbiz-container fourteen carousel columns">
+
+      <!-- Portfolio Entries -->
+      <div id="sbiz314" class="showbiz our-clients" data-right="#showbiz_right_2" data-left="#showbiz_left_2">
+        <div class="overflowholder" style="height: 95px;">
+          <ul style="width: 1539px; left: 0px; height: 95px;">
+
+            <!-- Item -->
+            <li style="width: 174px;">
+              <img alt="" src="{% static 'images/logo-01.png' %}"></img>
+            </li>
+            <li style="width: 174px;">
+              <img alt="" src="{% static 'images/logo-02.png' %}"></img>
+            </li>
+            <li style="width: 174px;">
+              <img alt="" src="{% static 'images/logo-03.png' %}"></img>
+            </li>
+            <li style="width: 174px;">
+              <img alt="" src="{% static 'images/logo-04.png' %}"></img>
+            </li>
+            <li style="width: 174px;">
+              <img alt="" src="{% static 'images/logo-05.png' %}"></img>
+            </li>
+            <li style="width: 174px;">
+              <img alt="" src="{% static 'images/logo-06.png' %}"></img>
+            </li>
+            <li style="width: 174px;">
+              <img alt="" src="{% static 'images/logo-07.png' %}"></img>
+            </li>
+          </ul>
+
+          <div class="clearfix"></div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+      </div>
+    </div>
+
+    <!-- Navigation / Right -->
+    <div class="one carousel column">
+      <div id="showbiz_right_2" class="sb-navigation-right-2">
+        <i class="icon-angle-right"></i>
+      </div>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 55px;"></div>
+
+  <!-- End container -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+<!-- No content from body-extend. -->
+{% endblock body-extend %}

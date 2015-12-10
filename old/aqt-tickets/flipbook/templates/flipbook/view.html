@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  {{ title }}
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+
+  <meta name="description" content="{{ meta_desc }}" />
+
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="{{ title }}" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://members.aqtsolutions.com/flipbook/{{ slug }}" />
+  {% with '/static/flipbook/'|add:image_name as image_static %}
+  <meta property="og:image" content="{{ image_static }}" />
+  {% endwith %}
+  <meta property="og:description" content="{{ meta_desc }}" />
+  <meta property="og:site_name" content="AQT Solutions" />
+  <meta property="article:tag" content="{{ og_article_tag }}" />
+{% endblock header-extend %}
+
+{% block body %}
+  <div class="container">
+    <div class="clearfix" style="margin-top: 50px;"></div>
+
+    <img src="{% static 'images/small-edited-logo.png' %}"
+         style="height: 75px;
+                display: inline-block;" />
+
+    {% if request.user.is_superuser %}
+    <a href="{% url 'flipbook:edit' slug %}"
+       class="button color"
+       style="margin: 18.5px 0 0 0;
+              float: right;
+              display: inline-block;">
+      Edit <i class="icon-edit white"></i>
+    </a>
+
+    <a href="{% url 'flipbook:index' %}"
+       class="button gray"
+       style="margin: 18.5px 6px 0 0;
+              float: right;
+              display: inline-block;">
+      Index <i class="icon-th-list white"></i>
+    </a>
+    {% endif %}
+
+    <div class="clearfix" style="margin-top: 25px;"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- Flipbook Information Area -->
+    <div class="ten alt columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h2 class="headline">{{ header }}</h2>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <div class="ten alt columns">
+          <p>
+            {{ intro }}
+          </p>
+      </div>
+
+      <div class="one columns">
+        <span class="line" style="width: 0;"></span>
+      </div>
+      
+      <div class="eight alt columns">
+                
+        <ul class="list-1">
+          <li>{{ bullet_1 }}</li>
+          <li>{{ bullet_2 }}</li>
+          <li>{{ bullet_3 }}</li>
+        </ul>
+        
+      </div>
+      
+      <div class="two columns">
+        <span class="line" style="width: 0;"></span>
+      </div>
+      
+      <div class="six alt columns">
+        
+        {% with '/static/flipbook/'|add:image_name as image_static %}
+        <img src="{{ image_static }}" 
+             style="margin-top: 50px;
+                    box-shadow: 0 0 80px 0 #cc4300;" />
+        {% endwith %}
+        
+      </div>
+      
+      <div class="one columns">
+        <span class="line" style="width: 0;"></span>
+      </div>
+      
+    <!-- End ten alt columns -->
+    </div>
+    <!-- End Flipbook Information Area -->
+
+
+    <!-- Right Bar -->
+    <div class="six columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">{{ form_header }}</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div> 
+
+      <!-- Error message(s) -->
+      {% for error in error_types %}
+	<div class="notification error closeable">
+	  <p>
+            {% if error == "exists" %}
+            <span>Error!</span> The specified username already exists!
+            {% elif error == "empty" %}
+            <span>Error!</span> All fields are required.
+            {% elif error == "security" %}
+            <span>Error!</span> The security code you entered was incorrect.
+            {% elif error == "api" %}
+            <span>Error!</span> There was a registration error. Please try
+            again later.
+            {% endif %}
+          </p>
+	  <a class="close" href="#"></a>
+	</div>
+      {% endfor %}
+
+      <!-- Login Form -->
+      <form method="post" action="{% url 'flipbook:view' slug %}">
+        {% csrf_token %}
+
+        <fieldset>
+          <div>
+            <label>E-mail:</label>
+            <input type="email" name="email" 
+                   style="width: 97%;" value="{{ email }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 35px 0 0 0;"></div>
+
+          <div>
+            <label>First Name:</label>
+            <input type="text" name="fname" 
+                   style="width: 97%;" value="{{ fname }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Last Name:</label>
+            <input type="text" name="lname" 
+                   style="width: 97%;" value="{{ lname }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Company:</label>
+            <input type="text" name="company" 
+                   style="width: 97%;" value="{{ company }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Position:</label>
+            <input type="text" name="position" 
+                   style="width: 97%;" value="{{ position }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Phone:</label>
+            <input type="text" name="phone" 
+                   style="width: 97%;" value="{{ phone }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 35px 0 0 0;"></div>
+
+          <div>
+            <label>How did you hear about us?</label>
+            <select name="source">
+              <option value="AQT Email">AQT Email</option>
+              <option value="AQT Print Mailing">AQT Print Mailing</option>
+              <option value="Online Advertisement">Online Advertisement</option>
+              <option value="Colleague Referral">Colleague Refferal</option>
+              <option value="Referred by a Friend">Referred by a Friend</option>
+              <option value="Google Search">Google Search</option>
+              <option value="Google+">Google+</option>
+              <option value="LinkedIn">LinkedIn</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Twitter">Twitter</option>
+              <option value="2015 - IMSH Conference">2015 - IMSH Conference</option>
+              <option value="2015 - WATS Conference">2015 - WATS Conference</option>
+              <option value="2014 - IT/SEC Conference">2014 - IT/SEC Conference</option>
+              <option value="2014 - DGAC Conference">2014 - DGAC Conference</option>
+              <option value="2014 - WATS Conference">2014 - WATS Conference</option>
+            </select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 35px 0 0 0;"></div>
+
+          <div>
+            <div style="float: left; margin-right: 10%; width: 40%;">
+              <label>Security Check:</label>
+              <input type="text" name="security_check" 
+                     style="width: 100%;" />
+            </div>
+
+            <div style="float: left; width: 50%; margin-top: 23px;">
+              <p>
+                Enter the following number in the Security Check field:
+                <strong>{{ security_number }}</strong>
+              </p>
+            </div>
+
+            <div>
+              <input type="hidden" name="security_number" 
+                     value="{{ security_number }}" />
+            </div>
+          </div>
+
+            <div class="clearfix"></div>
+            <div style="margin: 35px 0 0 0;"></div>
+
+          <div>
+            <div style="float: left; margin-top: 2px; margin-right: 3%; width: 2%;">
+              <input type="checkbox" name="subscribe" value="True"
+                     style="width: 100%;" checked/>
+            </div>
+
+            <div style="float: left; width: 95%;">
+              <p>
+                Yes, I would like to subscribe to receive important updates from
+                AQT Solutions.
+              </p>
+            </div>
+          </div>
+
+        </fieldset>
+
+        <div class="clearfix"></div>
+        <div style="margin: 20px 0 0 0;"></div>
+
+        <input type="submit" value="{{ form_button }}" />
+      </form>
+
+    <!-- End six columns -->
+    </div>
+    <!-- End Right Bar -->
+
+    <div class="clearfix" style="margin-bottom: 45px;"></div>
+
+  <!-- Container end -->
+  </div>
+
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

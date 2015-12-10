@@ -1,0 +1,44 @@
+# What's new in 2.0?
+- Lucene 4.10.4 -> Lucene 5.2.1
+- About 2,800 pull requests
+- 800 completely new PRs to ES 2.0
+- 477 committers
+- Compatibility with 2.0 plugins (including Shield, Watcher, Marvel)
+
+# Major features at a glance:
+- Better resource utilization, reduced memory usage, improved index compression
+- Improved query execution and caching
+- Hardening: localhost binding, Java security manager, atmoic and checksummed file handling
+- Pipeline aggregations for anomaly detection, derivatives, time-series predictions, and much more
+
+# Hot/cool indexes and DEFLATE compression
+- Previously, there tended to be a dichotomy between "Hot" and "Cool" indexes where data separation created collections
+where one would be ingesting data (fast writes), but the others (older) would be largely read-heavy (stagnant).  In 1.x,
+both "Hot" and "Cool" indexes would use LZ4 compression that had fast writes with medium compression characteristics --
+obviously sub-optimal for "Cool" indexes.
+- In 2.0, they introduced "best_compression/_optimize" which is "DEFLATE" compression which has slower writes but high
+compression.
+
+# Queries and filters were merged in 2.0
+- Previously, queries supported scoring but not caching and filters supported caching but not scoring.
+- The new queries support both caching and scoring.
+    + Smarter caching logic
+    + Less memory per cached set
+    + Automatic optimizations
+
+# Massive pipeline aggregations improvements
+- Aggregations are basically natural mixes of traditional facets enabling you to do time series data plots.
+- In 2.0 they introduced pipeline aggregations which allow you to take aggregation information and then do aggregations
+on top of that.
+- Pipeline aggregations allow you to do processing across a large number of time series data to do things like anomaly
+detection.
+- Pipeline aggregations, simplistically, allow you to do post-processing on aggregations.  Find ratios between values,
+prune buckets over and under a threshold, moving averages for time series.
+- Allow you to do a certain amount of post-processing that is done ON TOP of your aggregations.  Post-processing on top
+of the buckets themselves in ES.
+
+# Pipeline aggregations demo
+- Pipeline aggregations are run only on the coordinating node.  Basically, the sharded nodes will run their traditional
+1.x aggregations and ship the buckets to the coordinating node.  Once the buckets have been reduced to their final
+state, then the coordinating node will run the pipeline agg on the remaining buckets.
+- This means that you will never run pipeline aggs on documents, only buckets (aggs).

@@ -1,0 +1,262 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  AQT Solutions | Member Area
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+
+  <!-- Google Tracking -->
+  {% include "google-tracking.html" %}
+
+  <!-- HubSpot Tracking -->
+  {% include "hubspot-tracking.html" %}
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar" style="margin: 0;">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Member Area</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+	    <li>Member Area</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <!-- Slider
+  ================================================== -->
+
+  <div class="fullwidthbanner-container" style="max-height: 500px;">
+    <div class="fullwidthbanner">
+      <ul>
+        
+	<!-- Slide 1 -->
+	<li data-fstransition="fade" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+	  <img src=
+               "{% static 'images/stock/shutterstock/aqt-airline-training-1200x695.jpg' %}"
+               alt="" style="width: 100%;">
+	  <div class="caption light text sfb" data-x="0" data-y="210" data-speed="400"
+	       data-start="800"  data-easing="easeOutExpo">
+            <h2 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px
+	        30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              Advanced Training. Superior Results.
+            </h2>
+          </div>
+ 	  <div class="caption light text sfb" data-x="550" data-y="270" data-speed="400"
+	       data-start="1000" data-easing="easeOutExpo">
+            <h3 style="color: #FFF; text-shadow: 0px 0px 20px rgba(0, 0, 0,
+	        0.7), 0px 0px 30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              Make compliance easier with ATMS today.
+            </h3>
+          </div>
+
+	</li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <!-- End Slider 
+  ========================================== -->
+
+  <div class="container" style="padding: 0 0 6rem 0;">
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="twelve alt columns">
+      
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Welcome {{ user.first_name }} {{ user.last_name }}!</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        Thank you for your interest in ATMS and MyATMS. The information below
+        will show you how the industry's only complete Training
+        Management solution can keep you compliant.
+      </p>
+
+      <p>
+        Details about each of these resources are below.
+      </p>
+
+      <div style="height: 25px;"></div>
+
+      <div class="four columns" style="margin-left: 0;">
+        <a href="{% url 'demo:demo_video' %}" target="_blank">
+          <div class="notice-box">
+            <h3>
+              Watch ATMS Demo
+            </h3>
+            <i class="icon-film"></i>
+            <p>
+              Watch this brief overview video of the ATMS system in action.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="four columns" style="margin: 0;">
+        <a href="http://www.aqtsolutions.com/atms-insiders" target="_blank">
+          <div class="notice-box">
+            <h3>
+              Latest ATMS News
+            </h3>
+            <i class="icon-bullhorn"></i>
+            <p>
+              Read our blog for our latest news and modern training insights.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="four columns" style="margin-right: 0;">
+        <a href="{% url 'download:download' %}?filename=ATMS Product Briefing.pdf&folder=marketing&type=application/pdf">
+          <div class="notice-box">
+            <h3>
+              Product Briefing
+            </h3>
+            <i class="icon-file-alt"></i>
+            <p>
+              Download this PDF document to discover the benefits of ATMS.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <p>
+        If you are having any technical difficulty, please 
+        <a href="{% url 'support:support' %}">
+          contact web support.
+        </a>
+      </p>
+
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline"><strong>NEW!</strong> Watch ATMS Demo</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        This video shows you how ATMS and MyATMS will ensure Currency,
+        Compliance and Communication for your operations
+        personnel. Running time: 15 minutes. (Opens in new window.)
+      </p>
+
+      <p>
+        This video requires your browser have .mp4 container and H.264 codec
+        support. Supported browsers are: 
+      </p>
+
+      <ul class="list-1" style="margin-left: 30px;">
+        <li>Internet Explorer 9.0 +</li>
+        <li>Firefox 26.0 +</li>
+        <li>Chrome 31.0 +</li>
+        <li>Safari 7.0 +</li>
+        <li>Opera 19.0 +</li>
+        <li>All mobile browsers... (except Opera Mini)</li>
+      </ul>
+
+      <p style="margin-top: 15px;">
+        If you are not using a supported browser, try 
+        <a href="{% url 'download:download-secure' %}?filename=FlashDriveDemo_v500.mp4&folder=marketing&type=video/mp4">
+          downloading our video
+        </a>
+        and using a video player application.
+      </p>
+
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">Latest ATMS News</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        Insiders ATMS is the place for all things ATMS. Access the latest news
+        and highlights including system enhancements, client announcement,
+        training and implementation success stories.
+      </p>
+
+      <p>
+        We strive to provide you with the most insightful news, whitepapers and
+        articles to help you continuously optimize and improve your experience
+        using ATMS.
+      </p>
+
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">Product Briefing</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        This Adobe Acrobat® document provides detailed information about ATMS
+        functionality and system requirements. (Downloads to your device) 
+      </p>
+
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">Next Steps</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        Review these materials. Then contact us to arrange a <strong>live
+        demo</strong> (delivered over the Web or in person), <strong>discuss
+        implementation schedules</strong>, or license ATMS to <strong>cut your
+        training costs and time to certification.</strong>
+      </p>
+      
+    <!-- End twelve columns -->
+    </div>
+    
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

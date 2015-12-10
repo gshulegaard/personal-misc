@@ -1,0 +1,97 @@
+{% load staticfiles %}
+
+<!-- Header
+================================================== -->
+<header id="header">
+
+<!-- Container -->
+  <div class="container">
+
+  <!-- Logo / Mobile Menu -->
+    <div class="four columns">
+	
+      <div id="mobile-navigation">
+        <a href="#menu" class="menu-trigger"><i class="icon-reorder"
+                                                style="color: #A0A0A0;"></i></a>
+      </div>
+      
+      <div id="logo" style="margin-top: 20px;">
+        <h1><a href="http://www.aqtsolutions.com/"><img src="{% static 'images/small-edited-logo.png' %}"
+                                                        alt="AQT Solutions" style="height: 46.5px;"/></a></h1>
+      </div>
+    </div>
+  
+  
+    <!-- Navigation
+    ================================================== -->
+    <div class="twelve columns">
+  
+      <nav id="navigation" class="menu">
+        <ul id="responsive">
+          
+          <!-- <li><a href="index.html" id="current">Home</a></li> -->
+
+          <li>
+            <a href="http://www.aqtsolutions.com/">Home</a>
+          </li>
+
+          <li>
+            <a href="http://www.aqtsolutions.com/industries">Industries</a>
+	    <ul>
+	      <li><a href="http://www.aqtsolutions.com/industries/commercial-aviation-training-management-system/">Commercial Aviation</a></li>
+	      <li><a href="http://www.aqtsolutions.com/military-and-defense-training-management-system/">Military & Defense</a></li>
+              <li><a href="http://www.aqtsolutions.com/regulatory-compliance-training-management-software/">Regulatory Compliance</a></li>
+	    </ul>
+          </li>
+
+          <li><a href="http://www.aqtsolutions.com/training-management-systems">Products</a>
+	    <ul>
+	      <li><a href="http://www.aqtsolutions.com/training-management-systems/atms">ATMS</a></li>
+	      <li><a href="http://www.aqtsolutions.com/products/my-atms-training-management-software/">MyATMS</a></li>
+	      <li><a href="http://www.aqtsolutions.com/products/my-atms-mobile-training-management-software/">MyATMS Mobile</a></li>
+	    </ul>
+          </li>
+
+          <li><a href="http://www.aqtsolutions.com/about-aqt">Company</a>
+	    <ul>
+	      <li><a href="http://www.aqtsolutions.com/about-aqt/aqt-leadership-team">Management Team</a></li>
+	      <li><a href="http://www.aqtsolutions.com/about-aqt/services">Services</a></li>
+	      <li><a href="http://www.aqtsolutions.com/careers">Careers</a></li>
+	      <li><a href="http://www.aqtsolutions.com/about-aqt/events">Events</a></li>
+	      <li><a href="{% url 'contact:contact' %}">Contact</a></li>
+	    </ul>
+          </li>
+
+          <li><a href="http://www.aqtsolutions.com/atms-insiders">News</a></li>
+          
+          {% if user.is_authenticated %}
+            {% if user.is_staff %}
+              <li><a href="{% url 'customer:customer' %}">Hello, {{ user.first_name }}!</a>
+                <ul>
+                  <li><a href="{% url 'aqt_auth:aqt_logout' %}">Logout</a></li>
+                </ul>
+              </li>
+            {% else %}
+              <li><a href="{% url 'member:member' %}">Hello, {{ user.first_name }}!</a>
+                <ul>
+                  <li><a href="{% url 'aqt_auth:aqt_logout' %}">Logout</a></li>
+                </ul>
+              </li>
+            {% endif %}
+          {% else %}
+            <li><a href="{% url 'aqt_auth:login_page' %}">My Account</a>
+              <ul>
+                <li><a href="{% url 'register:register' %}">Register</a></li>
+                <li><a href="{% url 'aqt_auth:login_page' %}">Sign In</a></li>
+              </ul>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    </div>
+    
+  </div>
+  <!-- Container / End -->
+  
+</header>
+<!-- Header / End -->

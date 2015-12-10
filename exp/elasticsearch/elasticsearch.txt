@@ -1,0 +1,75 @@
+# First thing is to install elasticsearch.  This test is being done on MAC OSX, but there are some supported repos (apt
+# and yum): https://www.elastic.co/guide/en/elasticsearch/reference/current/setup-repositories.html
+#
+# You can also do a manual install with .zip or .tar: https://www.elastic.co/downloads/elasticsearch
+
+# Installing with HomeBrew: (http://stackoverflow.com/questions/23034863/install-elasticsearch-1-1-using-brew)
+$ brew install Caskroom/cask/java  # (Java dependency)
+$ brew install elasticsearch
+$ brew info elasticsearch
+
+# To run:
+$ elasticsearch
+$ elasticsearch --config=/usr/local/etc/elasticsearch/elasticsearch.yml  # specifying the config explicitly is now
+                                                                         # deprecated
+
+# Postgres Helpers:
+pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+pg_ctl -D /usr/local/var/postgres stop -s -m fast
+
+# Some quick hit configuration notes:
+- cluster.name: Cluster name that elasticsearch will use to try and automatically join (cluster) on your network.
+Elasticsearch will auto-magically take a poke around the network to discover clusters and automatically join the one
+named by this setting.  In general, doesn't matter, but can be odd when you have multiple clusters you want to keep
+distinct/separate.  (ex. elasticsearch_granthulegaard-dev)
+- node.name: Should describe your node.  In general should be boring and descriptive.  (ex. granthulegaard-dev_01)
+- bootstrap.mlockall: Should be set to "true".  This is a way to prevent your memory from "swapping" which would be "
+death to performance".  This setting is picked up and obeyed by the JVM.
+- network.host: Only allows traffic from a specified IP.  (ex. 127.0.0.1 [poor-man's access control that limits traffic
+to/from localhost)
+
+# Some quick test commands:
+$ curl -XGET localhost:9200/_cluster/health
+$ curl -XGET localhost:9200/_cluster/health?pretty  # Query param "pretty" just pretty-prints JSON output.
+
+# Useful links (tutorials):
+- http://joelabrahamsson.com/elasticsearch-101/  # Recommends Sense Chrome extension
+- http://red-badger.com/blog/2013/11/08/getting-started-with-elasticsearch/  # Recommends generic Postman Chrome extension
+
+# Background research (info):
+- https://cds.cern.ch/record/2011172/files/LHCb-TALK-2015-060.pdf (CERN comparison of Influx, ELK, and OpenTSDB)
+- https://www.elastic.co/webinars/elasticsearch-2-0-overview?baymax=rtp_2.0webinar&elektra=products&iesrc=ctr
+- https://www.elastic.co/blog/elasticsearch-as-a-time-series-data-store
+- http://engineering.laterooms.com/elasticsearch-as-a-time-series-database-does-it-work-part-1/ (Another comparison)
+- https://www.elastic.co/blog/release-we-have (2.0 release announcement blog)
+- https://www.elastic.co/blog/timelion-timeline (Kibana's support for timeseries in ELK)
+- http://stackoverflow.com/questions/24890453/elasticsearch-for-time-series-data (StackOverflow discussion on ES for TS)
+- http://www.infoq.com/presentations/uber-stream-processing
+
+At the end of the day, if ES turns out to be something worth exploring, we should probably also consider Apache Solr.
+Both are built on top of Apache Lucene, but Solr is guaranteed to be 100% open and free for the rest of time.  ES, on
+the other hand benefits from having a company behind it with faster development and more complete tooling, but it also
+has a company behind it which means that the open-source nature is going to clash with the revenue generating demands of
+creating a successful business.
+
+# Timeseries specific documentation:
+- https://www.elastic.co/guide/en/elasticsearch/guide/current/_looking_at_time.html
+
+# ES with Python:
+- There are two different client libraries for ES in Python:
+    + https://elasticsearch-py.readthedocs.org/en/master/
+    + http://elasticsearch-dsl.readthedocs.org/en/latest/index.html
+- *-py is low level and designed to be a very thin wrapper around the REST client.
+- *-dsl is a higher level abstraction designed to be more pythonic.  It is built on top of *-py.
+
+- You can install both with `pip install elasticsearch-dsl`
+
+- While the REST API supports bulk processing, it doesn't appear that elasticsearch-dsl does yet.
+
+- Diving into the definition of the *-dsl wrappers, some of the nomenclature is non-intuitive.  Such as accessing return
+objects by using a custom helper function ".hits" on the "result" class.  Not impressed.
+
+- There is some concern that there is no return all feature...instead you have to specify a fixed size for the return
+number of hits.  This is opposed to the REST API which supports accepting a -1 to return all values (at least it looks
+like it does).
+

@@ -1,0 +1,67 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+auto em1
+iface em1 inet manual
+#iface em1 inet dhcp
+#iface em1 inet static
+#address	  107.181.80.3
+#gateway	  107.181.80.1
+#netmask	  255.255.255.240
+#network	  107.181.80.0/28
+#broadcast 107.181.80.15
+#dns-nameservers	8.8.8.8 8.8.4.4
+
+# The network bridge that uplinks the virtbr0 virtual network switch 
+# to a shared KVM-host/vmd1 NIC (i.e. em1)
+
+auto br0
+iface br0 inet static
+address		107.181.80.3
+gateway		107.181.80.1
+netmask		255.255.255.240
+network		107.181.80.0/28
+broadcast	107.181.80.15
+dns-nameservers	8.8.8.8 8.8.4.4
+bridge_ports   	em1
+bridge_stp     	off
+bridge_fd      	0
+bridge_maxwait 	0
+
+# The secondary network interface
+auto em2
+iface em2 inet manual
+#iface em2 inet dhcp
+#iface em2 inet static
+#address	  107.181.80.3
+#gateway	  107.181.80.1
+#netmask	  255.255.255.240
+#network	  107.181.80.0/28
+#broadcast 107.181.80.15
+#dns-nameservers	8.8.8.8 8.8.4.4
+
+# The network bridge that uplinks the virtbr0 virtual network switch 
+# to a shared KVM-host/vmd1 NIC (i.e. em1)
+
+auto br1
+iface br1 inet static
+address		10.11.12.2
+gateway		10.11.12.1
+netmask		255.255.255.0
+network		10.11.12.0
+broadcast	10.11.12.255
+dns-nameservers	8.8.8.8 8.8.4.4
+bridge_ports   	em2
+bridge_stp     	off
+bridge_fd      	0
+bridge_maxwait 	0
+
+# To route to the hidden network...you will have to add the route to the machine
+# manually:
+# 
+#     $ route add -net 10.11.12.0 netmask 255.255.255.0 gw 107.181.80.2 dev eth0

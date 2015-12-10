@@ -1,0 +1,864 @@
+{% extends 'templates/base.jinja2' %}
+
+{% block title %}
+  ATMS Portal
+{% endblock title %}
+
+{% block header_extend %}
+  {% include 'foundation-header.jinja2' %}
+
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="{{'portal:static/ember-starter-kit-1.9.1/css/style.css'|static_url}}">
+{% endblock header_extend %}
+
+{% block body %}
+  {% raw %}
+  <script type="text/x-handlebars">
+    {{outlet}}
+  </script>
+
+  <!-- INDEX -->
+  
+  <script type="text/x-handlebars" id="index">
+    <!-- Full width row -->
+    <div class="row full-width">
+
+      <!-- Left orange vertical bar -->
+      <div class="medium-4 large-3 columns hide-for-small"
+           style="background-color: #ff5400; height: 100%;">
+
+        <span class="vert-helper"></span>
+        <div class="row vert-center" style="width: 100%;">
+          <div class="medium-8 medium-centered medium-offset-2 columns">
+   {% endraw %}
+            <img src="{{'portal:static/aqt/ATMS-White-Logo-For-Login-Page-450x450.png'|static_url}}" 
+                 width="100%" style="padding: 0 0 12px 0; min-width: 110px;
+                                     max-width: 175px; display: block; margin: 0 auto;">
+   {% raw %}            
+          </div>
+        </div>
+
+      </div>
+      <!-- End left orange vertical bar -->
+
+      <!-- Right side content -->
+      <div class="small-12 medium-8 large-9 columns text-center">
+        
+        <span class="vert-helper"></span>
+        <div class="row vert-center" style="width: 100%;">
+
+          <div class="small-8 medium-9 large-6 small-centered
+                      medium-uncentered medium-offset-2 large-offset-3
+                      columns"
+               style="max-width: 365px;">
+
+            <!-- Login panel -->
+            <div class="panel radius">
+   {% endraw %}
+              <img src="{{'portal:static/aqt/ATMS.png'|static_url}}" 
+                   width="100%" style="padding: 0 0 12px 0;">
+   {% raw %}
+              <form>
+                {{input type="text" value=username placeholder="username"}}
+                {{input type="password" value=password placeholder="password"}}
+                
+                {{#link-to 'applications'}}
+                <a class="button expand radius" style="margin-bottom: 0;">
+                  Login
+                </a>
+                {{/link-to}}
+              </form>
+            </div>
+            <!-- End login panel -->
+
+          </div>
+          
+        </div>
+
+      </div>
+      <!-- End right side content -->
+
+    </div>
+    <!-- End full width row -->
+  </script>
+
+
+  <!-- WEB FRAME -->
+
+  <script type="text/x-handlebars" id="frame">
+    {{#if verified}}
+    <!-- Top nav (for large screens) -->
+    <div class="fixed show-for-large-up" style="z-index: 1001;">
+      <nav class="top-bar" data-topbar role="navigation" style="background: #c2c2c2;">
+
+        <ul class="title-area" style="width: 16.66667%;">
+          <li class="name">
+            <h1>
+              <a href="#/frame/applications" style="padding: 0;">
+   {% endraw %}
+                <img src="{{'portal:static/aqt/ATMS.png'|static_url}}"
+                     style="width: 100%; max-width: 175px; display: block;
+                            margin-left: auto; margin-right: auto;">
+   {% raw %}
+                <span style="font-weight: bold;">
+                </span>
+              </a>
+            </h1>
+          </li>
+        </ul>
+        
+        <section class="top-bar-section">
+        
+          <!-- Right nav section -->
+          <ul class="right">
+            <li class="active" {{action "exitEmberApp"}}><a>Logout</a></li>
+          </ul>
+          
+        </section>
+
+      </nav>
+    </div>
+
+    <!-- Top nav (for medium down screens) -->
+    <div class="fixed hide-for-large-up">
+      <nav class="tab-bar" style="background: #c2c2c2;">
+
+        <!-- Left menu button -->
+        {{#if showMenu}}
+        <section class="left-small" {{action "closeMenu"}}>
+          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        </section>
+        {{else}}
+        <section class="left-small" {{action "openMenu"}}>
+          <a class="left-off-canvas-toggle menu-icon"><span></span></a>
+        </section>
+        {{/if}}
+        
+        <!-- Middle section -->
+        <section class="middle tab-bar-section">
+          <h1>
+            <a href="#/frame/applications" style="padding: 0;">
+   {% endraw %}
+              <img src="{{'portal:static/aqt/ATMS.png'|static_url}}"
+                   style="width: 100%; max-width: 175px; display: block;
+                          margin-left: auto; margin-right: auto;">
+   {% raw %}
+              <span style="font-weight: bold;">
+              </span>
+            </a>
+          </h1>
+        </section>
+
+        <!-- Right logout button -->
+        <section class="right-small" {{action "exitEmberApp"}}>
+          <a class="right-off-canvas-toggle" style="width: 100%; height: 100%;">
+              <i class="fi-power size-36" 
+                 style="color: white;
+                        height: 100%;
+                        padding-left: 8px;;
+                        padding-top: auto;"></i>
+          </a>
+        </section>
+
+      </nav>
+    </div>
+    <!-- End top nav (for medium down screens) -->
+
+    {{#if showMenu}}
+    <!-- Left side menu (for medium down screens) -->
+    <div class="fixed hide-for-large-up" 
+         style="z-index: 98; 
+                width: 240px;
+                height: 100%;
+                background-color: #D5D8DA;
+                padding: 45px 15px 0 15px;">
+
+      <nav>
+        <!-- Side nav -->
+        <ul class="side-nav">
+          <li>
+            <a href="#/frame/applications" style="color: #707070;">
+              Launch Page
+            </a>
+          </li>
+          
+          <li class="divider" style="border-top: 2px solid;
+                                     border-top-color: #999999;
+                                     margin: 10px 0 20px 0;"></li>
+          
+          <li class="heading" style="color: #707070;">Help</li>
+          
+          <li>
+            <a href="#/frame/printing" style="color: #707070;">
+              Printing
+            </a>
+          </li>
+          <li>
+            <a href="#/frame/uploading" style="color: #707070;">
+              Uploading Files
+            </a>
+          </li>
+          <li>
+            <a href="#/frame/downloading" style="color: #707070;">
+              Downloading Files
+            </a>
+          </li>
+          <li>
+            <a href="#/frame/touch-screens" style="color: #707070;">
+              Touch Screens
+            </a>
+          </li>
+          
+        </ul>
+      </nav>
+
+    </div>
+    {{/if}}
+
+    <div class="row full-width">
+      <!-- Left bar (for large screens) -->
+      <div class ="large-2 show-for-large-up columns" 
+           style="background-color: #D5D8DA;
+                  height: 100%;
+                  position: fixed;
+                  padding-top: 45px;
+                  z-index: 1000;">
+        
+        <nav>
+          <!-- Side nav -->
+          <ul class="side-nav">
+            <li>
+              <a href="#/frame/applications" style="color: #707070;">
+                Launch Page
+              </a>
+            </li>
+
+            <li class="divider" style="border-top: 2px solid;
+                                       border-top-color: #999999;
+                                       margin: 10px 0 20px 0;"></li>
+
+            <li class="heading" style="color: #707070;">Help</li>
+
+            <li>
+              <a href="#/frame/printing" style="color: #707070;">
+                Printing
+              </a>
+            </li>
+            <li>
+              <a href="#/frame/uploading" style="color: #707070;">
+                Uploading Files
+              </a>
+            </li>
+            <li>
+              <a href="#/frame/downloading" style="color: #707070;">
+                Downloading Files
+              </a>
+            </li>
+            <li>
+              <a href="#/frame/touch-screens" style="color: #707070;">
+                Touch Screens
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+        
+      </div>
+      
+      <!-- App content -->
+      <div class="small-12 large-10 columns" style="padding-top: 45px;">
+        {{outlet}}
+      </div>
+    </div>
+
+    {{else}}
+
+    <div class="row" style="padding-top: 18%;">
+      <div class="small-10 medium-8 large-7 small-centered columns">
+        <div class="panel callout radius">
+          <h1>Authentication Failed</h1>
+          <p>
+            You were unable to be authenticated.  Please try again.
+          </p>
+            
+          {{#link-to 'index'}}
+          <a class="button radius" style="float: right;">
+            Back to Login
+          </a>
+          {{/link-to}}
+        </div>
+      </div>
+    </div>
+
+    {{/if}}
+
+  </script>
+
+  <!-- APPLICATIONS -->
+  
+  <script type="text/x-handlebars" id="applications">
+    {{#unless error}}
+
+    <div class="row">
+
+      <span class="vert-helper" style="margin-top: -45px;"></span>
+
+      <div class="small-10 small-offset-1 
+                  medium-8 medium-offset-2 
+                  large-8 large-offset-2 
+                  vert-center">
+
+        {{#if stupidatms}}
+        <div class="clearfix">
+
+          <div class="small-12 medium-8 columns">
+   {% endraw %}
+            <img src="{{'portal:static/aqt/applications/ATMS.png'|static_url}}"
+                 style="height: 75px; margin: 0 0 0 62px;"
+                 class="show-for-large-up">
+   {% raw %}
+            <a class="hide-for-large-up" style="width: 100%;"
+               {{action "popGuacWindow" "ATMS"}}>
+   {% endraw %}
+              <img src="{{'portal:static/aqt/applications/ATMS.png'|static_url}}"
+                   style="height: 75px; margin: 0 0 0 62px;">
+   {% raw %}
+            </a>
+          </div>
+
+          <div class="medium-4 columns show-for-large-up">
+            <a class="button color round right"
+               style="margin-bottom: 0; margin-top: 12px;"
+               {{action "popGuacWindow" "ATMS"}}>
+              <strong>Launch</strong>
+            </a>
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if stupidmyatms}}
+        <div class="clearfix" style="padding: 50px 0 0 0;">
+          
+          <div class="small-12 medium-8 columns">
+   {% endraw %}
+            <img src="{{'portal:static/aqt/applications/myATMS.png'|static_url}}"
+                 style="height: 75px;"
+                 class="show-for-large-up">
+   {% raw %}
+            <a class="hide-for-large-up" style="width: 100%"
+               {{action "popGuacWindow" "MyATMS"}}>
+   {% endraw %}
+              <img src="{{'portal:static/aqt/applications/myATMS.png'|static_url}}"
+                   style="height: 75px;">
+   {% raw %}
+            </a>
+          </div>
+
+          <div class="medium-4 columns show-for-large-up">
+            <a class="button color round right"
+               style="margin-bottom: 0; margin-top: 12px;"
+               {{action "popGuacWindow" "MyATMS"}}>
+              <strong>Launch</strong>
+            </a>
+          </div>
+        </div>
+        {{/if}}
+
+        {{#if stupidconnect}}
+        <div class="clearfix" style="padding: 50px 0 0 0;">
+          
+          <div class="small-12 medium-8 columns">
+   {% endraw %}
+            <img src="{{'portal:static/aqt/applications/ATMSconnect.png'|static_url}}"
+                 style="height: 75px; margin: 0 0 0 62px;"
+                 class="show-for-large-up">
+   {% raw %}
+            <a class="hide-for-large-up" style="width: 100%;"
+               {{action "popGuacWindow" "ATMS Connect"}}>
+   {% endraw %}
+              <img src="{{'portal:static/aqt/applications/ATMSconnect.png'|static_url}}"
+                   style="height: 75px; margin: 0 0 0 62px;">
+   {% raw %}
+            </a>
+          </div>
+          
+          <div class="medium-4 columns show-for-large-up">
+            <a class="button color round right"
+               style="margin-bottom: 0; margin-top: 12px;"
+               {{action "popGuacWindow" "ATMS Connect"}}>
+              <strong>Launch</strong>
+            </a>
+          </div>
+        </div>
+        {{/if}}
+
+      </div>
+    </div>
+
+    {{else}}
+
+    <div class="row" style="padding-top: 18%;">
+      <div class="small-10 medium-8 large-7 small-centered columns">
+        <div class="panel callout radius">
+          <h1>Error</h1>
+          <p>
+            {{message}}
+          </p>
+          
+          {{#link-to 'index'}}
+          <a class="button radius" 
+             style="float: right;"
+             {{action "exitEmberApp"}}>
+            Exit
+          </a>
+          {{/link-to}}
+        </div>
+      </div>
+    </div>
+      
+    {{/unless}}
+  </script>
+
+
+  <!-- HELP PAGES -->
+
+  
+  <!-- Printing -->
+  <script type="text/x-handlebars" id="printing">
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="small-10 small-offset-1
+                  medium-10 medium-offset-1
+                  large-8 large-offset-1">
+
+        <h1>Printing</h1>
+
+        <p>
+          This ATMS web cient supports the printing of reports and other
+          documents stored within the ATMS training management system. In order
+          to print, just follow these steps.
+        </p>
+
+        <ol style="padding-left: 45px;">
+          <li style="margin-bottom: 20px;">
+            Select the "Print..." option from the RMB menu.
+            
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/print-option.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+              
+            <strong>Note:</strong> This option is available within ATMS for
+            various printable resources.
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            A helpful side-menu will appear on the left side of your browser
+            window with your desired printed resource in it. 
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/printing-menu.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+
+            <strong>Important!</strong> You may open and close this side menu at any
+            time by pressing the &lt;"ctrl"&gt; + &lt;"shift"&gt; + &lt;"alt"&gt; key
+            combination.
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Simply click on your desired resource and you will be able to
+            download a printable .pdf.  Your download process will differ
+            depending on your browser, but you should chose to either "Save" or
+            "Open" the downloaded file when applicable. 
+
+            <br>
+            <br>
+
+            For example, with Google Chrome a download bar will appear at the
+            bottom of your window.
+  
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/chrome-download.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Now you can open the downloaded .pdf and print to any printer
+            connected to your local machine.
+          </li>
+       </ol>
+
+       <p>
+         It is important to note that in order to support remote printing, ATMS
+         converts all printable documents into .pdf files before sending them to
+         the client.
+       </p>
+      </div>
+
+    </div>
+
+  </script>
+
+
+  <!-- Uploading Files -->
+  <script type="text/x-handlebars" id="uploading">
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="small-10 small-offset-1
+                  medium-10 medium-offset-1
+                  large-8 large-offset-1">
+
+        <h1>Uploading Files</h1>
+
+        <p>
+          The ATMS portal client supports uploading files into ATMS directly
+          from the browser.  There are two ways to upload files.
+        </p>
+
+        <h3>Click and Drag:</h3>
+
+        <ol style="padding-left: 45px;">
+          <li style="margin-bottom: 20px;">
+            Click and drag a file onto the browser window that has your ATMS
+            client running.
+            
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/uploading-drag.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            A helpful side-menu will appear on the left side of your browser
+            window showing the upload progress for the file you are uploading. 
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/uploading-menu.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+
+            <strong>Important!</strong> You may open and close this side menu at any
+            time by pressing the &lt;"ctrl"&gt; + &lt;"shift"&gt; + &lt;"alt"&gt; key
+            combination.
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Once the upload is finished, the file will be placed in a drive
+            named "A on ATMS RDP" that is made available to ATMS.
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/uploading-fs.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Now you will be able to attach the uploaded file into ATMS where
+            applicable.
+
+            <br>
+            <br>
+
+            For example, you will be able to select the file in "Attachment
+            Maintenance".
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/uploading-attachmx.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+       </ol>
+
+       <h3>From the side menu:</h3>
+
+        <ol style="padding-left: 45px;">
+          <li style="margin-bottom: 20px;">
+            Open the side menu with the &lt;"ctrl"&gt; + &lt;"shift"&gt; +
+            &lt;"alt"&gt; key combination.
+
+            <br>
+            <br>
+
+            <strong>Important!</strong> You may open and close this side menu at any
+            time by pressing the &lt;"ctrl"&gt; + &lt;"shift"&gt; + &lt;"alt"&gt; key
+            combination.
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Use the "Upload Files" button to select a file to upload from your
+            local device.
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/uploading-upload-button.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Once the upload is finished, the file will be placed in a drive
+            named "A on ATMS RDP" that is made available to ATMS.
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/uploading-fs.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Now you will be able to attach the uploaded file into ATMS where
+            applicable.
+
+            <br>
+            <br>
+
+            For example, you will be able to select the file in "Attachment
+            Maintenance".
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/uploading-attachmx.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+        </ol>
+
+      </div>
+
+    </div>
+
+  </script>
+
+
+  <!-- Downloading Files -->
+  <script type="text/x-handlebars" id="downloading">
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="small-10 small-offset-1
+                  medium-10 medium-offset-1
+                  large-8 large-offset-1">
+
+        <h1>Downloading Files</h1>
+
+        <p>
+          This ATMS web client also supports the downloading of files. In most
+          situations it is preferable to use the printing mechanism, however,
+          downloading IS supported.
+        </p>
+
+        <p>
+          In the drive "A on ATMS RDP" there is a "Download" folder:
+        </p>
+
+   {% endraw %}
+        <img src="{{'portal:static/aqt/help/uploading-fs.png'|static_url}}"
+             style="margin: 0px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+        
+        <p>
+          Any file saved in this folder will be automatically downloaded to your
+          web browser.
+        </p>
+
+        <h3>Example:</h3>
+
+        <p>
+          You can use the "Save As..." RMB menu option to save a
+          file from ATMS into the "Download" folder:
+        </p>
+
+        <ol style="padding-left: 45px;">
+          <li style="margin-bottom: 20px;">
+            Select the "Save As..." option from the RMB menu.
+            
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/save-as-option.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+              
+            <strong>Note:</strong> This option is available within ATMS for
+            various resources that can be saved.
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Make sure to save the resource into the "Download" directory on the
+            "A on ATMS RDP" file system.
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/downloading-save-in-download.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            A helpful side-menu will appear on the left side of your browser
+            window with your saved file in the "File Transfer" area.. 
+
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/printing-menu.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+
+            <strong>Important!</strong> You may open and close this side menu at any
+            time by pressing the &lt;"ctrl"&gt; + &lt;"shift"&gt; + &lt;"alt"&gt; key
+            combination.
+          </li>
+
+
+          <li style="margin-bottom: 20px;">
+            Simply click on your desired resource and you will be able to
+            download the file.  Your download process will differ depending on
+            your browser, but you should choose to "Save" the downloaded file
+            when applicable. 
+
+            <br>
+            <br>
+
+            For example, with Google Chrome a download bar will appear at the
+            bottom of your window.
+  
+            <br>
+   {% endraw %}
+            <img src="{{'portal:static/aqt/help/chrome-download.png'|static_url}}"
+                 style="margin: 20px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}          
+            <br>
+          </li>
+
+          <li style="margin-bottom: 20px;">
+            Now you can open the downloaded file from your local device.
+          </li>
+       </ol>
+
+      </div>
+
+    </div>
+
+  </script>
+
+
+  <!-- Touch Screens -->
+  <script type="text/x-handlebars" id="touch-screens">
+
+    <div class="row" style="margin-top: 45px;">
+
+      <div class="small-10 small-offset-1
+                  medium-10 medium-offset-1
+                  large-8 large-offset-1">
+
+        <h1>Touch Screens</h1>
+
+        <p>
+          The ATMS web RDP solution has robust touch screen support including
+          click-and-drag and right-click commands.  This guide describes how to
+          use these commands from a touch-enabled device.
+        </p>
+
+
+        <h3>Touch to click</h3>
+
+        <p>
+          By default, the ATMS web portal uses "touch-to-click" commands from
+          touch-eneabled devices.  This means that you may simply touch anywhere
+          to simulate a "click" wherever you finger is located.
+        </p>
+
+        <p>
+          This also means that double-tapping simulates a double-click.
+        </p>
+
+
+        <h3>Right click (RMB)</h3>
+
+        <p>
+          To perform a right-click (right-mouse-button; RMB), touch and hold the
+          position on the screen you wish to perform the right-click.
+        </p>
+
+        <p>
+          For example, within ATMS a RMB opens a menu with actions for the
+          specific window you are on:
+        </p>
+
+   {% endraw %}
+        <img src="{{'portal:static/aqt/help/print-option.png'|static_url}}"
+             style="margin: 0px 20px 20px 20px; padding-right: 40px;">
+   {% raw %}
+        <br>
+
+
+        <h3>Double tap (and HOLD) to drag</h3>
+
+        <p>
+          In order to drag the mouse in a clicked mode, like dragging a
+          scroll bar or moving a window, simply double-tap and hold.
+        </p>
+
+        <p>
+          Just like a for double-clicking, double tap, but instead of lifting
+          your finger on the second tap, hold it down for a moment and you will
+          be able to drag your mouse in a clicked mode.
+        </p>
+
+        <p>
+          For example, double tapping and holding a scroll bar will allow you to
+          slide it up and down, scrolling through a window's contents as if you
+          were clicking and dragging with a mouse.
+        </p>
+
+      </div>
+
+    </div>
+  </script>
+
+
+  <!-- GUACRDP -->
+
+  <script type="text/x-handlebars" id="guac">
+    <div class="full-height">
+      <div class="small-12 columns full-height" style="padding:0;">
+        <iframe {{bind-attr src=url}} frameborder="0" class="full-screen"></iframe>
+      </div>
+    </div>
+  </script>
+  {% endraw %}
+{% endblock body %}
+
+{% block body_extend %}
+  <script src="{{'portal:static/ember-starter-kit-1.9.1/js/libs/jquery-1.10.2.js'|static_url}}"></script>
+  <script src="{{'portal:static/ember-starter-kit-1.9.1/js/libs/handlebars-v2.0.0.js'|static_url}}"></script>
+  <script src="{{'portal:static/ember-starter-kit-1.9.1/js/libs/ember-1.9.1.js'|static_url}}"></script>
+  <script src="{{'portal:static/ember-starter-kit-1.9.1/js/app.js'|static_url}}"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="{{'portal:static/ember-starter-kit-1.9.1/tests/runner.js'|static_url}}"></script>
+
+{% endblock body_extend %}

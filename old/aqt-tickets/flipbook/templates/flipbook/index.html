@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Flipbook Index
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+ <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Flipbook Index</h1>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+            <li><a href="{% url 'customer:customer' %}">Admin Area</a></li>
+            <li>Flipbooks</li>
+	  </ul>
+	</nav>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    
+      <div class="clearfix" style="margin-top: 25px;"></div>
+ 
+      <!-- Section Title -->
+      <h1 class="headline">Search Flipbook</h1>
+      <span class="line" style="margin-bottom: 15px;"></span>
+      <div class="clearfix"></div>
+
+        <form method="post" action="{% url 'flipbook:index' %}">
+        {% csrf_token %}
+
+          <div class ="four alt columns">
+            <label><strong style="color: #888;">Flipbook Header:</strong></label>
+            <input type="text" name="header" value="{{ header }}"
+                   style="width: 80%;"
+                   placeholder='e.g. Header HERE'/>
+          </div>
+
+
+          <div class ="four alt columns">
+          <label><strong style="color: #888;">Slug:</strong></label>
+            <input type="text" name="slug" value="{{ slug }}"
+                   style="width: 80%;"
+                   placeholder='e.g. slug-HERE '/>
+          </div>
+
+          <div class="eight alt columns">
+            <input type="submit" name="search" value="Search"
+               style="margin-top: 30px";/>
+
+            <input type="submit" name="clear" value="Clear" 
+               class="button gray" style="margin-left: 8px; margin-top: 30px"/>
+            
+            <a href="{% url 'flipbook:new' %}" class="button color" 
+               style="margin: 30px 0 0 8px; text-align: center;">
+              Create Flipbook <i class="icon-file white"></i>
+            </a>
+
+            <p style="margin: 30px 0 0 8px; display: inline-block;">
+              <strong style="color: #888;">Flipbook Count:</strong> {{ flipbook_count }}
+            </p>
+          </div>
+
+        
+        <div class="clearfix"></div>
+        <div style="margin: 20px 0 0 0;"></div>
+ 
+   
+        
+      </form>
+
+      <!-- Tabs Content -->
+      <div class="tabs-container">
+          
+          <h1 style="padding: 10px 0 15px 0;">Flipbooks</h1>
+          
+          <table class="standard-table">
+            <tbody>
+              <tr>
+                <th>Header</th>
+                <th>Slug</th>
+                <th>URL</th>
+                <th>Edit</th>
+              </tr>
+            <tr>
+              {% for f in flipbook %} 
+                <td>
+                  <a href="{% url 'flipbook:view' f.slug %}"
+                     style="color: #888;">
+                    {{ f.header }}
+                  </a>
+                </td>
+                <td>
+                  <a href="{% url 'flipbook:view' f.slug %}"
+                     style="color: #888;">
+                    {{ f.slug }}
+                  </a>
+                </td>
+                <td>
+                  <a href="{{ f.url }}"
+                     style="color: #888;">
+                    {{ f.url }}
+                  </a>
+                </td>
+                <td style="width: 200px; min-width: 200px;">
+                  <a href="{% url 'flipbook:edit' f.slug %}" 
+                     class="button color">
+                    Edit <i class="icon-edit white"></i>
+                  </a>
+                  <a href="{% url 'flipbook:copy' f.slug %}" 
+                     class="button gray"
+                     style="margin-left: 4px;">
+                    Copy <i class="icon-copy white"></i>
+                  </a>
+                </td>
+              </tr>
+               {% endfor %}
+             </tbody>
+          </table>
+      </div>
+     </div>
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

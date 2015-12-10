@@ -1,0 +1,153 @@
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.24 sec
+'influx_write' 196.48 sec
+'postgres_write' 16.03 sec
+'influx_read' 0.88 sec
+Influx returned 100000 rows.
+'postgres_read' 0.43 sec
+Postgres returned 100000 rows.
+'influx_sum' 0.04 sec
+Influx sum returned: [{u'sum': 502545703531, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.04 sec
+Influx average returned: [{u'mean': 5025457.03531008, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.02 sec
+Postgres sum returned: [(502545703531.0,)]
+'postgres_average' 0.02 sec
+Postgres average returned: [(5025457.03531,)]
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.23 sec
+'influx_write' 196.60 sec
+'postgres_write' 18.05 sec
+'influx_read' 1.99 sec
+Influx returned 200000 rows.
+'postgres_read' 0.89 sec
+Postgres returned 200000 rows.
+'influx_sum' 0.07 sec
+Influx sum returned: [{u'sum': 1002648937288, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.07 sec
+Influx average returned: [{u'mean': 5013244.686440045, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.04 sec
+Postgres sum returned: [(1002648937288.0,)]
+'postgres_average' 0.03 sec
+Postgres average returned: [(5013244.68644,)]
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.24 sec
+'influx_write' 222.49 sec
+'postgres_write' 16.17 sec
+'influx_read' 2.68 sec
+Influx returned 300000 rows.
+'postgres_read' 1.28 sec
+Postgres returned 300000 rows.
+'influx_sum' 0.10 sec
+Influx sum returned: [{u'sum': 1501683157379, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.10 sec
+Influx average returned: [{u'mean': 5005610.524596702, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.05 sec
+Postgres sum returned: [(1501683157379.0,)]
+'postgres_average' 0.05 sec
+Postgres average returned: [(5005610.52459667,)]
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.24 sec
+'influx_write' 226.74 sec
+'postgres_write' 17.71 sec
+'influx_read' 3.55 sec
+Influx returned 400000 rows.
+'postgres_read' 1.73 sec
+Postgres returned 400000 rows.
+'influx_sum' 0.13 sec
+Influx sum returned: [{u'sum': 2000007787818, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.13 sec
+Influx average returned: [{u'mean': 5000019.469544922, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.06 sec
+Postgres sum returned: [(2000007787818.0,)]
+'postgres_average' 0.05 sec
+Postgres average returned: [(5000019.469545,)]
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.25 sec
+'influx_write' 271.01 sec
+'postgres_write' 35.98 sec
+'influx_read' 4.45 sec
+Influx returned 500000 rows.
+'postgres_read' 2.19 sec
+Postgres returned 500000 rows.
+'influx_sum' 0.17 sec
+Influx sum returned: [{u'sum': 2499658601764, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.17 sec
+Influx average returned: [{u'mean': 4999317.203527946, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.08 sec
+Postgres sum returned: [(2499658601764.0,)]
+'postgres_average' 0.07 sec
+Postgres average returned: [(4999317.203528,)]
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.24 sec
+'influx_write' 240.66 sec
+'postgres_write' 18.51 sec
+'influx_read' 5.27 sec
+Influx returned 600000 rows.
+'postgres_read' 2.55 sec
+Postgres returned 600000 rows.
+'influx_sum' 0.18 sec
+Influx sum returned: [{u'sum': 2998272888453, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.20 sec
+Influx average returned: [{u'mean': 4997121.480754967, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.09 sec
+Postgres sum returned: [(2998272888453.0,)]
+'postgres_average' 0.07 sec
+Postgres average returned: [(4997121.480755,)]
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.31 sec
+'influx_write' 416.27 sec
+'postgres_write' 18.59 sec
+'influx_read' 6.96 sec
+Influx returned 700000 rows.
+'postgres_read' 3.33 sec
+Postgres returned 700000 rows.
+'influx_sum' 0.24 sec
+Influx sum returned: [{u'sum': 3499401267976, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.27 sec
+Influx average returned: [{u'mean': 4999144.668537092, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.12 sec
+Postgres sum returned: [(3499401267976.0,)]
+'postgres_average' 0.08 sec
+Postgres average returned: [(4999144.66853714,)]
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.60 sec
+'influx_write' 268.82 sec
+'postgres_write' 17.07 sec
+'influx_read' 7.07 sec
+Influx returned 800000 rows.
+'postgres_read' 3.60 sec
+Postgres returned 800000 rows.
+'influx_sum' 0.26 sec
+Influx sum returned: [{u'sum': 3998309679781, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.26 sec
+Influx average returned: [{u'mean': 4997887.0997263035, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.12 sec
+Postgres sum returned: [(3998309679781.0,)]
+'postgres_average' 0.09 sec
+Postgres average returned: [(4997887.09972625,)]
+ip-10-10-20-129:influxdb granthulegaard$ python comparison.py
+--- START ---
+'create_data' 0.24 sec
+'influx_write' 253.87 sec
+'postgres_write' 15.53 sec
+'influx_read' 7.93 sec
+Influx returned 900000 rows.
+'postgres_read' 3.90 sec
+Postgres returned 900000 rows.
+'influx_sum' 0.27 sec
+Influx sum returned: [{u'sum': 4499747822025, u'time': u'1970-01-01T00:00:00Z'}]
+'influx_average' 0.28 sec
+Influx average returned: [{u'mean': 4999719.802250149, u'time': u'1970-01-01T00:00:00Z'}]
+'postgres_sum' 0.15 sec
+Postgres sum returned: [(4499747822025.0,)]
+'postgres_average' 0.12 sec
+Postgres average returned: [(4999719.80225,)]

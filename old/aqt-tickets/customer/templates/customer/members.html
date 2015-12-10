@@ -1,0 +1,565 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  AQT Solutions | Member Area
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+
+  <!-- Google Tracking -->
+  {% include "google-tracking.html" %}
+
+  <!-- HubSpot Tracking -->
+  {% include "hubspot-tracking.html" %}
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar" style="margin: 0;">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Member Area</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+	    <li>Member Area</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container" style="padding: 0 0 6rem 0;">
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="twelve alt columns">
+      
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">My Support</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <div class="four columns" style="margin-left: 0;">
+        <a href="{% url 'tickets:tickets' %}">
+          <div class="notice-box">
+            <h3>
+              Review Tickets
+            </h3>
+            <i class="icon-search"></i>
+            <p>
+              View and search your company's currently open tickets.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="four columns" style="margin: 0;">
+        <a href="{% url 'tickets:ticket_create' %}">
+          <div class="notice-box">
+            <h3>
+              Create Ticket
+            </h3>
+            <i class="icon-file"></i>
+            <p>
+              Create a new ticket for review by ATMS Support.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="four columns" style="margin-right: 0;">
+        <a href="{% url 'atms_support:atms_support' %}">
+          <div class="notice-box">
+            <h3>
+              Contact Support
+            </h3>
+            <i class="icon-envelope"></i>
+            <p>
+              Send a message to the ATMS Support team.
+            </p>
+          </div>
+        </a>
+      </div>
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">Full Installation</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        Please <strong>save</strong> software installation files to your
+        network or local drive before attempting an installation. Do not
+        attempt to open an installation file directly from the AQT server. 
+      </p>
+      
+      <p>
+        Please note file sizes before attempting download to ensure you have
+        enough disk space. All documentation files are included in the
+        product setup files but are listed below if you would like to
+        download them separately.
+      </p>
+
+      <!-- Tabs Navigation -->
+      <ul class="tabs-nav">
+        <li class="active">
+          <a href="#520">Version 5.20</a>
+        </li>
+        <li>
+          <a href="#510">Version 5.10</a>
+        </li>
+      </ul>
+
+      <!-- Tabs Content -->
+      <div class="tabs-container">
+        
+        <div class="tab-content" id="520">
+          
+          <h3 style="padding: 10px 0 15px 0;">Installers</h3>
+          
+          <table class="standard-table">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Size</th>
+                <th>Download</th>
+              </tr>
+              <tr>
+                <td>ATMS Installer</td>
+                <td>Sep 4, 2015</td>
+                <td>205 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=atms_setup.msi&folder=ver520&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Appeon 32-bit Installer</td>
+                <td>Dec 6, 2014</td>
+                <td>1.49 GB</td>
+                <td>
+                  <a href="https://members.aqtsolutions.com/static/downloads/ver520/APB-2015GA-OE-X32-WIN-AP-002.zip" 
+                     class="button color" style="text-align: center;" download>
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Appeon 64-bit Installer</td>
+                <td>Dec 6, 2014</td>
+                <td>1.49 GB</td>
+                <td>
+                  <a href="https://members.aqtsolutions.com/static/downloads/ver520/APB-2015GA-OE-X64-WIN-AP-002.zip" 
+                     class="button color" style="text-align: center;" download>
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <h3 style="padding: 10px 0 15px 0;">Documentation</h3>
+          
+          <table class="standard-table">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Size</th>
+                <th>Download</th>
+              </tr>
+              <tr>
+                <td>ATMS 5.2 Release Bulletin</td>
+                <td>May 31, 2015</td>
+                <td>675 KB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS 52x Release Bulletin.pdf&folder=ver520&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Installation Guide</td>
+                <td>Sep 4, 2015</td>
+                <td>1.38 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS Installation Guide.pdf&folder=ver520&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="clearfix" style="magin-top: 25px;"></div>
+
+          <!-- Section Title -->
+          <h3 style="margin-top: 25px;" class="headline">Updates</h3>
+          <span class="line" style="margin-bottom: 35px;"></span>
+          <div class="clearfix"></div>
+                    
+          <p>
+            To install an update, run the packaged executable and follow the
+            on-screen instructions.  The updater will automatically replace the
+            necessary files of an existing 5.2x installation.
+          </p>
+          
+          <p>
+            <strong>Note:</strong> Product Updates contain all of the
+            previous fixes packaged with earlier Product Updates.
+          </p>
+
+          <p>
+            <strong>Note:</strong> All updates are also packaged into an updated
+            main installer.  If installing a new instance of ATMS, use the
+            primary installer above.
+          </p>
+          
+          <table class="standard-table">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Size</th>
+                <th>Download</th>
+              </tr>
+              <tr>
+                <td>ATMS 5.21 Release Bulletin</td>
+                <td>Sep 4, 2015</td>
+                <td>474 KB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS 521 Release Bulletin.pdf&folder=ver521&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Updater 5.21</td>
+                <td>Sep 4, 2015</td>
+                <td>17 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=atms_update.msi&folder=ver521&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          
+        <!-- End tab-content for 520 -->
+        </div>
+
+        <div class="tab-content" id="510">
+
+          <h3 style="padding: 10px 0 15px 0;">Installers</h3>
+
+          <table class="standard-table">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Size</th>
+                <th>Download</th>
+              </tr>
+              <tr>
+                <td>ATMS Core 5.1</td>
+                <td>Dec 01, 2014</td>
+                <td>56 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=setup_core.exe&folder=ver510&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Web 5.1</td>
+                <td>Dec 01, 2014</td>
+                <td>11 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=setup_web.exe&folder=ver510&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Mobile 5.1</td>
+                <td>Jan 12, 2014</td>
+                <td>10.8 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=setup_mobile.exe&folder=ver510&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Connect 5.1</td>
+                <td>Dec 01, 2014</td>
+                <td>35 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=setup_connect.exe&folder=ver510&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Database Manager 5.1</td>
+                <td>Dec 01, 2014</td>
+                <td>160 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=setup_dbmgr.exe&folder=ver510&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS API 5.1</td>
+                <td>Dec 01, 2014</td>
+                <td>9.4 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=setup_api.exe&folder=ver510&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Sybase PB 12.5 .NET Runtime</td>
+                <td>Oct 15, 2014</td>
+                <td>19.49 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=PBNETRT125.msi&folder=ver510&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Appeon 32-bit Installer</td>
+                <td>Oct 15, 2014</td>
+                <td>1.43 GB</td>
+                <td>
+                  <a href="https://members.aqtsolutions.com/static/downloads/ver510/APB-2013R2-OE-X32-WIN-AP-002.zip" 
+                     class="button color" style="text-align: center;" download>
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>Appeon 64-bit Installer</td>
+                <td>Oct 15, 2014</td>
+                <td>1.43 GB</td>
+                <td>
+                  <a href="https://members.aqtsolutions.com/static/downloads/ver510/APB-2013R2-OE-X64-WIN-AP-002.zip" 
+                     class="button color" style="text-align: center;" download>
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3 style="padding: 10px 0 15px 0;">Documentation</h3>
+
+          <table class="standard-table">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Size</th>
+                <th>Download</th>
+              </tr>
+              <tr>
+                <td>ATMS 5.1 Release Bulletin</td>
+                <td>Oct 20, 2014</td>
+                <td>2.21 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS 510 Release Bulletin.pdf&folder=ver510&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Installation Guide</td>
+                <td>Oct 15, 2014</td>
+                <td>1.69 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS Installation Guide.pdf&folder=ver510&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS System Requirements</td>
+                <td>Oct 15, 2015</td>
+                <td>50 KB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS System Requirements.pdf&folder=ver510&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS User's Guide</td>
+                <td>Oct 15, 2014</td>
+                <td>1.73 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS Users Guide.pdf&folder=ver510&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Connect User's Guide</td>
+                <td>Oct 15, 2014</td>
+                <td>1.03 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS Connect Users Guide.pdf&folder=ver510&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Report's Guide</td>
+                <td>Oct 15, 2014</td>
+                <td>282 KB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS Reports Guide.pdf&folder=ver510&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Database Manager User's Guide</td>
+                <td>Oct 15, 2014</td>
+                <td>989 KB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS Database Manager.pdf&folder=ver510&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="clearfix" style="magin-top: 25px;"></div>
+
+          <!-- Section Title -->
+          <h3 style="margin-top: 25px;" class="headline">Product Updates</h3>
+          <span class="line" style="margin-bottom: 35px;"></span>
+          <div class="clearfix"></div>
+          
+          <p>
+            Please review the information provided carefully and install the
+            update at your discretion. All remedies provided by an update will
+            be included in the next release of the software.
+          </p>
+          
+          <p>
+            To install an update, run the packaged executable and follow the
+            on-screen instructions. Each product update includes a Readme file
+            for review. Contact ATMS Support if you have any questions.
+          </p>
+          
+          <p>
+            <strong>Please Note:</strong> Product Updates contain all of the
+            previous fixes packaged with earlier Product Updates.
+          </p>
+          
+          <table class="standard-table">
+            <tbody>
+              <tr>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Size</th>
+                <th>Download</th>
+              </tr>
+              <tr>
+                <td>ATMS 5.1 Release Bulletin</td>
+                <td>Oct 20, 2014</td>
+                <td>2.21 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=ATMS 510 Release Bulletin.pdf&folder=ver510&type=application/pdf" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+              <tr>
+                <td>ATMS Updater 5.1</td>
+                <td>Dec 17, 2014</td>
+                <td>134 MB</td>
+                <td>
+                  <a href="{% url 'download:download-secure' %}?filename=atms_update[5.1].exe&folder=ver510&type=application/x-msdownload" 
+                     class="button color" style="text-align: center;">
+                    Download <i class="icon-cloud-download white"></i>
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+        </div>
+
+      </div>
+      
+    <!-- End twelve columns -->
+    </div>
+    
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

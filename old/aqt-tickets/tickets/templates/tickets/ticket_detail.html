@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Ticket #{{ ticket_number }}
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Ticket #{{ ticket_number }}</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+            <li><a href="{% url 'customer:customer' %}">Member Area</a></li>
+	    <li><a href="{% url 'tickets:tickets' %}">Tickets</a></li>
+            <li>#{{ ticket_number }}</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container">
+    <div class="sixteen columns">
+
+      <!-- Ticket Details -->
+      <div class="featured plan one-third column" style="margin-bottom: 5.2rem;">
+        <h3>Ticket #{{ ticket_number }}</h3>
+
+        <div class="plan-price">
+          <span class="value">{{ product }}</span>
+          <span class="period">{{ release }}</span>
+        </div>
+
+        <div class="plan-features">
+          <form id="details" method="post" 
+                action="{% url 'tickets:ticket_detail' ticket_id=ticket_number %}">
+            {% csrf_token %}
+            <ul>
+              <li>
+                <strong style="color: #888;">Issue Type:</strong> 
+                <select name="issue_type" style="display: inline-block;">
+                  {% if issue_type == "Question" %}
+                  <option value="Question" selected>Question</option>
+                  {% else %}
+                  <option value="Question">Question</option>
+                  {% endif %}
+
+                  {% if issue_type == "Suggestion" %}
+                  <option value="Suggestion" selected>Suggestion</option>
+                  {% else %}
+                  <option value="Suggestion">Suggestion</option>
+                  {% endif %}
+
+                  {% if issue_type == "Change Req." %}
+                  <option value="Change Req." selected>Change Request</option>
+                  {% else %}
+                  <option value="Change Req.">Change Request</option>
+                  {% endif %}
+
+                  {% if issue_type == "Problem" %}
+                  <option value="Problem" selected>Problem</option>
+                  {% else %}
+                  <option value="Problem">Problem</option>
+                  {% endif %}
+                </select>
+              </li>
+              <li><strong style="color: #888;">Reported By:</strong> 
+                {{ reported_by }}
+              </li>              
+              <li><strong style="color: #888;">Reported Date:</strong> 
+                {{ reported_date }}
+              </li>
+              <li><strong style="color: #888;">Assigned To:</strong> 
+                {{ assigned_to }}
+              </li>
+              <li><strong style="color: #888;">Priority:</strong> 
+                <select name="priority" style="display: inline-block;">
+                  {% if priority == "Critical" %}
+                  <option value="Critical" selected>Critical</option>
+                  {% else %}
+                  <option value="Critical">Critical</option>
+                  {% endif %}
+
+                  {% if priority == "Severe" %}
+                  <option value="Severe" selected>Severe</option>
+                  {% else %}
+                  <option value="Severe">Severe</option>
+                  {% endif %}
+
+                  {% if priority == "Serious" %}
+                  <option value="Serious" selected>Serious</option>
+                  {% else %}
+                  <option value="Serious">Serious</option>
+                  {% endif %}
+
+                  {% if priority == "Moderate" %}
+                  <option value="Moderate" selected>Moderate</option>
+                  {% else %}
+                  <option value="Moderate">Moderate</option>
+                  {% endif %}
+
+                  {% if priority == "Minor" %}
+                  <option value="Minor" selected>Minor</option>
+                  {% else %}
+                  <option value="Minor">Minor</option>
+                  {% endif %}
+
+                  {% if priority == "None" %}
+                  <option value="None" selected>None</option>
+                  {% else %}
+                  <option value="None">None</option>
+                  {% endif %}
+                </select>
+              </li>
+              <li><strong style="color: #888;">Responses:</strong> 
+                {{ num_responses }}
+              </li>
+          </ul>
+          <a class="button light" href="javascript:{}" 
+             onclick="document.getElementById('details').submit(); return
+                  false;">
+            <i class="icon-save white"></i> Save
+          </a>
+          </form>
+        </div>
+
+        <a href="{% url 'tickets:tickets' %}" class="button gray"
+           style="margin: 25px 0 0 0; width: 93%; text-align: center;">
+          <i class="icon-chevron-left white"></i> Back to Index
+        </a>
+
+        <div class="clearfix" style="margin-bottom: 23px;"></div>
+
+        <!-- End one-third column -->        
+      </div>
+
+      <!-- Ticket Details -->
+      <div class="two-thirds column" 
+           style="margin: 0 0px 0 0px; display: inline-block; max-width: 47rem;
+                  float: right;">
+
+        <!-- Error box -->
+        {% if errors %}
+        <div class="notification error closeable">
+          <p>
+            <span>Error!</span> Unable to save changes. Please try again
+            later.
+          </p>
+          <a class="close" href="#"></a>
+        </div>
+        {% endif %}
+
+        <!-- Section Title -->
+        <h3 class="headline">Description</h3>
+        <span class="line" style="margin-bottom: 35px;"></span>
+        <div class="clearfix"></div> 
+
+        <p>{{ description }}</p>
+
+        <div style="margin: 35px 0 0 0;"></div>
+
+        <!-- Section Title -->
+        <h3 class="headline">Responses</h3>
+        <span class="line" style="margin-bottom: 35px;"></span>
+        <div class="clearfix"></div>
+
+        {% for key, response in responses %}
+        <div id="footer">
+          <div class="container">
+
+            <!-- Left side of response (information) -->
+            <div class="two columns" style="padding: 0 15px 20px 30px; margin: 0;">
+              <h5>{{ response.response_name }}</h5>
+              <h8>{{ response.response_date }}</h8>
+            </div>
+
+            <!-- Right side of response (text) -->
+            <div class="eight columns" style="padding: 2px 0 0 15px; margin: 0;
+            width: 34rem;">
+              <p>{{ response.response_text }}</p>
+            </div>
+
+          <!-- End container -->
+          </div>
+        <!-- End footer -->
+        </div>
+
+        <div class="clearfix" style="margin-bottom: 30px;"></div>
+        {% endfor %}
+
+        <div style="margin: 5px 0 0 0;"></div>
+
+        <!-- Section Title -->
+        <h3 class="headline">Add a new response</h3>
+        <span class="line" style="margin-bottom: 35px;"></span>
+        <div class="clearfix"></div>
+        
+        <form method="post" 
+              action="{% url 'tickets:ticket_detail' ticket_id=ticket_number %}">
+          {% csrf_token %}
+          
+          <textarea name="new_response_text" style="width: 100%; height: 100px;"
+                    placeholder="Enter response here..."></textarea>
+
+          <input type="submit" name="action" value="Add Response" 
+                 style="float: right; margin: 20px 0 45px 0;"/ class="button gray">
+        </form>
+      <!-- End two-third column -->
+      </div>
+
+    <!-- End sixteen columns -->
+    </div>
+
+  <!-- End container -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

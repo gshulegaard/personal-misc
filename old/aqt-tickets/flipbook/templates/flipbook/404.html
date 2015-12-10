@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Page Not Found (404)
+{% endblock title %}
+
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Page not found</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+	    <li>404</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <!-- Container -->
+  <div class="container">
+    <div class="sixteen columns">
+      
+      <section id="not-found">
+        <h2>404 <i class="icon-question-sign"></i></h2>
+        <p>We're sorry, but the page you were looking for doesn't exist.</p>
+      </section>
+
+    </div>
+  </div>
+  <!-- Container / End -->
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+<!-- No body-extend for flipbook/404.html -->
+{% endblock body-extend %}

@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Successfully Created Ticket
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Ticket Created</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+            <li><a href="{% url 'customer:customer' %}">Member Area</a></li>
+	    <li><a href="{% url 'tickets:tickets' %}">Tickets</a></li>
+	    <li><a href="{% url 'tickets:ticket_create' %}">Create Ticket</a></li>
+            <li>Success</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container">
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <!-- Success area -->
+    <div class="twelve columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Successfully created Ticket #{{ issue_id }}</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div> 
+
+      <p>
+        Ticket #{{ issue_id }} has been submitted on your behalf.
+      </p>
+
+      <p>
+        You can view this new ticket by returning to the Ticket Review page and
+        searching for "Issue ID" {{ issue_id }}
+      </p>
+
+      <p>You may also view the ticket directly using the "View Ticket" button
+      below.</p>
+
+      <a href="{% url 'tickets:ticket_detail' ticket_id=issue_id %}" 
+         class="button color" style="float: right; margin-top: 20px;">
+        View Ticket <i class="icon-file-alt white"></i>
+      </a>
+
+      <a href="{% url 'tickets:tickets' %}" 
+         class="button gray" style="float: right; margin: 20px 10px 0 0;">
+        Review Tickets <i class="icon-list-alt white"></i>
+      </a>
+
+    <!-- End twelve columns -->
+    </div>
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 27.95rem;"></div>
+
+  <!-- Container end -->
+  </div>
+
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

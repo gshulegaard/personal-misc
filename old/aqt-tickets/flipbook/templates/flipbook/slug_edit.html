@@ -1,0 +1,344 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Edit Flipbook
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2> Edit Flipbook</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+            <li><a href="#">Admin Area</a></li>
+	    <li><a href="{% url 'flipbook:base' %}">Flipbook</a></li>
+            <li>Edit</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container">
+
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+
+    <!-- Edit Flipbook Form Section -->
+    <div class="eight alt columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Edit Flipbook</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <!-- Error Messages -->
+      {% for error in errors %}
+
+      {% if error == "missing-field" %}
+      <div class="notification error closeable">
+	<p>
+          <span>Error!</span> A required field was not filled out.
+        </p>
+	<a class="close" href="#"></a>
+      </div>
+      {% elif error == "slug-taken" %}
+      <div class="notification error closeable">
+	<p>
+          <span>Error!</span> That slug is already taken.
+        </p>
+	<a class="close" href="#"></a>
+      </div>
+      {% elif error == "slug-misformat" %}
+      <div class="notification error closeable">
+	<p>
+          <span>Error!</span> That slug is formatted incorrectly.
+        </p>
+	<a class="close" href="#"></a>
+      </div>
+      {% endif %}
+
+      {% endfor %}
+
+      <!-- Success Message -->
+      {% if success == True %}
+      <div class="notification success closeable">
+        <p>
+          <span>Success!</span> Flipbook successfully edited.
+        </p>
+        <a class="close" href='#'></a>
+      </div>
+      {% endif %}
+
+      <!-- Edit Flipbook Form -->
+      <form method="post" 
+            action="{% url 'flipbook:edit' url_slug %}" 
+            enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <fieldset>
+          <div>
+            <label>URL:</label>
+            <input type="text" name="url"
+                   style="width: 100%;" value="{{url}}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Slug:</label>
+            <input type="text" name="slug"
+                   style="width: 100%;" value="{{slug}}"/>
+          </div>
+        </fieldset>
+
+        <div class="clearfix"></div>
+        <div style="margin: 25px 0 0 0;"></div>
+
+        <h4>SEO Fields:</h4>
+        
+        <fieldset>
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Title:</label>
+            <input type="text" name="title"
+                   style="width: 100%;" value="{{title}}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Description:</label>
+            <input type="text" name="meta_desc"
+                   style="width: 100%;" value="{{meta_desc}}"
+                   maxlength="150"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Article Tags:</label>
+            <input type="text" name="og_article_tag"
+                   style="width: 100%;" value="{{og_article_tag}}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+        </fieldset>
+
+        <div class="clearfix"></div>
+        <div style="margin: 25px 0 0 0;"></div>
+
+        <h4>Page Headers:</h4>
+
+        <fieldset>
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Header:</label>
+            <input type="text" name="header"
+                   style="width: 100%;" value="{{header}}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Form Header:</label>
+            <input type="text" name="form_header"
+                   style="width: 100%;" value="{{form_header}}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Form Submit Label:</label>
+            <input type="text" name="form_button"
+                   style="width: 100%;" value="{{form_button}}"/>
+          </div>
+        </fieldset>
+
+        <div class="clearfix"></div>
+        <div style="margin: 25px 0 0 0;"></div>
+
+        <h4>Page Content:</h4>
+
+        <fieldset>
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Intro Paragraph:</label>
+            <textarea name="intro"
+                      style="width: 100%; resize: vertical;">{{ intro }}</textarea>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Bullet 1:</label>
+            <textarea name="bullet_1" 
+                      style="width: 100%; resize: vertical;">{{ bullet_1 }}</textarea>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Bullet 2:</label>
+            <textarea name="bullet_2" 
+                      style="width: 100%; resize: vertical;">{{ bullet_2 }}</textarea>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Bullet 3:</label>
+            <textarea name="bullet_3"
+                      style="width: 100%; resize: vertical;">{{ bullet_3 }}</textarea>
+          </div>          
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Cover Image:</label>
+            <input type="file" name="image_name" accept="image/*"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 20px 0 0 0;"></div>
+
+        </fieldset>
+
+        <input type="submit" value="Save Changes" />
+        <input type="submit" name="delete" value="Delete"
+               class="button gray" style="margin-left: 8px;"/>
+
+      </form>
+      
+    <!-- End eight alt columns -->
+    </div>
+    <!-- End New Flipbook Form -->
+
+
+    <!-- Right Bar -->
+    <div class="four columns" style="margin-left: 25px;">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Current Cover Image</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <img style="width: 100%;"
+           src="/static/flipbook/{{image_name}}" />
+
+      <a href="{% url 'flipbook:view' slug %}"
+         class="button color"
+         style="width: 90%;
+                margin: 20px 0 0 0;
+                text-align: center;">
+        View Page <i class="icon-desktop white"></i>
+      </a>
+
+      <a href="{% url 'flipbook:index' %}"
+         class="button gray"
+         style="width: 90%;
+                margin: 8px 0 0 0;
+                text-align: center;">
+        Back to Index <i class="icon-th-list white"></i>
+      </a>
+
+      <a href="{% url 'flipbook:copy' slug %}"
+         class="button color"
+         style="width: 90%;
+                margin: 20px 0 0 0;
+                text-align: center;">
+        Copy Page <i class="icon-copy white"></i>
+      </a>
+
+    <!-- End four columns -->
+    </div>
+    <!-- End Right Bar -->
+
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 45px;"></div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <script>
+    // Initialize height...
+    $("textarea").each(function() {
+      initheight($(this).attr('name'));
+    });
+
+    function initheight(name) {
+      $('[name="' + name + '"]').height(
+        $('[name="' + name + '"]')[0].scrollHeight + 2
+      );      
+    };
+
+    // On keyup with text area selected...
+    $("textarea").keyup(function() {
+      autoheight($(this).attr('name'));
+    });
+    
+    // Resize the element with selected name to be its own scrollHeight.
+    function autoheight(name) {
+      $('[name="' + name + '"]').height(
+        $('[name="' + name + '"]')[0].scrollHeight - 16
+      );
+    };
+  </script>
+{% endblock body-extend %}

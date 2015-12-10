@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Registration Success
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Registration Success</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+	    <li><a href="{% url 'aqt_auth:login_page' %}">Login</a></li>
+        <li>
+          <a href="{% url 'register:register' %}">
+            Registration
+          </a>
+        </li>
+        <li>Success</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container" style="padding-bottom: 21.5rem;">
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <!-- Login -->
+    <div class="twelve alt columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Registration Success</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div> 
+
+      <p>
+        Your information has been successfully submitted!
+      </p>
+
+      <p>
+        Your new account needs to be activated by a site administrator before you
+        can start using your new account.
+      </p>
+
+      <p>
+        An e-mail will be sent to you by an AQT Solutions representative
+        containing additional information and suggested next steps for utilizing
+        your new acount.
+      </p>
+
+      <p>
+        Best regards,
+      </p>
+
+      <p>
+        The AQT Solutions Team
+      </p>
+    </div>    
+    
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 80px;"></div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

@@ -1,0 +1,324 @@
+/*
+
+foundation-customize.css
+
+This .css file customizes aspects of the Foundation responsive web-design
+framework version 5.5.1.  This file was originally authored by gshulegaard for
+use in a variety of personal and work projects.  The css style rules are
+presented for use by any who are interested.
+
+THIS FILE SHOULD NEVER BE DIRECTLY EDITED OR CUSTOMIZED EXCEPT BY GSHULEGAARD.
+
+For personal use, copy this file with a different name, and edit said copy.
+Changes may be proposed but will only be incorporated by gshulegaard after a
+code review.
+
+*/
+
+html {
+    height: auto;
+}
+
+body {
+    background-color: #EDF0F2;
+    height: auto;
+}
+
+/* Creating a background color assignment class for debugging */
+.black {
+    background-color: black;
+}
+
+/* Creating a "bg-image" class for use with EmberJS. */
+.bg-image {
+    background-color: white;
+    z-index: -1;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+}
+
+/* Creating a "bg-logo" class for use with EmberJS. */
+.bg-logo {
+    z-index: -1;
+    position: fixed;
+    right: 0px;
+    bottom: 0px;
+    width: 66.5%;
+}
+
+/* Creating a "full-width" class for use in Foundation */
+.full-width {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+/* Creating a "full-height" class for use in Foundation */
+.full-height {
+    /* Relative positioning required for dynamic display of navigation bar
+       elements. */
+    position: relative;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+}
+
+/* Implementing vertical alignment. */
+/* http://jsfiddle.net/kizu/TQX9b/ */
+.vert-helper {
+    height: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+.vert-helper,
+.vert-center {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+/* Creating a "nav-overlay" class so that the nav bar starts overlayed. */
+.nav-overlay {
+    position: fixed;
+    top: 0;
+}
+  /* Editing the Magellan "sub-nav" CSS for custom look */
+  .nav-overlay .sub-nav {
+      margin: 0;
+      padding: 0;
+  }
+    .nav-overlay .sub-nav li {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+    }
+      .nav-overlay .sub-nav a {
+          padding: 0;
+          margin: 0;
+          display: inline-block !important;
+          height: 100%;
+          width: 100%;
+          text-align: center;
+          overflow-y: hidden;
+          font-size: 1rem;
+          color: white;
+      }
+      .nav-overlay .sub-nav span {
+          width: 100%;
+          height: 100%;
+          color: white;
+      }
+        /* Icon settings */
+        .nav-overlay .sub-nav img {
+            height: 60px;
+            padding-right: 0px;
+            display: inline-block !important;
+            vertical-align: middle;
+            margin-top: -18px;
+            margin-right: -8px;
+        }
+        .nav-overlay .sub-nav img.logo {
+            height: 45px;
+            padding-right: 6px;
+            display: inline-block !important;
+            vertical-align: middle;
+            margin-top: -14px;
+            margin-right: 0px;
+        }
+        .nav-overlay .sub-nav div {
+            height: 55px;
+            padding-top: 13px;
+        }
+        .nav-overlay .sub-nav div.right-menu {
+            padding-top: 13px;
+        }
+        .nav-overlay .sub-nav div.text {
+            margin-top: -1px;
+            vertical-align: top;
+        }
+        .nav-overlay .sub-nav div.logo-text {
+            height: 55px;
+            padding-top: 14px;
+        }
+        .nav-overlay .sub-nav div.logo-text-2 {
+            height: 55px;
+            padding-top: 15px;
+        }
+    /* Hover */
+    .nav-overlay .sub-nav li:hover {
+        background: rgba(51, 51, 51, 1)
+    }
+    /* Active */
+    .nav-overlay .sub-nav li.active-custom {
+        background: rgba(165, 42, 42, .75);
+    }
+    .nav-overlay .sub-nav li.active-custom a {
+        background: none;
+    }
+      /* Hover */
+      .nav-overlay .sub-nav li.active-custom:hover {
+          background: rgba(165, 42, 42, 1);
+      }
+      .sub-nav li.active-custom a:hover {
+          background: none;
+      }
+
+/* Editing the [data-magellan-expedition] styles for nav-bar re-purposing. */
+[data-magellan-expedition], [data-magellan-expedition-clone] {
+    background: rgba(51, 51, 51, 0.75);
+    z-index: 50;
+    min-width: 100%;
+    padding: 10px; 
+}
+  [data-magellan-expedition] .sub-nav, [data-magellan-expedition-clone] .sub-nav {
+      margin-bottom: 0; 
+  }
+  [data-magellan-expedition] .sub-nav dd, [data-magellan-expedition-clone] .sub-nav dd {
+      margin-bottom: 0; 
+  }
+  [data-magellan-expedition] .sub-nav a, [data-magellan-expedition-clone] .sub-nav a {
+      line-height: 1.8em; 
+  }
+
+[data-magellan-expedition-clone] {
+    background: rgba( 51, 51, 51, 0.0);
+    margin-top: -55px;
+}
+
+/* Override padding in [data-magellan...]. */
+.top-nav-custom {
+    padding: 0;
+    height: 55px;
+}
+
+/* Top nav-button class */
+.nav-button {
+    padding: 0;
+    background-color: rgba(51, 51, 51, .75);
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+}
+  .nav-button img {
+      height: 100%;
+      width: 100%;
+  }
+.nav-button:hover {
+    background-color: rgba(51, 51, 51, 1);
+}
+
+/* Customizing the size of the <iframe> tag for full width and height. */
+/* This was the only thing that worked.  It will make the <iframe> the same
+   width/height of the container. */
+
+iframe.full-screen {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0px solid transparent;
+}
+
+/* Convenient spacer to slide in between side-by-side elements */
+
+.spacer {
+    width: 10px;
+    height: auto;
+    display: inline-block;
+}
+
+/* Convenient font-size modifiers. */
+/* Taken for foundation-icons from this stackoverflow:
+   http://stackoverflow.com/questions/21384506/how-do-i-set-up-the-zurb-foundation-icons*/
+
+.size-12 { font-size: 12px; }
+.size-14 { font-size: 14px; }
+.size-16 { font-size: 16px; }
+.size-18 { font-size: 18px; }
+.size-21 { font-size: 21px; }
+.size-24 { font-size: 24px; }
+.size-36 { font-size: 36px; }
+.size-48 { font-size: 48px; }
+.size-60 { font-size: 60px; }
+.size-72 { font-size: 72px; }
+
+/* Parallax CSS scrolling */
+/* http://blog.keithclark.co.uk/pure-css-parallax-websites/ */
+
+/* This works...but there are some styling issues that mean if you are going to
+   attempt to use this method...you have to build the entire page from the
+   ground up with this expectation.
+
+   In other words: Don't use it unless you are wrapping ALL of your page
+   elements in a tag that has the "parallax" class...doing it in the <body> tag
+   breaks the foundation top-bar...might try the <html> tag in future attempts. */
+
+.parallax {
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-perspective: 1px;
+    perspective: 1px;
+}
+
+.parallax__layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.parallax__layer--base {
+  -webkit-transform: translateZ(0)
+  transform: translateZ(0);
+}
+
+.parallax__layer--back {
+  -webkit-transform: translateZ(-1px) scale(2);
+  transform: translateZ(-1px) scale(2);
+  /* Depth correction is in "scale(x)" */
+  /* x = 1 + (translateZ * -1) / perspective) */
+}
+
+.parallax__layer--deep {
+  -webkit-transform: translateZ(-2px) scale(3);
+  transform: translateZ(-2px) scale(3);
+  /* Depth correction */
+  /* 1 + (translateZ * -1) / perspective) */
+}
+
+.parallax__group {
+  position: relative;
+  height: 100vh;
+  transform-style: preserve-3d;
+}
+
+/* Example HTML using parallax scrolling CSS:
+
+<div class="parallax">
+  <div class="parallax__group">
+    <div class="parallax__layer parallax__layer--back">
+      ...
+    </div>
+    <div class="parallax__layer parallax__layer--base">
+      ...
+    </div>
+  </div>
+  <div class="parallax__group">
+    ...
+  </div>
+</div>
+
+*/

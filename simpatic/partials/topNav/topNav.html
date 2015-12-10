@@ -1,0 +1,48 @@
+<!-- Top Nav -->
+<nav class="navbar navbar-simpatic navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header pull-left"
+         style="padding: 2.5px 20px 0 0;">
+      <img src="assets/images/simpatic-logo.png"
+           style="height: 35px;" />
+    </div>
+
+    <div class="navbar-header pull-left">
+      <!-- Brand -->
+      <a class="navbar-brand stylish" href="#">
+        Inbox
+      </a>
+    </div>
+    
+    <div class="navbar-header pull-right">
+      <power-pane-nav></power-pane-nav>
+    </div>
+
+    <div class="navbar-header pull-right"
+         style="padding: 13px 15px 0 15px;"
+         ng-style="topNavCtrl.iconMarginStyle()">
+      <div class="onoffswitch">
+        <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
+        <label class="onoffswitch-label" for="myonoffswitch">
+          <span class="onoffswitch-inner"></span>
+          <span class="onoffswitch-switch"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="navbar-header pull-right"
+         style="padding: 5px 15px 0 15px;">
+      <a href="/mail/compose" class="stylish">
+        <img src="assets/images/compose-small.png" 
+             style="height: 30px;"/>
+      </a>
+    </div>
+
+    <div class="navbar-header pull-right"
+         style="padding: 5px 15px 0 15px;">
+      <a href="/security" class="stylish">
+        <img src="assets/images/security-shield.png" 
+             style="height: 30px;"/>
+      </a>
+    </div>
+</nav>

@@ -1,0 +1,9 @@
+# After connecting to influx CLI you can use the following commands...
+
+# Create database
+> CREATE DATABASE time_test
+> USE time_test
+
+# You don't actually have to create tables in InfluxDB.  Since it is geared towards time series (and only time series),
+# you insert information to a "series" and, similar to Graphite/Statsd it just creates new "series" (buckets) when one
+# doesn't exist (similar to upsert). Cool!!!

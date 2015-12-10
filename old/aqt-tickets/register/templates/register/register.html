@@ -1,0 +1,308 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  AQT Solutions | Registration
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+
+  <!-- Google Tracking -->
+  {% include "google-tracking.html" %}
+
+  <!-- HubSpot Tracking -->
+  {% include "hubspot-tracking.html" %}
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar" style="margin: 0;">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Registration</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+	    <li><a href="{% url 'aqt_auth:login_page' %}">Login</a></li>
+            <li>Registration</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <!-- Slider
+  ================================================== -->
+
+  <div class="fullwidthbanner-container" style="max-height: 400px;">
+    <div class="fullwidthbanner">
+      <ul>
+        
+	<!-- Slide 1 -->
+	<li data-fstransition="fade" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+	  <img src=
+               "{% static 'images/orange men technology background.jpg' %}"
+               alt="" style="width: 100%;">
+	  <div class="caption light text sfb" data-x="80" data-y="115" data-speed="400"
+	       data-start="800"  data-easing="easeOutExpo">
+            <h2 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px
+	        30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              View our ATMS Demo Video, eBrochures,
+            </h2>
+          </div>
+	  <div class="caption light text sfb" data-x="80" data-y="160" data-speed="400"
+	       data-start="800"  data-easing="easeOutExpo">
+            <h2 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px
+	        30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              &amp; Product Briefing
+            </h2>
+          </div>
+	  <div class="caption light text sfb" data-x="80" data-y="220" data-speed="400"
+	       data-start="1000" data-easing="easeOutExpo">
+            <h3 style="color: #FFF; text-shadow: 0px 0px 20px rgba(0, 0, 0,
+	        0.7), 0px 0px 30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              Discover ATMS the most robust compliance <br>
+              Training Management System.
+            </h3>
+          </div>
+	</li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <!-- End Slider 
+  ========================================== -->
+
+  <div class="container">
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <!-- Register -->
+    <div class="eight alt columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Sign Up</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div> 
+
+      <!-- Error message(s) -->
+      {% for error in errors %}
+	<div class="notification error closeable">
+	  <p>
+            {% if error == "exists" %}
+            <span>Error!</span> The specified username already exists!
+            {% elif error == "empty" %}
+            <span>Error!</span> All fields are required.
+            {% elif error == "security" %}
+            <span>Error!</span> The security code you entered was incorrect.
+            {% elif error == "api" %}
+            <span>Error!</span> There was a registration error. Please try
+            again later.
+            {% endif %}
+          </p>
+	  <a class="close" href="#"></a>
+	</div>
+      {% endfor %}
+
+      <!-- Login Form -->
+      <form method="post" action="{% url 'register:register_send' %}">
+        {% csrf_token %}
+
+        <fieldset>
+          <div>
+            <label>E-mail:</label>
+            <input type="email" name="email" 
+                   style="width: 97%;" value="{{ email }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 35px 0 0 0;"></div>
+
+          <div>
+            <label>First Name:</label>
+            <input type="text" name="fname" 
+                   style="width: 97%;" value="{{ fname }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Last Name:</label>
+            <input type="text" name="lname" 
+                   style="width: 97%;" value="{{ lname }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Company:</label>
+            <input type="text" name="company" 
+                   style="width: 97%;" value="{{ company }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Position:</label>
+            <input type="text" name="position" 
+                   style="width: 97%;" value="{{ position }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Phone:</label>
+            <input type="text" name="phone" 
+                   style="width: 97%;" value="{{ phone }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 35px 0 0 0;"></div>
+
+          <div>
+            <label>How did you hear about us?</label>
+            <select name="source">
+              <option value="AQT Email">AQT Email</option>
+              <option value="AQT Print Mailing">AQT Print Mailing</option>
+              <option value="Online Advertisement">Online Advertisement</option>
+              <option value="Colleague Referral">Colleague Refferal</option>
+              <option value="Referred by a Friend">Referred by a Friend</option>
+              <option value="Google Search">Google Search</option>
+              <option value="Google+">Google+</option>
+              <option value="LinkedIn">LinkedIn</option>
+              <option value="Facebook">Facebook</option>
+              <option value="Twitter">Twitter</option>
+              <option value="2015 - IMSH Conference">2015 - IMSH Conference</option>
+              <option value="2015 - WATS Conference">2015 - WATS Conference</option>
+              <option value="2014 - IT/SEC Conference">2014 - IT/SEC Conference</option>
+              <option value="2014 - DGAC Conference">2014 - DGAC Conference</option>
+              <option value="2014 - WATS Conference">2014 - WATS Conference</option>
+            </select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 35px 0 0 0;"></div>
+
+          <div>
+            <div style="float: left; margin-right: 10%; width: 40%;">
+              <label>Security Check:</label>
+              <input type="text" name="security_check" 
+                     style="width: 100%;" />
+            </div>
+
+            <div style="float: left; width: 50%; margin-top: 23px;">
+              <p>
+                Enter the following number in the Security Check field:
+                <strong>{{ security_number }}</strong>
+              </p>
+            </div>
+
+            <div>
+              <input type="hidden" name="security_number" 
+                     value="{{ security_number }}" />
+            </div>
+          </div>
+
+            <div class="clearfix"></div>
+            <div style="margin: 35px 0 0 0;"></div>
+
+          <div>
+            <div style="float: left; margin-top: 2px; margin-right: 3%; width: 2%;">
+              <input type="checkbox" name="subscribe" value="True"
+                     style="width: 100%;" checked/>
+            </div>
+
+            <div style="float: left; width: 95%;">
+              <p>
+                Yes, I would like to subscribe to receive important updates from
+                AQT Solutions.
+              </p>
+            </div>
+          </div>
+
+        </fieldset>
+
+        <div class="clearfix"></div>
+        <div style="margin: 20px 0 0 0;"></div>
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    
+    <!-- Right Bar -->
+    <div class="four columns" style="margin-left: 25px;">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Instructions</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        Your information will be reviewed and we will get back to you with your
+        new account information.
+      </p>
+
+      <p>
+        If you would like to follow-up with your registration, you may e-mail
+        the adminstrative staff at <strong>atmsinfo@aqtsolutions.com</strong>.
+      </p>
+
+      <p>
+        If you are a customer and would like help recovering an account, you may
+        e-mail ATMS Technical Support at
+        <strong>atmssupport@aqtsolutions.com</strong> or contact them by
+        clicking the button below:
+      </p>
+
+      <p>
+        <a href="{% url 'support:support' %}" class="button gray"
+           style="float: left;">
+          Contact Support <i class="icon-double-angle-right"></i>
+        </a>
+      </p>
+    </div>
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 80px;"></div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

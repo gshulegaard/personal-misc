@@ -1,0 +1,310 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  AQT Solutions | Mobile Download
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Mobile Download</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+	    <li>Mobile Download</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container" style="padding: 0 0 6rem 0;">
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="twelve alt columns">
+      
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">ATMS Mobile Download</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix" style="padding-bottom: 5px;"></div>
+
+      <!-- Tabs Navigation -->
+      <ul class="tabs-nav">
+        <li class="active">
+          <a href="#521">Version 5.21</a>
+        </li>
+        <li>
+          <a href="#520">Version 5.20</a>
+        </li>
+        <li>
+          <a href="#510">Version 5.10</a>
+        </li>
+      </ul>
+
+      <!-- Tabs Content -->
+      <div class="tabs-container">
+
+        <div class="tab-content" id="521">
+
+          {% if user.is_superuser %}
+          <div class="six columns" style="margin: 5px 0 15px 0;">
+            <a href="itms-services://?action=download-manifest&url=https://members.aqtsolutions.com/static/ver521/atms_mobile.plist">
+              <img src="{% static 'downloads/mobile/images/appledownload.png' %}"
+                   alt="Apple Download" style="height: 94px; 
+                                               margin-left: auto; 
+                                               margin-right: auto;
+                                               max-width: 97%;">
+            </a>
+          </div>
+          {% endif %}
+
+
+          <div class="six columns" style="margin: 5px 0 15px 0;">
+            <a href="itms-services://?action=download-manifest&url=https://members.aqtsolutions.com/static/ver521/ios9_test.plist">
+              <img src="{% static 'downloads/mobile/images/appledownload.png' %}"
+                   alt="Apple Download" style="height: 94px; 
+                                               margin-left: auto; 
+                                               margin-right: auto;
+                                               max-width: 97%;">
+            </a>
+          </div>
+
+
+          <div class="six columns" style="margin: 5px 0 15px 0;">
+            <a href="{% url 'download:download' %}?filename=atms_mobile.apk&folder=ver521&type=application/vnd.android.package-archive">
+              <img src="{% static 'downloads/mobile/images/androiddownload.png' %}"
+                   alt="Apple Download" style="height: 94px;
+                                               margin-left: auto;
+                                               margin-right: auto;
+                                               max-width: 97%;
+                                               display: none;">
+            </a>
+          </div>
+          
+        <!-- End tab-content 521 -->
+        </div>
+
+        <div class="tab-content" id="520">
+
+          <div class="six columns" style="margin: 5px 0 15px 0;">
+            <a href="itms-services://?action=download-manifest&url=https://members.aqtsolutions.com/static/ver520/atms_mobile.plist">
+              <img src="{% static 'downloads/mobile/images/appledownload.png' %}"
+                   alt="Apple Download" style="height: 94px; 
+                                               margin-left: auto; 
+                                               margin-right: auto;
+                                               max-width: 97%;">
+            </a>
+          </div>
+
+          <div class="six columns" style="margin: 5px 0 15px 0;">
+            <a href="{% url 'download:download' %}?filename=atms_mobile.apk&folder=ver520&type=application/vnd.android.package-archive">
+              <img src="{% static 'downloads/mobile/images/androiddownload.png' %}"
+                   alt="Apple Download" style="height: 94px;
+                                               margin-left: auto;
+                                               margin-right: auto;
+                                               max-width: 97%;">
+            </a>
+          </div>
+          
+        <!-- End tab-content 520 -->
+        </div>
+
+        <div class="tab-content" id="510">
+
+          <div class="six columns" style="margin: 5px 0 15px 0;">
+            <a href="itms-services://?action=download-manifest&url=https://members.aqtsolutions.com/static/ver510/atms_mobile.plist">
+              <img src="{% static 'downloads/mobile/images/appledownload.png' %}"
+                   alt="Apple Download" style="height: 94px; 
+                                               margin-left: auto; 
+                                               margin-right: auto;
+                                               max-width: 97%;">
+            </a>
+          </div>
+
+          <div class="six columns" style="margin: 5px 0 15px 0;">
+            <a href="{% url 'download:download' %}?filename=atms_mobile.apk&folder=ver510&type=application/vnd.android.package-archive">
+              <img src="{% static 'downloads/mobile/images/androiddownload.png' %}"
+                   alt="Apple Download" style="height: 94px;
+                                               margin-left: auto;
+                                               margin-right: auto;
+                                               max-width: 97%;">
+            </a>
+          </div>
+          
+        <!-- End tab-content 510 -->
+        </div>
+        
+        <!-- End tabs-container -->
+      </div>
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">System Requirements</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <ul class="list-1" style="margin-left: 30px;">
+        <li>
+          Apple iOS 5.1 or above. Supported iOS devices are iPad 2/3/4/Mini/Air.
+        </li>
+
+        <li>
+          Google Android 4.1 or above. All Android tablet devices are supported.
+        </li>
+      </ul>
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">Download Instructions</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <ol style="padding-left: 26px; margin-bottom: 25px;">
+        <li style="margin-bottom: 8px;">
+          Open a web browser session on your mobile device. On the iPad this
+          would typically be Safari and on an Android device this would typically
+          be the app labeled "Internet".
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          Navigate to the URL
+          <a href="{% url 'mobile:mobile' %}">
+            https://members.aqtsolutions.com/mobile
+          </a>
+          (this page). 
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          Download the ATMS Mobile Workspace for your appropriate device.
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          After the app has completed installation, you will have a
+          preconfigured ATMS Mobile Workspace with an ATMS Mobile application
+          within it pre-configured to run against an AQT Demo database.
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          You can run ATMS Mobile by opening the "ATMS Mobile Workspace" and
+          clicking on "ATMS Mobile" from within.
+        </li>       
+      </ol>
+
+      <p>
+        Congratulations! You now have a working ATMS Mobile demo installed on
+        your device. You may use this demo to evaluate the application. Changes
+        to this demo database are reverted daily.
+      </p>
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">Configuring ATMS Mobile for
+        Customers</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        In order to configure ATMS Mobile to run against a custom database,
+        there are a few extra steps (examples are taken from our Demo
+        configuration):
+      </p>
+
+      <ol style="padding-left: 26px; margin-bottom: 25px;">
+        <li style="margin-bottom: 8px;">
+          Contact your IT Department to obtain an ATMS Mobile server URL. This
+          URL should point to a licensed Appeon server
+          (e.g. "http://demo.aqtsolutions.com/atms51_mobile/x32_application.htm?connection=OLE08_DEMO51"
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          Open your ATMS Mobile Workspace.
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          Click on the Settings button in the upper right and select "Settings".
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          Select the app you wish to configure from the list of "Installed Apps"
+          (e.g. "ATMS Mobile").
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          Replace the App URL with the URL you obtained from your IT Department in Step 1.
+        </li>       
+
+        <li style="margin-bottom: 8px;">
+          Hit "Test Connection" and make sure you see a message stating:
+          "Connection is successful!"
+        </li>       
+
+        <li style="margin-bottom: 8px;">
+          Exit out of settings using the back arrow in the upper left.
+        </li>       
+      </ol>
+
+      <p>
+        You have now configured your ATMS Mobile Workspace application to run
+        against a custom server.
+      </p>
+
+      <p>
+        Help using ATMS Mobile can be found by clicking on the 
+        <img src="{% static 'downloads/mobile/images/helpicon.png' %}" 
+             style="display: inline;">
+        icon at the bottom right corner of each page in the app. Also, you can
+        click
+        <a href="{% url 'download:download' %}?filename=ATMS Mobile Users Guide.pdf&folder=mobile&type=application/pdf">
+          here
+        </a>
+        to download the ATMS Mobile User's Guide in PDF format.
+      </p>
+
+    <!-- End twelve columns -->
+    </div>
+    
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  AQT Solutions | Login
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar" style="margin: 0;">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Login</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+	    <li>Login</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <!-- Slider
+  ================================================== -->
+
+  <div class="fullwidthbanner-container" style="max-height: 400px;">
+    <div class="fullwidthbanner">
+      <ul>
+        
+	<!-- Slide 1 -->
+	<li data-fstransition="fade" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+	  <img src=
+               "{% static 'images/ATMS Sign-up Page Slider for Reg Compliance.jpg' %}"
+               alt="" style="width: 100%;">
+          <div class="caption light text sfb" data-x="80" data-y="95" data-speed="400"
+	       data-start="800"  data-easing="easeOutExpo">
+            <h2 style="text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5), 0px 0px
+	        30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              We're glad you're back!
+            </h2>
+          </div>
+	  <div class="caption light text sfb" data-x="80" data-y="160" data-speed="400"
+	       data-start="1000" data-easing="easeOutExpo">
+            <h3 style="color: #FFF; text-shadow: 0px 0px 20px rgba(0, 0, 0,
+	        0.7), 0px 0px 30px #000, 0px 0px 10px rgba(0, 0, 0, 0.824);">
+              <strong style="color: #FFF;">Our team is very proud to serve you with ATMS<br>
+                (Advanced Training Management System).</strong>
+            </h3>
+          </div>
+	</li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <!-- End Slider 
+  ========================================== -->
+
+  <div class="container" style="padding-bottom: 1.75rem;">
+    <!-- Center block placeholder -->
+    <div class="three columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <!-- Login -->
+    <div class="ten alt columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Login</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div> 
+
+      <!-- Login Error message -->
+      {% if errors %}
+	<div class="notification warning closeable">
+	  <p><span>Warning!</span> Your username and password combination were
+            not recognized.</p>
+	  <a class="close" href="#"></a>
+	</div>
+      {% endif %}
+
+      <!-- Login Form -->
+      <form method="post" action="{% url 'aqt_auth:aqt_login' %}">
+        {% csrf_token %}
+
+        <fieldset>
+          <div>
+            <label>E-mail</label>
+            <input type="text" name="email" placeholder="doej@aqtsolutions.com"
+                   style="width: 100%;" value="{{ email }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="password"
+                   style="width: 100%; margin: 0 0 10px 0;" value="{{ password }}"/>
+          </div>
+        </fieldset>
+
+        <div class="clearfix"></div>
+        <div style="margin: 20px 0 0 0;"></div>
+
+        <input type="submit" value="Login" />
+        <!--<a href="#" class="button gray" style="margin-left: 8px;">Forgot Password</a>-->
+        <input type="hidden" name="next" value="{{ next }}" />
+
+        <a href="{% url 'register:register' %}" class="button color"
+        style="margin-left: 10px; width: 105px; float: right;">Register Here <i
+        class="icon-double-angle-right"></i></a>
+
+        <a href="{% url 'support:support' %}" class="button light" 
+           style="margin-left: 10px; width: 105px; float: right;">
+          Web Support <i class="icon-double-angle-right"></i>
+        </a>
+
+      </form>
+    </div>
+    
+    <!-- Center block placeholder -->
+    <div class="three columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 25px;"></div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

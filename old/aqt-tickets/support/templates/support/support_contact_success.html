@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Contact Support Success
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Contact Support Success</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+        <li><a href="{% url 'customer:customer' %}">Member Area</a></li>
+	    <li><a href="{% url 'support:support' %}">Contact Support</a></li>
+        <li>Success</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container">
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <!-- Success area -->
+    <div class="twelve columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Successfully Contacted Support</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div> 
+
+      <p>An e-mail has been sent to the AQT Solutions web staff.  A team member
+        should address your request as soon as possible.</p>
+
+      <p>If you do not receive a response to this support request, check you Spam folder before
+        submitting another support request.</p>
+
+      {% if user.is_authenticated %}
+        {% if user.is_staff %}
+        <a href="{% url 'customer:customer' %}" 
+           class="button color" style="float: right; margin-top: 20px;">
+          Back to Member Area
+        </a>
+        {% else %}
+        <a href="{% url 'member:member' %}" 
+           class="button color" style="float: right; margin-top: 20px;">
+          Back to Member Area
+        </a>
+        {% endif %}
+      {% else %}
+        <a href="{% url 'aqt_auth:login_page' %}"
+           class="button color" style="float: right; margin-top: 20px;">
+          Back to Member Area
+        </a>
+      {% endif %}
+      <a href="{% url 'support:support' %}" 
+         class="button gray" style="float: right; margin: 20px 10px 0 0;">
+        Submit New Request
+      </a>
+
+    <!-- End twelve columns -->
+    </div>
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 31rem;"></div>
+
+  <!-- Container end -->
+  </div>
+
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

@@ -1,0 +1,11 @@
+Postgres Helpers:
+pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+pg_ctl -D /usr/local/var/postgres stop -s -m fast
+
+Influxdb Helpers:
+influxd -config /usr/local/etc/influxdb.conf
+
+
+Some findings:
+- InfluxDB does not support Unix epoch time without timezone information out of the box...interesting.
+- Creating timestamps for Influx is non-trivial with the Python API.

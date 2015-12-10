@@ -1,0 +1,372 @@
+# 100k
+--- START ---
+'create_data' 0.15 sec
+'elastic_write' 129.86 sec
+'postgres_write' 16.93 sec
+'elastic_read' 1.09 sec
+Elastic returned 100000 rows.
+'postgres_read' 0.50 sec
+Postgres returned 100000 rows.
+'elastic_sum' 0.01 sec
+Elastic sum returned: 4.99852185413e+11
+'elastic_average' 0.01 sec
+Elastic average returned: 4998521.85413
+'postgres_sum' 0.02 sec
+Postgres sum returned: [(499852185413.0,)]
+'postgres_average' 0.01 sec
+Postgres average returned: [(4998521.85413,)]
+'elastic_group_sum' 0.01 sec
+Elastic group sum returned 10 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.01 sec
+Elastic group average returned 10 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.01 sec
+Elastic combined metrics returned 10 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#200k
+--- START ---
+'create_data' 0.13 sec
+'elastic_write' 127.48 sec
+'postgres_write' 22.07 sec
+'elastic_read' 2.34 sec
+Elastic returned 200000 rows.
+'postgres_read' 0.94 sec
+Postgres returned 200000 rows.
+'elastic_sum' 0.01 sec
+Elastic sum returned: 9.97832387653e+11
+'elastic_average' 0.01 sec
+Elastic average returned: 4989161.93826
+'postgres_sum' 0.03 sec
+Postgres sum returned: [(997832387653.0,)]
+'postgres_average' 0.03 sec
+Postgres average returned: [(4989161.938265,)]
+'elastic_group_sum' 0.01 sec
+Elastic group sum returned 20 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.01 sec
+Elastic group average returned 20 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.02 sec
+Elastic combined metrics returned 20 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#300k
+--- START ---
+'create_data' 0.12 sec
+'elastic_write' 120.20 sec
+'postgres_write' 15.77 sec
+'elastic_read' 3.28 sec
+Elastic returned 300000 rows.
+'postgres_read' 1.31 sec
+Postgres returned 300000 rows.
+'elastic_sum' 0.01 sec
+Elastic sum returned: 1.49858227356e+12
+'elastic_average' 0.01 sec
+Elastic average returned: 4995274.24521
+'postgres_sum' 0.05 sec
+Postgres sum returned: [(1498582273564.0,)]
+'postgres_average' 0.04 sec
+Postgres average returned: [(4995274.24521333,)]
+'elastic_group_sum' 0.01 sec
+Elastic group sum returned 30 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.02 sec
+Elastic group average returned 30 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.02 sec
+Elastic combined metrics returned 30 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#400k
+--- START ---
+'create_data' 0.13 sec
+'elastic_write' 179.22 sec
+'postgres_write' 21.84 sec
+'elastic_read' 5.45 sec
+Elastic returned 400000 rows.
+'postgres_read' 1.86 sec
+Postgres returned 400000 rows.
+'elastic_sum' 0.01 sec
+Elastic sum returned: 1.99917465620e+12
+'elastic_average' 0.01 sec
+Elastic average returned: 4997936.64051
+'postgres_sum' 0.07 sec
+Postgres sum returned: [(1999174656205.0,)]
+'postgres_average' 0.05 sec
+Postgres average returned: [(4997936.6405125,)]
+'elastic_group_sum' 0.02 sec
+Elastic group sum returned 40 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.02 sec
+Elastic group average returned 40 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.05 sec
+Elastic combined metrics returned 40 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#500k
+--- START ---
+'create_data' 0.13 sec
+'elastic_write' 198.32 sec
+'postgres_write' 21.52 sec
+'elastic_read' 6.43 sec
+Elastic returned 500000 rows.
+'postgres_read' 2.16 sec
+Postgres returned 500000 rows.
+'elastic_sum' 0.04 sec
+Elastic sum returned: 2.4992062897e+12
+'elastic_average' 0.01 sec
+Elastic average returned: 4998412.57939
+'postgres_sum' 0.08 sec
+Postgres sum returned: [(2499206289696.0,)]
+'postgres_average' 0.06 sec
+Postgres average returned: [(4998412.579392,)]
+'elastic_group_sum' 0.02 sec
+Elastic group sum returned 50 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.02 sec
+Elastic group average returned 50 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.03 sec
+Elastic combined metrics returned 50 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#600k
+--- START ---
+'create_data' 0.13 sec
+'elastic_write' 192.60 sec
+'postgres_write' 21.27 sec
+'elastic_read' 7.85 sec
+Elastic returned 600000 rows.
+'postgres_read' 3.25 sec
+Postgres returned 600000 rows.
+'elastic_sum' 0.01 sec
+Elastic sum returned: 2.99882980178e+12
+'elastic_average' 0.03 sec
+Elastic average returned: 4998049.66963
+'postgres_sum' 0.10 sec
+Postgres sum returned: [(2998829801780.0,)]
+'postgres_average' 0.08 sec
+Postgres average returned: [(4998049.66963333,)]
+'elastic_group_sum' 0.03 sec
+Elastic group sum returned 60 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.05 sec
+Elastic group average returned 60 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.03 sec
+Elastic combined metrics returned 60 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#700k
+--- START ---
+'create_data' 0.13 sec
+'elastic_write' 198.75 sec
+'postgres_write' 22.91 sec
+'elastic_read' 8.94 sec
+Elastic returned 700000 rows.
+'postgres_read' 3.18 sec
+Postgres returned 700000 rows.
+'elastic_sum' 0.02 sec
+Elastic sum returned: 3.49912690291e+12
+'elastic_average' 0.02 sec
+Elastic average returned: 4998752.71844
+'postgres_sum' 0.12 sec
+Postgres sum returned: [(3499126902911.0,)]
+'postgres_average' 0.09 sec
+Postgres average returned: [(4998752.71844429,)]
+'elastic_group_sum' 0.03 sec
+Elastic group sum returned 70 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.04 sec
+Elastic group average returned 70 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.05 sec
+Elastic combined metrics returned 70 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#800k
+--- START ---
+'create_data' 0.13 sec
+'elastic_write' 187.91 sec
+'postgres_write' 21.63 sec
+'elastic_read' 12.37 sec
+Elastic returned 800000 rows.
+'postgres_read' 4.44 sec
+Postgres returned 800000 rows.
+'elastic_sum' 0.02 sec
+Elastic sum returned: 3.99800004027e+12
+'elastic_average' 0.02 sec
+Elastic average returned: 4997500.05034
+'postgres_sum' 0.15 sec
+Postgres sum returned: [(3998000040269.0,)]
+'postgres_average' 0.11 sec
+Postgres average returned: [(4997500.05033625,)]
+'elastic_group_sum' 0.03 sec
+Elastic group sum returned 80 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.04 sec
+Elastic group average returned 80 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.05 sec
+Elastic combined metrics returned 80 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#900k
+--- START ---
+'create_data' 0.21 sec
+'elastic_write' 193.15 sec
+'postgres_write' 20.41 sec
+'elastic_read' 10.40 sec
+Elastic returned 900000 rows.
+'postgres_read' 4.02 sec
+Postgres returned 900000 rows.
+'elastic_sum' 0.02 sec
+Elastic sum returned: 4.49866042677e+12
+'elastic_average' 0.02 sec
+Elastic average returned: 4998511.5853
+'postgres_sum' 0.16 sec
+Postgres sum returned: [(4498660426773.0,)]
+'postgres_average' 0.11 sec
+Postgres average returned: [(4998511.58530333,)]
+'elastic_group_sum' 0.04 sec
+Elastic group sum returned 90 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.04 sec
+Elastic group average returned 90 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.05 sec
+Elastic combined metrics returned 90 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+#1M
+--- START ---
+'create_data' 0.14 sec
+'elastic_write' 186.62 sec
+'postgres_write' 18.42 sec
+'elastic_read' 11.72 sec
+Elastic returned 1000000 rows.
+'postgres_read' 4.75 sec
+Postgres returned 1000000 rows.
+'elastic_sum' 0.02 sec
+Elastic sum returned: 4.99681673950e+12
+'elastic_average' 0.02 sec
+Elastic average returned: 4996816.73951
+'postgres_sum' 0.17 sec
+Postgres sum returned: [(4996816739505.0,)]
+'postgres_average' 0.13 sec
+Postgres average returned: [(4996816.739505,)]
+'elastic_group_sum' 0.04 sec
+Elastic group sum returned 100 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.04 sec
+Elastic group average returned 100 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.05 sec
+Elastic combined metrics returned 100 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+--- START ---
+'elastic_read' 11.26 sec
+Elastic returned 1000000 rows.
+'postgres_read' 4.41 sec
+Postgres returned 1000000 rows.
+'elastic_sum' 0.02 sec
+Elastic sum returned: 4.99681673950e+12
+'elastic_average' 0.02 sec
+Elastic average returned: 4996816.73951
+'postgres_sum' 0.16 sec
+Postgres sum returned: [(4996816739505.0,)]
+'postgres_average' 0.12 sec
+Postgres average returned: [(4996816.739505,)]
+'elastic_group_sum' 0.03 sec
+Elastic group sum returned 100 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.05 sec
+Elastic group average returned 100 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.06 sec
+Elastic combined metrics returned 100 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+--- START ---
+'elastic_read' 13.62 sec
+Elastic returned 1000000 rows.
+'postgres_read' 4.54 sec
+Postgres returned 1000000 rows.
+'elastic_sum' 0.02 sec
+Elastic sum returned: 4.99681673950e+12
+'elastic_average' 0.02 sec
+Elastic average returned: 4996816.73951
+'postgres_sum' 0.17 sec
+Postgres sum returned: [(4996816739505.0,)]
+'postgres_average' 0.12 sec
+Postgres average returned: [(4996816.739505,)]
+'elastic_group_sum' 0.04 sec
+Elastic group sum returned 100 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.05 sec
+Elastic group average returned 100 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.06 sec
+Elastic combined metrics returned 100 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+--- START ---
+'elastic_sum' 0.02 sec
+Elastic sum returned: 4.99681673950e+12
+'elastic_average' 0.03 sec
+Elastic average returned: 4996816.73951
+'postgres_sum' 0.15 sec
+Postgres sum returned: [(4996816739505.0,)]
+'postgres_average' 0.12 sec
+Postgres average returned: [(4996816.739505,)]
+'elastic_group_sum' 0.04 sec
+Elastic group sum returned 100 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.05 sec
+Elastic group average returned 100 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.06 sec
+Elastic combined metrics returned 100 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+--- START ---
+'elastic_sum' 0.02 sec
+Elastic sum returned: 4.99681673950e+12
+'elastic_average' 0.03 sec
+Elastic average returned: 4996816.73951
+'postgres_sum' 0.15 sec
+Postgres sum returned: [(4996816739505.0,)]
+'postgres_average' 0.12 sec
+Postgres average returned: [(4996816.739505,)]
+'elastic_group_sum' 0.05 sec
+Elastic group sum returned 100 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.05 sec
+Elastic group average returned 100 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.06 sec
+Elastic combined metrics returned 100 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+
+--- START ---
+'elastic_sum' 0.02 sec
+Elastic sum returned: 4.99681673950e+12
+'elastic_average' 0.02 sec
+Elastic average returned: 4996816.73951
+'postgres_sum' 0.14 sec
+Postgres sum returned: [(4996816739505.0,)]
+'postgres_average' 0.12 sec
+Postgres average returned: [(4996816.739505,)]
+'elastic_group_sum' 0.04 sec
+Elastic group sum returned 100 rows.
+Example: {u'sum': {u'value': 49843048784.0}, u'key': 0, u'doc_count': 10000}
+'elastic_group_average' 0.05 sec
+Elastic group average returned 100 rows.
+Example: {u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}
+'elastic_combined_metrics' 0.06 sec
+Elastic combined metrics returned 100 rows
+Example: {u'sum': {u'value': 49843048784.0}, u'avg': {u'value': 4984304.8784}, u'key': 0, u'doc_count': 10000}

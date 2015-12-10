@@ -1,0 +1,11 @@
+Package: aqt-portal
+Version: 2.1.0-3
+Section: base
+Priority: optional
+Architecture: all
+Depends: nginx, openjdk-7-jdk, python, python-setuptools, python-dev
+Maintainer: AQT Solutions (atmssupport@aqtsolutions.com)
+Description: AQT Portal
+ This .deb package contains all the runtime libraries and supporting files
+ required to deploy the HTML5 web portal for ATMS.
+

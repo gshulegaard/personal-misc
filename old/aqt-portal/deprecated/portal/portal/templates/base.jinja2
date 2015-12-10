@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <title>
+      {% block title %}
+        Default Title
+      {% endblock title %}
+    </title>
+
+    <!-- Header extension area -->
+    {% block header_extend %}
+      <!-- No header extension -->
+    {% endblock header_extend %}
+  </head>
+
+  <body>
+    <!-- Generic body area. -->
+    {% block body %}
+      <!-- No body -->
+    {% endblock body %}
+
+    <!-- Body extension area (end of body tag) -->
+    {% block body_extend %}
+      <!-- No body extension (usually JS) -->
+    {% endblock body_extend %}
+  </body>
+</html>

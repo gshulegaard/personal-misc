@@ -1,0 +1,14 @@
+{% autoescape off %}
+A new user has registered on aqtsolutions.com.
+
+     Name:     {{ fname }} {{ lname }}
+     Company:     {{ company }}
+     Position:     {{ position }}
+     E-mail:     {{ email }}
+     Phone:     {{ phone }}
+
+     Source:     {{ source }}
+
+     Subscribed?     {% if subscribe %}Yes{% else %}No{% endif %}
+
+{% endautoescape %}

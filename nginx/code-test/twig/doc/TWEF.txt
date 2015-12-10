@@ -1,0 +1,52 @@
+ThoughtWorks Edge Format
+
+  TWEF:      [Vertex1][Vertex2][distance]
+  Regexp:       ?        ?     [1-9][0-9]*
+
+TWEF uses two, single-character (only), alphanumeric vertex identifier
+values as the first two (single character-wide fields) fields of any single
+edge specification.  These two fields are immediately followed by a numeric
+distance (or weight) value.  There are no explicit delimiters between any of
+these fields.
+
+In TWEF, newlines will be ignored.  Whitespace ('\n\t '), and/or commas,
+delimit each three-field edge specification.  Comment blocks begin
+(anywhere) with '#' and terminate at the next newline ('\n\).
+   
+      Example:    AF231 AB3
+      
+                  In this example, the first edge is from
+                  vertex 'A' to vertex 'F' with an edge
+                  distance of 231.  Above, this is followed by 
+                  an edge from 'A' to 'B' with distance = 3
+
+===  Future Directions (FDs) ===
+
+FD::  Maybe enhance/extend the TWEF serialization format?
+
+      The TWEF format (herein) is rife with limitations. 
+      The notion that vertex identifiers must be limited
+      to a single character (even with UTF8) harshly limits
+      the size of graphs that can be serialized using TWEF.
+      In addtion, there is no way to represent vertex
+      annotations in TWEF (when/if these might be supported).  
+
+      By the way, reinventing yet another (TWEF)
+      graph serialization (format) smacks of a
+      reinvent-the-wheel mistake.  Rather than enhancing/extending
+      TWEF, switching away from TWEF to adopt one of the
+      popular, widespread graph serialization formats is
+      probably a move toward 'production quality'.
+
+      Only extenuating circumstances, like the present TW
+      coding exam, justify the development/maintenance of
+      yet another home-grown, hand-rolled, ad-hoc,
+      graph serialization format.
+          
+      *  GraphML
+      *  GraphViz Dot (and DotML)
+      *  GML (Graph Modelling Language)
+         - http://www.fim.uni-passau.de/en/fim/faculty/chairs/theoretische-informatik/projects.html
+      *  DIMACS
+      *  ... many others ...
+         - http://igraph.org/r/doc/read.graph.html

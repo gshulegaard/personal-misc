@@ -1,0 +1,27 @@
+<!-- Bottom Navigation -->  
+<div id="botNav" 
+     ng-class="botNavCtrl.botNavClass()">
+
+  <div class="container-fluid" style="height: 45px;">
+    <div class="navbar-header pull-left">
+
+      <a class="navbar-brand stylish" href="mail"
+         ng-class="botNavCtrl.activeView('partials/mail/mail.html')">
+        Mail
+      </a>
+      
+      <a class="navbar-brand stylish" href="chat"
+         ng-class="botNavCtrl.activeView('partials/chat.html')">
+        Chat
+      </a>
+      
+      <a class="navbar-brand stylish" href="#"
+         ng-class="botNavCtrl.activeView('partials/combined.html')">
+        Mail+Chat
+      </a>
+
+    </div>
+  </div>
+
+</div>
+

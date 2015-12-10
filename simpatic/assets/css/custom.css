@@ -1,0 +1,53 @@
+/*
+
+custom.css
+
+This custom.css file was written by gshulegaard and contains a variety of CSS
+hacks/workarounds for creating desired web affects.  This is a personal file
+and should therefore remain untouched by others.
+
+THIS FILE SHOULD NEVER BE DIRECTLY EDITED OR CUSTOMIZED EXCEPT BY GSHULEGAARD.
+
+For personal use, copy this file with a different name, and edit said copy.
+Changes may be proposed but will only be incorporated by gshulegaard after a
+code review.
+
+*/
+
+/* Shortcut for horizontal block/image alignment. */
+/* http://www.w3.org/Style/Examples/007/center.en.html */
+.block-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Red Border for invalid */
+.ng-invalid.ng-dirty {
+    border-color: #FA787E;
+}
+
+/* Green border for valid */
+.ng-valid.ng-dirty {
+    border-color: #78FA89;
+}
+
+/* Q&D 100% height */
+.fill { 
+    min-height: 100%;
+    height: 100%;
+}
+
+/* Implementing vertical alignment. */
+/* http://jsfiddle.net/kizu/TQX9b/ */
+/* DOES NOT WORK WELL WITH BOOTSTRAP*/
+.vert-helper {
+    height: 100%;
+    padding: 0;
+}
+
+.vert-helper,
+.vert-center {
+    display: inline-block;
+    vertical-align: middle;
+}

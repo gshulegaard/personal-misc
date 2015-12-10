@@ -1,0 +1,272 @@
+<!-- Icon Controls -->
+
+<!-- Log off (only when client is NOT shown) -->
+<a href=""
+   ng-hide="appPageController.showClient"
+   ng-click="appPageController.logout()">
+  <span class="glyphicon 
+               glyphicon-remove 
+               pull-right 
+               icon-control"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Logout">
+  </span>
+</a>
+
+<!-- Close Client (only when client is open) -->
+<a href=""
+   ng-show="appPageController.showClient"
+   ng-click="appPageController.stopClient()">
+  <span class="glyphicon 
+               glyphicon-remove 
+               pull-right 
+               icon-control"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Close">
+  </span>
+</a>
+
+<!-- Always shown -->
+<a href=""
+   data-toggle="modal"
+   data-target="#passwordModal"
+   ng-click="appPageController.releaseKeyboard(); appPageController.hideClipboard()">
+  <span class="glyphicon 
+               glyphicon-cog 
+               pull-right 
+               icon-control"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Settings">
+  </span>
+</a>
+
+<a href=""
+   data-toggle="modal"
+   data-target="#helpModal"
+   ng-click="appPageController.releaseKeyboard(); appPageController.hideClipboard()">
+  <span class="glyphicon 
+               glyphicon-question-sign 
+               pull-right 
+               icon-control"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Help">
+  </span>
+</a>
+
+<!-- Shown only with RDP client -->
+<a href=""
+   ng-if="appPageController.showClient"
+   ng-click="appPageController.toggleClipboard()">
+  <span class="glyphicon 
+               glyphicon-paste 
+               pull-right 
+               icon-control"
+        ng-style="appPageController.clipboardStyle()"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Toggle Clipboard">
+  </span>
+</a>
+
+<a href=""
+   ng-if="appPageController.showClient"
+   ng-hide="appPageController.activeMenu"
+   ng-click="appPageController.showMenu()">
+  <span class="glyphicon 
+               glyphicon-chevron-down 
+               pull-right 
+               icon-control"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Show Menu">
+  </span>
+</a>
+
+<a href=""
+   ng-if="appPageController.showClient"
+   ng-show="appPageController.activeMenu"
+   ng-click="appPageController.hideMenu()">
+  <span class="glyphicon 
+               glyphicon-chevron-up
+               pull-right 
+               icon-control"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Hide Menu">
+  </span>
+</a>
+
+
+<!-- Application List -->
+<div class="container" style="padding: 40px 0 40px 0;" 
+     ng-hide="appPageController.showClient">
+
+  <div class="row">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
+      <div class="panel panel-default panel-app"
+           ng-repeat="app in appPageController.appList"
+           ng-hide="appPageController.apiProcessing">
+        <a class="stylish" href="#">
+          <div class="panel-body" ng-click="appPageController.startClient(app.id)">
+            <img ng-src="/assets/applications/{{app.id}}.png"
+                 style="display: block; 
+                        margin-left: auto;
+                        margin-right: auto;
+                        max-width: 100%;">
+          </div>
+        </a>
+      </div>
+
+      <!-- To-Do List object -->
+      <div class="panel panel-default panel-app"
+           ng-hide="appPageController.apiProcessing">
+        <a class="stylish" href="/lms/todo">
+          <div class="panel-body">
+            <img ng-src="/assets/applications/2.png"
+                 style="display: block; 
+                        margin-left: auto;
+                        margin-right: auto;
+                        max-width: 100%;">
+          </div>
+        </a>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Applications API Loading -->
+<img src="/assets/oloader.gif"
+     class="viewport-center"
+     ng-show="appPageController.apiProcessing"
+     style="display: block;
+            margin-left: auto;
+            margin-right: auto;
+            height: 70px;">
+
+
+<!-- Guac Client -->
+<guac-client client="client" 
+             ng-if="appPageController.showClient"
+             ng-class="{ hideElement: appPageController.loadingClient }"
+             ng-click="appPageController.activateKeyboard()">
+</guac-client>
+
+
+<!-- Client loading .gif -->
+<img src="/assets/loading.gif"
+     class="viewport-center"
+     ng-if="appPageController.showClient"
+     ng-show="appPageController.loadingClient"
+     style="display: block;
+            margin-left: auto;
+            margin-right: auto;">
+
+
+<!-- WebRDP Menu -->
+<div class="container-fluid" 
+     style="padding: 20px 0 20px 0; background-color: #E7E7E7;
+            position: absolute; width: 100%;"
+     ng-if="appPageController.showClient"
+     ng-show="appPageController.activeMenu">
+
+  <div class="container">
+    <h1 style="margin-bottom: 20px;"><small>File Transfers</small></h1>
+
+    <guac-file-transfer-manager client="client"></guac-file-transfer-manager>
+  </div>
+
+</div>
+
+
+<!-- Clipboard -->
+<div id="clipboard-container"
+     style="z-index: 10001; position: absolute; top: 50px; right: 10px;">
+  <div class="panel panel-default panel-app"
+       ng-show="appPageController.activeClipboard"
+       style="margin: 0;">
+    <div class="panel-body">
+
+      <!-- Clipboard -->
+      <div class="menu-section" id="clipboard-settings">
+        <h3 class="text-center"
+            style="margin-top: 0px; margin-bot: 15px;">Clipboard</h3>
+        <div class="content">
+          <textarea ng-model="client.clipboardData"
+                    ng-click="appPageController.releaseKeyboard()"
+                    style="border-color: rgb(169, 169, 169);
+                           resize: vertical;"
+                    rows="4" cols="40" id="clipboard"></textarea>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+ $(function() {
+   $("#clipboard-container").draggable({ containment: "body", scroll: false });
+ });
+</script>
+
+
+<!-- Change Password Modal -->
+<div class="modal fade" 
+     id="passwordModal" 
+     tabindex="-1" 
+     role="dialog"
+     aria-labelledby="passwordChangeForm"
+     ng-click="appPageController.releaseKeyboard()">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button" 
+                class="close" 
+                data-dismiss="modal" 
+                aria-label="Close"
+                ng-click="changePasswordCtrl.closeModal()"><span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="passwordChangeForm">Change Password</h4>
+      </div>
+
+      <div class="modal-body">
+        <change-password-form></change-password-form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Help Modal -->
+<div class="modal fade"
+     id="helpModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="helpModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <button type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title" id="helpPage">Help</h4>
+      </div>
+
+      <div class="modal-body">
+        <help-page></help-page>
+      </div>
+
+    </div>
+  </div>
+</div>

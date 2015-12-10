@@ -1,0 +1,23 @@
+<!-- Window Pane -->
+<div class="container-fluid window-pane">
+
+  <!-- mainPane area -->
+  <div id="mainPane" 
+       ng-class="windowPaneCtrl.mainPaneClass()"
+       ng-hide="windowPaneCtrl.currentState('expanded')">
+    <div ng-view style="height: 100%;"></div>
+  </div>
+
+  <!-- PowerPane directives -->
+
+  <!-- Compose button -->
+  <!-- PowerPane = minimized -->
+  <div style="position: absolute;"
+       ng-show="windowPaneCtrl.showCompose()"
+       ng-style="windowPaneCtrl.styleCompose()">
+    <a href="/mail/compose" class="stylish">
+      <img src="assets/images/compose-large.png"
+           style="max-height: 70px;" />
+    </a>
+  </div>
+</div>

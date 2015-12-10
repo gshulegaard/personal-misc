@@ -1,0 +1,423 @@
+/*
+
+bootstrap-customize.css
+
+This .css file customizes aspects of the Bootstrap responsive web-design
+framework.  This file was originally authored by gshulegaard for use in a
+variety of personal and work projects.  The css style rules are presented for
+use by any who are interested.
+
+THIS FILE SHOULD NEVER BE DIRECTLY EDITED OR CUSTOMIZED EXCEPT BY GSHULEGAARD.
+
+For personal use, copy this file with a different name, and edit said copy.
+Changes may be proposed but will only be incorporated by gshulegaard after a
+code review.
+
+*/
+
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #DBDBDB;
+}
+
+/* AQT color button */
+.btn-aqt {
+    color: #FFF;
+    background-color: #FF5400;
+    border-color: #E64C00;
+}
+
+.btn-aqt:focus, .btn-aqt:hover {
+    color: #FFF;
+    background-color: #E64C00;
+    border-color: #CC4300;
+}
+
+/* Light-to-Dark teal color button */
+.btn-teal-ltd {
+    color: #FFF;
+    background-color: #80CCB5;
+    border-color: #DEF2ED;
+}
+
+.btn-teal-ltd:focus, .btn-teal-ltd:hover {
+    color: #FFF;
+    background-color: #42997E;
+    border-color: #DEF2ED;
+}
+
+
+/* topNav */
+
+
+.navbar-simpatic {
+    background-color: #215285;
+    border-color: #215285;
+    border-width: 0;
+    height: 40px;
+    min-height: 40px;
+    margin: 0;
+}
+
+.navbar-simpatic 
+.navbar-brand {
+    color: #FFF;
+    font-size: 18px;
+    line-height: 20px;
+    padding: 10px;
+}
+
+.navbar-simpatic
+.navbar-brand:hover {
+    color: #F5F5F5;
+}
+
+/* powerPaneNav */
+.power-pane-nav {
+    margin: 0 -15px 0 0; /* Compensate container padding */
+    background-color: #7DA0BC;
+    border-color: #7DA0BC;
+    height: 40px;
+}
+
+.power-pane-nav 
+a.chevron {
+    height: 40px;
+    padding: 10px 7px 0px 8px;
+    float: right;
+    line-height: 20px;
+    font-size: 14px;
+    color: #FFF;
+    text-decoration: none;
+    outline: 0;
+}
+
+.power-pane-nav
+a:hover {
+    color: #F5F5F5;
+}
+
+.power-pane-nav
+a.chevron
+.glyphicon {
+    line-height: 1;
+    font-size: 16px;
+    color: inherit;
+    vertical-align: middle;
+    margin-top: -3px;
+    padding-right: 2px;
+}
+
+
+/* botNav */
+
+
+.bot-nav {
+    height: 45px;
+    background-color: #F5F5F5;
+    border: 4px solid #80CCB5;
+    border-left-width: 0;
+    border-right-width: 0;
+}
+
+.bot-nav
+.navbar-brand {
+    color: #000000;
+    font-size: 18px;
+    line-height: 20px;
+    padding: 9px 20px;
+}
+
+.bot-nav
+.navbar-brand:hover {
+    font-weight: bold;
+}
+
+.bot-nav
+.navbar-brand-active {
+    font-weight: bold;
+}
+
+
+/* windowPane */
+
+
+.window-pane {
+    top: 0;
+    left: 0;
+    margin: 40px 0 0 0;
+    padding: 0;
+    background-color: #DBDBDB;
+}
+
+/* mainPane */
+.main-pane-minimized {
+    background-color: #DBDBDB;
+    padding: 0; /* No padding important for JS resize. */
+    overflow-y: scroll;
+}
+
+.main-pane-active {
+    background-color: #DBDBDB;
+    padding: 0; /* No padding for JS resize. */
+    /*padding: 50px;*/
+    overflow-y: scroll;
+}
+
+/* App (template) container */
+.template-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0 10%;
+}
+
+/* powerPane */
+.power-pane-minimized {
+    width: 80px;
+    height: 100%;
+    padding-top: 50px; /* Padding for top-nav */
+    float: right;
+    background-color: #7DA0BC;
+}
+
+
+/* Remove default styling from a tags */
+a.stylish {
+    text-decoration: none;
+    outline: 0;
+}
+
+
+/* ProtoIO switch */
+/* https://proto.io/freebies/onoff/ */
+.onoffswitch {
+    position: relative; width: 40px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid inherit; border-radius: 30px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.2s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 14px; padding: 0; line-height: 14px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "";
+    padding-left: 10px;
+    background-color: #EAD691; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "";
+    padding-right: 10px;
+    background-color: #878587; color: #FFFFFF;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 30px; margin: -8px;
+    background: #878587;
+    position: absolute; top: 0; bottom: 0;
+    right: 22px;
+    border: 2px solid #E5BD39; border-radius: 30px;
+    transition: all 0.2s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+    background-color: #E5BD39;
+}
+
+
+/* Compose Message */
+.compose-header {
+    width: 100%;
+    background-color: #42997E;
+    color: #FFF;
+    padding: 2px 8px;
+    border-radius: 2px;
+}
+
+.compose-message {
+    width: 100%;
+    height: 82%;
+    min-height: 600px;
+    background-color: #FFF;
+    border-radius: 2px;
+    color: #878587;
+    padding: 15px 40px;
+    position: relative;
+}
+
+.compose-message hr {
+    margin: 8px -40px;
+    border-top: 2px solid #F5F5F5;
+}
+
+.compose-message .compose-message-row {
+    padding: 0px 0px;
+    position: relative;
+}
+
+.compose-message-row div:focus {
+    outline: none;
+}
+
+.compose-message-row *[role="textbox"] {
+    padding: 6px 2px;
+}
+
+.compose-message .bottom-controls {
+    height: 50px;
+    padding: 15px 0px 0px 0px;
+}
+
+/* Single line workaround */
+/* http://stackoverflow.com/questions/6831482/contenteditable-single-line-input */
+.compose-message-row .subject {
+    font-weight: bold;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.compose-message-row .subject br {
+    display: none;
+}
+
+.compose-message-row .subject * {
+    display: inline;
+    white-space: nowrap;
+}
+
+.compose-message-row .message {
+    overflow-y: auto;
+}
+
+.compose-message-row label, 
+.compose-message-row input,
+.compose-message-row textarea {
+    border-color: #FFF;
+    border: 0px solid #FFF;
+    box-shadow: none;
+}
+
+.compose-message-row input,
+.compose-message-row textarea {
+    padding: 6px 2px;
+}
+
+.compose-message-row input:focus,
+.compose-message-row textarea:focus {
+    border-color: #FFF;
+    border: 0px solid #FFF;
+    box-shadow: none;    
+}
+
+/* Various placeholder inspired by: */
+/* http://guardian.github.io/scribe-angular-example/ */
+.compose-message-row .subject-placeholder {
+    font-weight: bold;
+    font-size: 16px;
+    white-space: nowrap;
+    overflow: hidden;
+    position: absolute;
+    display: none;
+    top: 0;
+    left: 0;
+}
+
+
+/* Pad middle content to account for nav-bar heights */
+.middle-content {
+    padding: 50px 0 0 0; /* nav height is 50px */
+    min-height: 100%; /* For <guac-client> */
+    min-width: 100%; /* For <guac-client> */
+    max-height: 100%;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Implementing centering with CSS3 */
+/* http://www.w3.org/Style/Examples/007/center.en.html */
+.viewport-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Using "visibility: hidden;" instead of "display: None;"... work around for */
+/* DOM updating issues surrounding <guac-client> and ng-show/ng-hide. */
+.hideElement {
+    visibility: hidden;
+}
+
+
+/* Deprecated/Unusued */
+
+
+/* Create bottom nav bar */
+.bot-nav-element {
+    color: #777;
+    height: 50px; /* Height of nav-bar */
+    padding: 5px 25px 5px 25px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.bot-nav-element:focus, .bot-nav-element:hover {
+    color: #5E5E5E;
+}
+
+.bot-nav-element.active, .bot-nav-element:active {
+    color: #FF5400;
+}
+
+.bot-nav-element .glyphicon {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.bot-nav-element .menu-item {
+    display: block;
+    text-align: center;
+}
+
+/* Implementing vertical alignment. */
+/* http://jsfiddle.net/kizu/TQX9b/ */
+/* Used mostly for loading screens (centering loading .gif) */
+.vert-helper {
+    height: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+.vert-helper,
+.vert-center {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.horiz-center {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}

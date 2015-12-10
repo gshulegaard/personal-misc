@@ -1,0 +1,356 @@
+{% extends "base.html" %}
+
+{% block title %}
+  AQT Solutions | Create Ticket
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Create Ticket</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+            <li><a href="{% url 'customer:customer' %}">Member Area</a></li>
+	    <li><a href="{% url 'tickets:tickets' %}">Tickets</a></li>
+            <li>Create Ticket</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container">
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <!-- Create Ticket -->
+    <div class="eight alt columns">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Ticket Information</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div> 
+
+      <!-- Create Ticket Error message(s) -->
+      {% if errors == 'Empty' %}
+	<div class="notification error closeable">
+	  <p>
+            <span>Error!</span> A required field was not filled out.
+          </p>
+	  <a class="close" href="#"></a>
+	</div>
+      {% elif errors %}
+	<div class="notification error closeable">
+	  <p>
+            <span>Error!</span> Unable to create ticket. Please try again later.
+          </p>
+	  <a class="close" href="#"></a>
+	</div>
+      {% endif %}
+
+      <!-- Login Form -->
+      <form method="post" action="{% url 'tickets:ticket_create' %}">
+        {% csrf_token %}
+
+        <fieldset>
+          <div>
+            <label>Product: *</label>
+            <select name="product">
+              {% if product == "select" %}
+              <option value="select" selected>------- Select -------</option>
+              {% else %}
+              <option value="select">------- Select -------</option>
+              {% endif %}
+
+              {% if product == "ATMS Core" %}
+              <option value="ATMS Core" selected>ATMS Core</option>
+              {% else %}
+              <option value="ATMS Core">ATMS Core</option>
+              {% endif %}
+
+              {% if product == "ATMS Web" %}
+              <option value="ATMS Web" selected>ATMS Web</option>
+              {% else %}
+              <option value="ATMS Web">ATMS Web</option>
+              {% endif %}
+
+              {% if product == "ATMS Mobile" %}
+              <option value="ATMS Mobile" selected>ATMS Mobile</option>
+              {% else %}
+              <option value="ATMS Mobile">ATMS Mobile</option>
+              {% endif %}
+
+              {% if product == "ATMS Connect" %}
+              <option value="ATMS Connect" selected>ATMS Connect</option>
+              {% else %}
+              <option value="ATMS Connect">ATMS Connect</option>
+              {% endif %}
+
+              {% if product == "ATMS Security" %}
+              <option value="ATMS Security" selected>ATMS Security</option>
+              {% else %}
+              <option value="ATMS Security">ATMS Security</option>
+              {% endif %}
+
+              {% if product == "ATMS API" %}
+              <option value="ATMS API" selected>ATMS API</option>
+              {% else %}
+              <option value="ATMS API">ATMS API</option>
+              {% endif %}
+
+              {% if product == "AQT Web Site" %}
+              <option value="AQT Web Site" selected>AQT Web Site</option>
+              {% else %}
+              <option value="AQT Web Site">AQT Web Site</option>
+              {% endif %}
+            </select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Release: *</label>
+            <select name="release">
+              {% if release == "select" %}
+              <option value="select" selected>------- Select -------</option>
+              {% else %}
+              <option value="select">------- Select -------</option>
+              {% endif %}
+
+              {% if release == "5.10" %}
+              <option value="5.10" selected>5.10</option>
+              {% else %}
+              <option value="5.10">5.10</option>
+              {% endif %}
+
+              {% if release == "5.01" %}
+              <option value="5.01" selected>5.01</option>
+              {% else %}
+              <option value="5.01">5.01</option>
+              {% endif %}
+
+              {% if release == "5.00" %}
+              <option value="5.00" selected>5.00</option>
+              {% else %}
+              <option value="5.00">5.00</option>
+              {% endif %}
+
+              {% if release == "4.95" %}
+              <option value="4.95" selected>4.95</option>
+              {% else %}
+              <option value="4.95">4.95</option>
+              {% endif %}
+
+              {% if release == "4.93" %}
+              <option value="4.93" selected>4.93</option>
+              {% else %}
+              <option value="4.93">4.93</option>
+              {% endif %}
+
+              {% if release == "4.92" %}
+              <option value="4.92" selected>4.92</option>
+              {% else %}
+              <option value="4.92">4.92</option>
+              {% endif %}
+            </select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Priority: *</label>
+            <select name="priority">
+              {% if priority == "select" %}
+              <option value="select" selected>------- Select -------</option>
+              {% else %}
+              <option value="select">------- Select -------</option>
+              {% endif %}
+
+              {% if priority == "Critical" %}
+              <option value="Critical" selected>Critical</option>
+              {% else %}
+              <option value="Critical">Critical</option>
+              {% endif %}
+              
+              {% if priority == "Severe" %}
+              <option value="Severe" selected>Severe</option>
+              {% else %}
+              <option value="Severe">Severe</option>
+              {% endif %}
+              
+              {% if priority == "Serious" %}
+              <option value="Serious" selected>Serious</option>
+              {% else %}
+              <option value="Serious">Serious</option>
+              {% endif %}
+              
+              {% if priority == "Moderate" %}
+              <option value="Moderate" selected>Moderate</option>
+              {% else %}
+              <option value="Moderate">Moderate</option>
+              {% endif %}
+              
+              {% if priority == "Minor" %}
+              <option value="Minor" selected>Minor</option>
+              {% else %}
+              <option value="Minor">Minor</option>
+              {% endif %}
+              
+              {% if priority == "None" %}
+              <option value="None" selected>None</option>
+              {% else %}
+              <option value="None">None</option>
+              {% endif %}
+            </select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Issue type: *</label>
+            <select name="issue_type">
+              {% if issue_type == "select" %}
+              <option value="select" selected>------- Select -------</option>
+              {% else %}
+              <option value="select">------- Select -------</option>
+              {% endif %}
+
+              {% if issue_type == "Question" %}
+              <option value="Question" selected>Question</option>
+              {% else %}
+              <option value="Question">Question</option>
+              {% endif %}
+              
+              {% if issue_type == "Suggestion" %}
+              <option value="Suggestion" selected>Suggestion</option>
+              {% else %}
+              <option value="Suggestion">Suggestion</option>
+              {% endif %}
+              
+              {% if issue_type == "Change Req." %}
+              <option value="Change Req." selected>Change Request</option>
+              {% else %}
+              <option value="Change Req.">Change Request</option>
+              {% endif %}
+              
+              {% if issue_type == "Problem" %}
+              <option value="Problem" selected>Problem</option>
+              {% else %}
+              <option value="Problem">Problem</option>
+              {% endif %}
+            </select>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Window:</label>
+            <input type="text" name="window" 
+                   style="width: 100%;" value="{{ window }}"/>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Keywords:</label>
+            <textarea name="keywords" style="resize: vertical; width: 100%;">{{ keywords }}</textarea>
+          </div>
+
+          <div class="clearfix"></div>
+          <div style="margin: 8px 0 0 0;"></div>
+
+          <div>
+            <label>Issue description: *</label>
+            <textarea name="issue" style="resize: vertical; width: 100%; height: 150px;">{{ issue }}</textarea>
+          </div>
+        </fieldset>
+
+        <div class="clearfix"></div>
+        <div style="margin: 20px 0 0 0;"></div>
+
+        <input type="submit" value="Submit" />
+
+        <p style="float: right; padding-top: 8px;">
+          * Field is required.
+        </p>
+      </form>
+    </div>
+    
+    <!-- Right Bar -->
+    <div class="four columns" style="margin-left: 25px;">
+
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">Instructions</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        Please fill out the form to the left to submit a new ticket.
+      </p>
+
+      <p>
+        If you are having problems or have questions regarding the form to the
+        left, you may contact ATMS Support at
+        <strong>atmssupport@aqtsolutions.com</strong> or you may send an e-mail
+        using the button below:
+      </p>
+
+      <p>
+        <a href="{% url 'atms_support:atms_support' %}" class="button gray"
+           style="float: left;">
+          Contact ATMS Support <i class="icon-double-angle-right"></i>
+        </a>
+      </p>
+    </div>
+
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="clearfix" style="margin-bottom: 45px;"></div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}

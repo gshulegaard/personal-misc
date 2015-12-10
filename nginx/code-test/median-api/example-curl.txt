@@ -1,0 +1,5 @@
+Here are some example cURL commands demonstrating the functioning of the API...
+
+$ curl -X POST http://localhost:5000/put -H "Content-Type: application/json" -d '{"intVal": 1}'
+
+$ curl http://localhost:5000/median

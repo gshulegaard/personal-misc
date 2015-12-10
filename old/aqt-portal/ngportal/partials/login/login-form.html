@@ -1,0 +1,119 @@
+<form name="loginForm" 
+      ng-submit="loginForm.$valid && !loginFormCtrl.apiProcessing && loginFormCtrl.submitLogin()"
+      ng-hide="loginFormCtrl.expiredPassword"
+      novalidate>
+
+
+  <!-- Message Handling -->
+
+  <div class="alert alert-dismissible" role="alert"
+       ng-repeat="message in loginFormCtrl.MessageManager.messageStore"
+       ng-class="message.messageClass()">
+    <button type="button" class="close" aria-label="Close"
+            ng-click="loginFormCtrl.MessageManager.removeMessage(message)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>{{message.type}}!</strong> {{message.text}}
+  </div>
+
+
+  <!-- Login Form -->
+  
+  <div class="form-group">
+    <input type="text"
+           class="form-control"
+           name="username" 
+           ng-model="loginFormCtrl.loginForm.username"
+           ng-show="loginFormCtrl.thisSession"
+           placeholder="Username"
+           required />
+  </div>
+
+  <div class="form-group">
+    <input type="password" 
+           class="form-control" 
+           name="password"
+           ng-model="loginFormCtrl.loginForm.password"
+           ng-show="loginFormCtrl.thisSession"
+           placeholder="Password"
+           required />
+  </div>
+  
+  <input type="submit" class="btn btn-aqt btn-block" value="Login"
+         ng-show="loginFormCtrl.thisSession && !loginFormCtrl.apiProcessing"
+         ng-disabled="!loginForm.$valid">
+
+  <!-- Forgot Password -->
+  <a class="btn btn-default btn-block" href 
+     ng-click="loginFormCtrl.submitForgotPassword()"
+     ng-show="loginForm.username.$valid && !loginFormCtrl.apiProcessing">
+    Forgot Password
+  </a>
+
+  <!-- API waiting gif -->
+  <img src="/assets/oloader.gif"
+       ng-show="!loginFormCtrl.expiredPassword && loginFormCtrl.apiProcessing"
+       style="display: block;
+              margin-left: auto;
+              margin-right: auto;
+              height: 70px;">
+
+</form>
+
+
+<!-- Expired Password Form -->
+
+<form name="expiredPasswordForm" 
+      ng-submit="expiredPasswordForm.$valid && !loginFormCtrl.apiProcessing && loginFormCtrl.submitExpiredPassword()"
+      ng-show="loginFormCtrl.expiredPassword"
+      novalidate>
+
+
+  <!-- Message Handling -->
+
+  <div class="alert alert-dismissible" role="alert"
+       ng-repeat="message in loginFormCtrl.expiredMessageManager.messageStore"
+       ng-class="message.messageClass()">
+    <button type="button" class="close" aria-label="Close"
+            ng-click="loginFormCtrl.expiredMessageManager.removeMessage(message)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>{{message.type}}!</strong> {{message.text}}
+  </div>
+
+
+  <!-- Expried Password Form -->
+  
+  <div class="form-group">
+    <input type="password"
+           class="form-control"
+           name="password" 
+           ng-model="loginFormCtrl.expiredForm.newPassword"
+           ng-show="loginFormCtrl.thisSession"
+           placeholder="New Password"
+           required />
+  </div>
+
+  <div class="form-group">
+    <input type="password" 
+           class="form-control" 
+           name="password2"
+           ng-model="loginFormCtrl.expiredForm.newPassword2"
+           ng-show="loginFormCtrl.thisSession"
+           placeholder="Repeat Password"
+           required />
+  </div>
+  
+  <input type="submit" class="btn btn-aqt btn-block" value="Change Password"
+         ng-show="loginFormCtrl.thisSession && !loginFormCtrl.apiProcessing"
+         ng-disabled="!expiredPasswordForm.$valid">
+
+  <!-- API waiting gif -->
+  <img src="/assets/oloader.gif"
+       ng-show="loginFormCtrl.expiredPassword && loginFormCtrl.apiProcessing"
+       style="display: block;
+              margin-left: auto;
+              margin-right: auto;
+              height: 70px;">
+
+</form>

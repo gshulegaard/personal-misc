@@ -1,0 +1,188 @@
+/*
+
+bootstrap-customize.css
+
+This .css file customizes aspects of the Bootstrap responsive web-design
+framework.  This file was originally authored by gshulegaard for use in a
+variety of personal and work projects.  The css style rules are presented for
+use by any who are interested.
+
+THIS FILE SHOULD NEVER BE DIRECTLY EDITED OR CUSTOMIZED EXCEPT BY GSHULEGAARD.
+
+For personal use, copy this file with a different name, and edit said copy.
+Changes may be proposed but will only be incorporated by gshulegaard after a
+code review.
+
+*/
+
+html {
+    height: 100%;
+}
+
+body {
+/*    background-color: #EDF0F2;*/
+    height: 100%;
+}
+
+.fill { 
+    min-height: 100%;
+    height: 100%;
+}
+
+/* AQT color button */
+.btn-aqt {
+    color: #FFF;
+    background-color: #FF5400;
+    border-color: #E64C00;
+}
+
+.btn-aqt:focus, .btn-aqt:hover {
+    color: #FFF;
+    background-color: #E64C00;
+    border-color: #CC4300;
+}
+
+/* AQT color pills */
+.nav-pills-aqt > li.active > a, 
+.nav-pills-aqt > li.active > a:focus, 
+.nav-pills-aqt > li.active > a:hover {
+    color: #FFF;
+    background-color: #FF5400 !important;
+}
+
+.nav-pills-aqt > li > a {
+    color: #FF5400;
+}
+
+/* Remove default styling from a tags */
+a.stylish {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Pad middle content to account for nav-bar heights */
+.middle-content {
+    padding: 50px 0 0 0; /* nav height is 50px */
+    min-height: 100%; /* For <guac-client> */
+    min-width: 100%; /* For <guac-client> */
+    max-height: 100%;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* <guac-client> class */
+.main {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.resize-sensor {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden;
+    border: none;
+    opacity: 0;
+    z-index: -1;
+}
+
+/* Styling for glyphicon controls */
+.icon-control {
+    font-size: 22px;
+    position: relative;
+    top: 12px;
+    right: 95px;
+    margin-right: 5px;
+    color: #777;
+    /* Shim for overlaying the nav */
+    z-index: 10000;
+}
+
+.icon-control:hover {
+    color: #FF5400;
+}
+
+/* Styling for application page panel hover. */
+.panel-app:hover {
+    border-color: #FF5400;
+}
+
+/* Add padding to images in ol objects. */
+ol li img {
+    margin-bottom: 10px;
+}
+
+/* Implementing centering with CSS3 */
+/* http://www.w3.org/Style/Examples/007/center.en.html */
+.viewport-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Using "visibility: hidden;" instead of "display: None;"... work around for */
+/* DOM updating issues surrounding <guac-client> and ng-show/ng-hide. */
+.hideElement {
+    visibility: hidden;
+}
+
+/* Deprecated/Unusued */
+
+
+/* Create bottom nav bar */
+.bot-nav-element {
+    color: #777;
+    height: 50px; /* Height of nav-bar */
+    padding: 5px 25px 5px 25px;
+    box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+.bot-nav-element:focus, .bot-nav-element:hover {
+    color: #5E5E5E;
+}
+
+.bot-nav-element.active, .bot-nav-element:active {
+    color: #FF5400;
+}
+
+.bot-nav-element .glyphicon {
+    margin-bottom: 5px;
+    font-size: 18px;
+}
+
+.bot-nav-element .menu-item {
+    display: block;
+    text-align: center;
+}
+
+/* Implementing vertical alignment. */
+/* http://jsfiddle.net/kizu/TQX9b/ */
+/* Used mostly for loading screens (centering loading .gif) */
+.vert-helper {
+    height: 100%;
+    padding: 0;
+    text-align: center;
+}
+
+.vert-helper,
+.vert-center {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: left;
+}
+
+.horiz-center {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,302 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  AQT Solutions | Mobile Demo
+{% endblock title %}
+
+{% block header-extend %}
+  <!-- Astrum Header -->
+  {% include "astrum-header.html" %}
+  <!-- End Astrum Header -->
+
+    <!-- Google Tracking -->
+    {% include "google-tracking.html" %}
+
+    <!-- HubSpot Tracking -->
+    {% include "hubspot-tracking.html" %}
+{% endblock header-extend %}
+
+{% block body %}
+  <!-- Astrum Top Bar -->
+  {% include "astrum-top-bar.html" %}
+  <!-- End Astrum Top Bar -->
+
+  <!-- Breadcrumbs -->
+  <section id="titlebar">
+    <!-- Container -->
+    <div class="container">
+      
+      <div class="eight columns">
+	<h2>Mobile Demo</h2>
+      </div>
+     
+      <div class="eight columns">
+	<nav id="breadcrumbs">
+	  <ul>
+	    <li>You are here:</li>
+	    <li><a href="/">Home</a></li>
+	    <li>Mobile Demo</li>
+	  </ul>
+	</nav>
+      </div>
+      
+    </div>
+    <!-- Container / End -->
+  </section>
+
+  <div class="container" style="padding: 0 0 6rem 0;">
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+    <div class="twelve alt columns">
+      
+      <div class="clearfix" style="margin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 class="headline">ATMS Mobile Demo</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix" style="padding-bottom: 5px;"></div>
+
+      <div class="six columns" style="margin: 5px 0 15px 0;">
+        <a href="itms-services://?action=download-manifest&url={% url 'download:download' %}?filename=atms_mobile.plist&folder=ver520&type=application/xml">
+          <img src="{% static 'downloads/mobile/images/appledownload.png' %}"
+               alt="Apple Download" style="height: 94px; 
+                                           margin-left: auto; 
+                                           margin-right: auto;
+                                           max-width: 97%;">
+        </a>
+      </div>
+
+      <div class="six columns" style="margin: 5px 0 15px 0;">
+        <a href="{% url 'download:download' %}?filename=atms_mobile.apk&folder=ver510&type=application/vnd.android.package-archive">
+          <img src="{% static 'downloads/mobile/images/androiddownload.png' %}"
+               alt="Apple Download" style="height: 94px;
+                                           margin-left: auto;
+                                           margin-right: auto;
+                                           max-width: 97%;">
+        </a>
+      </div>
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">System Requirements</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <ul class="list-1" style="margin-left: 30px;">
+        <li>
+          Apple iOS 5.1 or above. Supported iOS devices are iPad 2/3/4/Mini/Air.
+        </li>
+
+        <li>
+          Google Android 4.1 or above. All Android tablet devices are supported.
+        </li>
+      </ul>
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">Download Instructions</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <ol style="padding-left: 26px; margin-bottom: 25px;">
+        <li style="margin-bottom: 8px;">
+          Open a web browser session on your mobile device. On the iPad this
+          would typically be Safari and on an Android device this would typically
+          be the app labeled "Internet".
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          Navigate to the URL
+          <a href="https://members.aqtsolutions.com/demo/mobile">
+            https://members.aqtsolutions.com/demo/mobile
+          </a>
+          (this page). 
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          Download the ATMS Mobile Workspace for your appropriate device.
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          After the app has completed installation, you will have a
+          preconfigured ATMS Mobile Workspace with an ATMS Mobile application
+          within it pre-configured to run against an AQT Demo database.
+        </li>
+
+        <li style="margin-bottom: 8px;">
+          You can run ATMS Mobile by opening the "ATMS Mobile Workspace" and
+          clicking on "ATMS Mobile" from within.
+        </li>       
+      </ol>
+
+      <p>
+        Congratulations! You now have a working ATMS Mobile demo installed on
+        your device. You may use this demo to evaluate the application. Changes
+        to this demo database are reverted daily.
+      </p>
+
+      <div class="clearfix" style="magin-top: 25px;"></div>
+
+      <!-- Section Title -->
+      <h3 style="margin-top: 25px;" class="headline">Using the ATMS Mobile Demo</h3>
+      <span class="line" style="margin-bottom: 35px;"></span>
+      <div class="clearfix"></div>
+
+      <p>
+        Our ATMS Mobile Demo download is configured to run against a demo
+        database hosted on AQT servers. This demo database is configured to
+        offer some broad overviews of ATMS Mobile to be used to evaluate ATMS
+        Mobile functionality. Below is some basic information in order to help
+        you get started.
+      </p>
+
+      <h4>Login</h4>
+
+      <p>
+        ATMS Mobile is designed to be used by instructors and we offer two demo
+        instructor logins:
+      </p>
+
+      <table class="standard-table" style="width: 50%;">
+        <tbody>
+          <tr>
+            <th>Login</th>
+            <th>Password</th>
+          </tr>
+          <tr>
+            <td>instructor320</td>
+            <td>admin</td>
+          </tr>
+          <tr>
+            <td>instructor720</td>
+            <td>admin</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Both of these instructor profiles are very similar. instructor320 offers
+        a generic ATMS Mobile experience while instructor757 is configured to
+        demonstrate some of the AQP capabilities of ATMS and ATMS Mobile.
+      </p>
+
+      <h4>Navigation</h4>
+
+      <p>
+        ATMS Mobile has two navigation areas:
+      </p>
+
+      <ul class="list-2" style="margin-left: 30px; margin-bottom: 15px;">
+        <li>
+          Navigation Bar
+        </li>
+
+        <li>
+          Action Bar
+        </li>
+      </ul>
+
+      <p>
+        The navigation bar is located in the header (top of the screen) and is
+        used to navigate between different screens/areas of ATMS Mobile. When
+        you are at the home screen (Event List), it also contains an "Exit"
+        button to close the app.
+      </p>
+
+      <p>
+        The action bar is located in the footer (bottom of the screen) and is
+        used to perform various actions from within the selected area. These
+        actions change according to where you are in ATMS Mobile.
+      </p>
+
+      <h4>Grading</h4>
+
+      <p>
+        Grading is available from the "Event List" screen of ATMS Mobile. To
+        grade an example event, simply select an event and hit "Grade" in the
+        action bar.
+      </p>
+
+      <p>
+        Ungrading functionality is also offered in ATMS Mobile. To ungrade an
+        event, you will have to select an event with a "Completed" status and
+        then hit "Ungrade" in the action bar. If you are having trouble
+        ungrading, make sure your search criteria is showing events with the
+        "Complete status". Use the "Search" button in the "Event List"
+        navigation bar to view your currently selected search criteria.
+      </p>
+
+      <h4>Disconnected Use</h4>
+
+      <p>
+        One of the key features of ATMS Mobile is that it allows end-users to
+        use the application while disconnected (offline). ATMS Mobile allows you
+        to download events from the "Event List" in order to allow grading while
+        offline.
+      </p>
+
+      <p>
+        To download an event, select an event from the "Event List" and hit
+        "Download" in the action bar.
+      </p>
+
+      <p>
+        This event will now be available in the "Downloaded Event List" which
+        can be accessed by hitting the 
+        <img src="{% static 'downloads/mobile/images/dlicon.png' %}" 
+             style="display: inline;">
+        icon on the left side of the action bar. Events in this list will also
+        be available for grading while the mobile device is disconnected from
+        the internet.
+      </p>
+
+      <p>
+        Once you are reconnected, you can upload downloaded events by selecting
+        them in the "Downloaded Event List" and hitting "Upload" in the action
+        bar.
+      </p>
+
+      <h4>Help</h4>
+
+      <p>
+        Help using ATMS Mobile can be found by clicking on the 
+        <img src="{% static 'downloads/mobile/images/helpicon.png' %}" 
+             style="display: inline;">
+        icon at the bottom right corner of each page in the app. Also, you can
+        click
+        <a href="{% url 'download:download' %}?filename=ATMS Mobile Users Guide.pdf&folder=mobile&type=application/pdf">
+          here
+        </a>
+        to download the ATMS Mobile User's Guide in PDF format.
+      </p>
+
+      <p>
+        <strong>Note:</strong> The built-in help documentation for ATMS Mobile
+        is currently in development.
+      </p>
+
+    <!-- End twelve columns -->
+    </div>
+    
+    <!-- Center block placeholder -->
+    <div class="two columns">
+      <span class="line" style="width: 0;"></span>
+    </div>
+
+  <!-- Container end -->
+  </div>
+
+  <!-- Astrum Footer -->
+  {% include "astrum-footer.html" %}
+  <!-- End Astrum Footer -->
+{% endblock body %}
+
+{% block body-extend %}
+  <!-- No content from body-extend. -->
+{% endblock body-extend %}
