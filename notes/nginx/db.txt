@@ -1,0 +1,52 @@
+ip-10-10-20-129:~ granthulegaard$ ssh gshulegaard@frontend1-int.naas.nginx.com
+Saving password to keychain failed
+Identity added: /Users/granthulegaard/.ssh/id_rsa ((null))
+Welcome to Ubuntu 14.04.3 LTS (GNU/Linux 3.13.0-48-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+  System information as of Wed Nov 18 15:03:13 UTC 2015
+
+  System load:  0.07              Processes:           224
+  Usage of /:   32.9% of 7.75GB   Users logged in:     0
+  Memory usage: 21%               IP address for eth0: 172.30.0.44
+  Swap usage:   0%
+
+  Graph this data and manage this system at:
+    https://landscape.canonical.com/
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+
+
+The programs included with the Ubuntu system are free software;
+the exact distribution terms for each program are described in the
+individual files in /usr/share/doc/*/copyright.
+
+Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
+applicable law.
+
+gshulegaard@frontend1:~$ psql -h localhost -p 6432 -U naas -d system
+psql (9.4.4)
+Type "help" for help.
+
+localhost naas@system=# select * from common_routing
+localhost naas@system[-]> ^C
+localhost naas@system=# ^C
+localhost naas@system=# ^C
+localhost naas@system=# select * from common_routing where account_id = 43
+localhost naas@system[-]> ;
+ account_id |   common   |   data   | lookup
+------------+------------+----------+--------
+         43 | common_004 | data_005 | f
+(1 row)
+
+localhost naas@system=# \c
+\cd         \connect    \conninfo   \copy       \copyright
+localhost naas@system=# \c common_004
+You are now connected to database "common_004" as user "naas".
+localhost naas@common_004=# select * from nginx_configs where object_id = 40
+localhost naas@common_004[-]> ;
+localhost naas@common_004=#
+localhost naas@common_004=#

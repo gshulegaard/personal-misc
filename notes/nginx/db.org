@@ -1,0 +1,27 @@
+* Basics
+
+** Example
+
+# SSH into any server that has acceess to our DB clusters.
+ip-10-10-20-129:~ granthulegaard$ ssh gshulegaard@frontend1-int.naas.nginx.com
+
+# Connect to postgres
+gshulegaard@frontend1:~$ psql -h localhost -p 6432 -U naas -d system
+psql (9.4.4)
+Type "help" for help.
+
+# Look up the routing information
+localhost naas@system=# select * from common_routing;
+localhost naas@system=# select * from common_routing where account_id = 43;
+ account_id |   common   |   data   | lookup
+------------+------------+----------+--------
+         43 | common_004 | data_005 | f
+(1 row)
+
+# Connect to the appropriate database instance (this example connects to the
+# common instance where the specific account is located)
+localhost naas@system=# \c common_004
+You are now connected to database "common_004" as user "naas".
+
+# Select the information you were interested in...
+localhost naas@common_004=# select * from nginx_configs where object_id = 40;

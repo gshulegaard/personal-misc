@@ -1,0 +1,9 @@
+2015-12-16 16:49:12,973 [37] 140183446949552_10030 bridge modified payload; current payload stats: meta - 30, metrics - 29, events - 1, configs - 1
+
+2.3% MEM -- KiB Mem:   2050296 total
+47156.808 KiB
+
+Normal operation (dev1-int):
+
+0.6% MEM -- KiB Mem:   4046840 total
+24281.04 KiB
