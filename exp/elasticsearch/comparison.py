@@ -29,10 +29,10 @@ elastic_client = Elasticsearch('localhost')
 
 # Configure Elasticsearch index
 test = Index('test', using=elastic_client)
-test.settings(max_result_window=100000000)  # For testing only.  Using the _scroll api might be better suited in future.
+# test.settings(max_result_window=100000000)  # For testing only.  Using the _scroll api might be better suited in future.
 # Index housekeeping
-test.delete(ignore=404)
-test.create()
+# test.delete(ignore=404)
+# test.create()
 
 
 # Define and Register the Elasticsearch document to the test index
