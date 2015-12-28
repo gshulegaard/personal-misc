@@ -1,0 +1,63 @@
+* How-To: Build/Deploy NAAS Packages
+
+Useful info on Wiki: moin.nginx.com/NAAS#Packaging
+
+Two different process:
+  - naas-agent
+  - naas-backend
+
+This is partly because naas-agent is open-source and externally facing and partly 
+because naas-backend has more parts.
+
+** naas-agent
+
+*** Process
+
+Steps:
+  1) ssh to dev1-int.naas.nginx.com
+  2) open bash shell ($ bash)
+  3) clone repositories
+  4) tools/builder.py
+    - if get-pip.py error: $ python get-pip.py --user --force-reinstall
+    - git must be configured:
+      + $ git config --local user.name <name/username>
+      + $ git config --local user.email <e-mail>
+  5) $ dpkg -i /path/to/built/package
+
+** naas-backend
+
+*** Process
+
+Steps:
+  1) ssh to dev1-int.naas.nginx.com
+  2) open bash shell ($ bash)
+  3) clone repositories
+  4) tools/builder.py
+    - if get-pip.py error: $ python get-pip.py --user --force-reinstall
+    - git must be configured:
+      + $ git config --local user.name <name/username>
+      + $ git config --local user.email <e-mail>
+
+For the installation of the naas-backend, there are multiple packages.  The only 
+really important detail is that 'naas-backend-common*' should be installed before 
+the others.
+
+Step 5) in steps:
+  1) $ sudo dpkg -i /path/to/dir/naas-backend-common_*.deb
+  2) $ sudo dpkg -i /path/to/dir/*.deb
+
+Obviously, the common package will be installed twice, but so long as the new 
+version was installed before the others, the new code will be picked up during the 
+restart process.
+
+*** Deploy
+
+Some deployment aspects (installing packages) are covered as part of the "Process" 
+section.  Other (optional) details are covered here.
+
+Making SQL changes:
+  1) $ psql -h localhost -p 6432 -U naas -d system
+  2) $ \c data_1 or $ \c common_1  to connect to the appropriate database to alter.
+  3) Run your SQL alter statement
+  ...
+  4) For production, this should be repeated for all database instances.
