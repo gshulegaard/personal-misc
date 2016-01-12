@@ -1,0 +1,246 @@
+This file outlines the set-up process and findings of gshulegaard's LXC
+research.  The goal is to gather enough of an understanding to determine what
+challenges there are when working with kernel virtualization, how naas-agent
+currently interacts within containers, and determine possible better ways
+forward when handling containers.
+
+* Kernel virtualization overview
+
+http://moi.vonos.net/linux/linux-containers/
+https://linuxcontainers.org/lxc/introduction/
+
+LXC is a userspace API that provides access to several kernel features and
+wraps them to create convenient kernel virtualization (containers) and
+management.
+
+These features are:
+  - Kernel namespaces (ipc, uts, mount, pid, network and user)
+  - Apparmor and SELinux profiles
+  - Seccomp policies
+  - Chroots (using pivot_root)
+  - Kernel capabilities
+  - CGroups (control groups)
+
+With LXC bringing these various kernel features together it is easier for a
+Linux user to create and manage kernel virtual environments somewhere between
+chroot and a full fledged virtual machine.
+
+LXC is a collection of userspace components:
+  - liblxc library
+  - Several language bindings for the API
+  - A set of tools (command-line) to manage the containers
+  - Distribution channels for container templates
+
+*** OpenVZ and the history of kernel virtualization
+
+Before the Linux kernel had the features required for LXC, OpenVZ was a project
+whose core competency were a set of kernel patches that enabled kernel
+virtualization.  Over time many of the patches/added kernel features of OpenVZ
+were incorported (in some way) into the mainline kernel.
+
+At this time, many OpenVZ devs started LXC as a re-envisioning of the OpenVZ
+userspace tools but built on top of the then new mainline kernel features
+rather than custom kernel patches.
+
+Ostensibly, OpenVZ also migrated to using the mainline features under the
+covers as well over time.
+
+*** LXD and the future of LXC
+
+https://linuxcontainers.org/lxd/introduction/
+http://www.ubuntu.com/cloud/lxd
+https://insights.ubuntu.com/2015/04/28/getting-started-with-lxd-the-container-lightervisor/
+
+LXD considers itself a container "hypervisor".  It considers LXC a low-level
+API enabling kernel virtualization that it builds on top of to provide
+virtualization featuers akin to a tradtional VM hypervisor.
+
+It is composed of three major compnenents:
+  - A system-wide daemon (lxd)
+  - A command line client (lxc)
+  - An OpenStack Nova plugin (nova-compute-lxd)
+
+LXD uses liblxc and its Go binding under the hood.  It's basically an
+alternative to LXC's tools and distribution template system.  It provides some
+sensible configuration out of the box, creates/exposes a REST API for network
+management, and uses images rather than templates for container initialization.
+
+Feature list at a glance:
+  - Full operating system functionality within containers, not just single
+    processes
+  - Maximum density of guests per host, providing a cost benefit when running in
+    a public cloud
+  - Allows easy management and sharing of hardware resources, and easy
+    monitoring of customer processes directly from the host level 
+  - REST API, and simple, single command line with proper help and
+    documentation 
+  - Support for architectures under‐served by full virtualisation
+  - Rapid provisioning, instant guest boot
+  - Tightly integrated with remote image services
+  - vSecure by default, with AppArmor, user namespaces, SECCOMP
+  - Implemented in Go, offering improved performance, concurrency, typing, and
+    networking
+  - Intelligent, extensible storage and networking
+
+
+* Setting up LXD/LXC
+
+https://linuxcontainers.org/lxd/getting-started-cli/
+http://blog.scottlowe.org/2015/05/06/quick-intro-lxd/
+
+1. Update and upgrade system
+  ```
+  $ sudo apt-get update
+  $ sudo apt-get upgrade
+  $ sudo apt-get dist-upgrade
+  ```
+
+2. Install lxd
+  ```
+  $ sudo apt-get install lxd
+  ```
+
+3. Add remote container image distributor
+  ```
+  $ lxc remote add <local name> <remote URL/FQDN>
+  # e.g. add the default site with local alias 'lxc-org':
+  # $ lxc remote add lxc-org images.linuxcontainers.org
+  ```
+
+4. (optional) Download an image to your local distributor
+  ```
+  $ lxc image copy <remote name>:/path/to/image local: --alias=<image name>
+  # e.g. download amd64 trusty to your local system:
+  # $ lxc image copy lxc-org:/ubuntu/trusty/amd64 local: \
+  # --alias=ubuntu-trusty-amd64
+  ```
+
+5. Create a container
+  ```
+  $ lxc launch <image name> <container name>
+  # $ lxc launch ubunutu-trusty-amd64 trusty64
+  ```
+
+6. Get into the system
+  ```
+  $ lxc exec <container name> <command>
+  # The following will launch a bash shell in the new 'trusty64' container:
+  # $ lxc exec trusty64 bash
+  ```
+
+
+* naas-agent
+
+** Installation into an LXC container
+
+To start off I simply installed our agent into an ubuntu-trusty-amd64
+container.  I followed our 'ubuntu1404/Dockerfile' as preparation and then
+followed our general open source directions (install.sh) to install the agent.
+
+*** Setup
+
+**** Dockerfile preparation
+
+```
+$ apt-get update
+$ apt-get install -y tar curl nano wget dialog net-tools build-essential
+$ apt-get install -y --fix-missing nginx
+$ apt-get install -y python python-dev python-distribute
+$ easy_install pip
+$ pip install lockfile gevent netifaces pytest-xdist ujson psutil requests \
+netaddr pyparsing setproctitle python-daemon
+```
+
+**** Install agent
+*** Observations
+
+(NAAS-848)
+
+** Exploring disk_io_counters failure
+
+Given that a straight installation revealed an issue with 'disk_io_counters' I
+tried to reproduce the problem and perhaps retrieve a stack trace.
+
+*** Setup...
+
+Instead of going through a full install process, I just did the Dockerfile prep:
+  ```
+  $ apt-get update
+  $ apt-get install -y tar curl nano wget dialog net-tools build-essential
+  $ apt-get install -y --fix-missing nginx
+  $ apt-get install -y python python-dev python-distribute
+  $ easy_install pip
+  $ pip install lockfile gevent netifaces pytest-xdist ujson psutil requests \
+  netaddr pyparsing setproctitle python-daemon
+  ```
+
+*** Test
+
+Noting in amplify.agent.containers.system.collectors.metrics that our
+'disk_io_counters' method uses psutil to collect metrics, I sought to test using
+the psutil library within a simple Python shell.
+
+```
+$ python
+Python 2.7.6 (default, Jun 22 2015, 17:58:13) 
+[GCC 4.8.2] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import time
+>>> import os
+>>> import re
+>>> import psutil
+>>> from collectiosn import defaultdict
+>>> disk_counters = {'__all__': psutil.disk_io_counters(perdisk=False)}
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python2.7/dist-packages/psutil/__init__.py", line 1699, in disk_io_counters
+    raise RuntimeError("couldn't find any physical disk")
+RuntimeError: couldn't find any physical disk
+```
+
+Which immediately reproduced the RuntimeError we were seeing in our logs.
+
+*** Python3 test
+
+A theory I had was that LXC/kernel virtualization support might have been added
+to psutils in Python 3 but not backported to 2.X.  As a quick test I did some
+additional setup of my container's Python 3 environment:
+
+```
+$ apt-get install python3-setuptools python3-dev
+$ easy_install3 pip
+$ pip3 install lockfile gevent netifaces pytest-xdist ujson psutil requests \
+netaddr pyparsing setproctitle python-daemon
+```
+
+I then ran the same test as before from the Python 3 shell:
+
+```
+$ python3
+Python 3.4.3 (default, Oct 14 2015, 20:28:29) 
+[GCC 4.8.4] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import time
+>>> import os
+>>> import re
+>>> import psutil
+>>> from collections import defaultdict
+>>> disk_counters = {'__all__': psutil.disk_io_counters(perdisk=False)}
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/usr/local/lib/python3.4/dist-packages/psutil/__init__.py", line 1699, in disk_io_counters
+    raise RuntimeError("couldn't find any physical disk")
+RuntimeError: couldn't find any physical disk
+```
+
+But as you can see, it would appear that the Python 3 psutil library has the
+same error.
+
+
+* psutil/ptop/htop/top
+
+The next step is to get some sort of comparison between popular monitoring
+tools to start seeing what works, what doesn't, and why.
+
+With this information we can then start to formulate a direction/method for
+handling monitoring withint containers and even VMs
