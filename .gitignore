@@ -65,3 +65,6 @@ target/
 
 # NodeJS
 node_modules/
+
+# Mac OS
+.DS_Store
