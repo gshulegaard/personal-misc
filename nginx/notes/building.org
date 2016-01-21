@@ -10,7 +10,7 @@ This is partly because naas-agent is open-source and externally facing and partl
 because naas-backend has more parts.
 
 ** naas-agent
-
+   
 *** Process
 
 Steps:
@@ -23,6 +23,7 @@ Steps:
       + $ git config --local user.name <name/username>
       + $ git config --local user.email <e-mail>
   5) $ dpkg -i /path/to/built/package
+
 
 ** naas-backend
 
