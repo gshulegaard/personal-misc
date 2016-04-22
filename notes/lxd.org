@@ -133,6 +133,8 @@ http://blog.scottlowe.org/2015/05/06/quick-intro-lxd/
   $ lxc exec <container name> <command>
   # The following will launch a bash shell in the new 'trusty64' container:
   # $ lxc exec trusty64 bash
+  # Complex commands will require a separator for correct parsing:
+  # $ lxc exec trusty64 -- ps -elf
   ```
 
 *** Installation
