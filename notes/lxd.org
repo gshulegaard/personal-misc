@@ -1,0 +1,333 @@
+* Kernel virtualization overview
+
+http://moi.vonos.net/linux/linux-containers/
+https://linuxcontainers.org/lxc/introduction/
+
+LXC is a userspace API that provides access to several kernel features and
+wraps them to create convenient kernel virtualization (containers) and
+management.
+
+These features are:
+  - Kernel namespaces (ipc, uts, mount, pid, network and user)
+  - Apparmor and SELinux profiles
+  - Seccomp policies
+  - Chroots (using pivot_root)
+  - Kernel capabilities
+  - CGroups (control groups)
+
+With LXC bringing these various kernel features together it is easier for a
+Linux user to create and manage kernel virtual environments somewhere between
+chroot and a full fledged virtual machine.
+
+LXC is a collection of userspace components:
+  - liblxc library
+  - Several language bindings for the API
+  - A set of tools (command-line) to manage the containers
+  - Distribution channels for container templates
+
+*** OpenVZ and the history of kernel virtualization
+
+Before the Linux kernel had the features required for LXC, OpenVZ was a project
+whose core competency were a set of kernel patches that enabled kernel
+virtualization.  Over time many of the patches/added kernel features of OpenVZ
+were incorported (in some way) into the mainline kernel.
+
+At this time, many OpenVZ devs started LXC as a re-envisioning of the OpenVZ
+userspace tools but built on top of the then new mainline kernel features
+rather than custom kernel patches.
+
+Ostensibly, OpenVZ also migrated to using the mainline features under the
+covers as well over time.
+
+*** LXD and the future of LXC
+
+https://linuxcontainers.org/lxd/introduction/
+http://www.ubuntu.com/cloud/lxd
+https://insights.ubuntu.com/2015/04/28/getting-started-with-lxd-the-container-lightervisor/
+
+LXD considers itself a container "hypervisor".  It considers LXC a low-level
+API enabling kernel virtualization that it builds on top of to provide
+virtualization featuers akin to a tradtional VM hypervisor.
+
+It is composed of three major compnenents:
+  - A system-wide daemon (lxd)
+  - A command line client (lxc)
+  - An OpenStack Nova plugin (nova-compute-lxd)
+
+LXD uses liblxc and its Go binding under the hood.  It's basically an
+alternative to LXC's tools and distribution template system.  It provides some
+sensible configuration out of the box, creates/exposes a REST API for network
+management, and uses images rather than templates for container initialization.
+
+Feature list at a glance:
+  - Full operating system functionality within containers, not just single
+    processes
+  - Maximum density of guests per host, providing a cost benefit when running in
+    a public cloud
+  - Allows easy management and sharing of hardware resources, and easy
+    monitoring of customer processes directly from the host level 
+  - REST API, and simple, single command line with proper help and
+    documentation 
+  - Support for architectures under‐served by full virtualisation
+  - Rapid provisioning, instant guest boot
+  - Tightly integrated with remote image services
+  - vSecure by default, with AppArmor, user namespaces, SECCOMP
+  - Implemented in Go, offering improved performance, concurrency, typing, and
+    networking
+  - Intelligent, extensible storage and networking
+
+
+* Getting started with LXD
+
+https://linuxcontainers.org/lxd/getting-started-cli/
+https://www.stgraber.org/2016/03/11/lxd-2-0-blog-post-series-012/
+https://github.com/lxc/lxd/blob/master/doc
+
+You can think of setting up LXD/LXC as a series of general steps:
+
+1) Install packages/wrappers for kernel virtualization
+2) Create containers from images
+3) Configure and interact with the container
+
+*** Quick start
+
+http://blog.scottlowe.org/2015/05/06/quick-intro-lxd/
+
+1. Update and upgrade system
+  ```
+  $ sudo apt-get update
+  $ sudo apt-get upgrade
+  $ sudo apt-get dist-upgrade
+  ```
+
+2. Install lxd
+  ```
+  $ sudo apt-get install lxd
+  $ sudo lxd init
+  # After this `lxd` can be called via the `lxc` key command.
+  ```
+
+3. Add remote container image distributor
+  ```
+  $ lxc remote add <local name> <remote URL/FQDN>
+  # e.g. add the default site with local alias 'lxc-org':
+  # $ lxc remote add lxc-org images.linuxcontainers.org
+  ```
+
+4. (optional) Download an image to your local distributor
+  ```
+  $ lxc image copy <remote name>:/path/to/image local: --alias=<image name>
+  # e.g. download amd64 trusty to your local system:
+  # $ lxc image copy lxc-org:/ubuntu/trusty/amd64 local: \
+  # --alias=ubuntu-trusty-amd64
+  ```
+
+5. Create a container
+  ```
+  $ lxc launch <image name> <container name>
+  # $ lxc launch ubunutu-trusty-amd64 trusty64
+  ```
+
+6. Get into the system
+  ```
+  $ lxc exec <container name> <command>
+  # The following will launch a bash shell in the new 'trusty64' container:
+  # $ lxc exec trusty64 bash
+  ```
+
+*** Installation
+
+Update and upgrade system:
+  ```
+  $ sudo apt-get update
+  $ sudo apt-get upgrade
+  $ sudo apt-get dist-upgrade
+  ```
+
+Install lxd:
+  ```
+  $ sudo apt-get install lxd
+  ```
+
+(Optional?) Init lxd:
+  ```
+  $ sudo lxd init
+  # After this `lxd` can be called via the `lxc` key command.
+  ```
+
+*** Configuration of lxd
+
+https://github.com/lxc/lxd/blob/master/doc/configuration.md#server-configuration
+
+Besides the configuring of the lxd server, I also found it useful to change the
+default editor in Ubuntu with: `sudo update-alternatives --config editor`.
+
+*** Managing remote image distributors
+
+https://www.stgraber.org/2016/03/30/lxd-2-0-image-management-512/
+
+By default, LXD installs on Ubuntu with 3 default remote locations:
+
+- local (default): This is the local LXD manager.
+- ubuntu: Canonical maintained `simmplestreams` based image server
+- ubuntu-daily: Canonical maintained daily builds (also using `simplestreams`
+  protocol)
+
+You can view all currently managed remotes with the `lxc remote list` command:
+
+```
+$ lxc remote list
++-----------------+------------------------------------------+---------------+--------+--------+
+|      NAME       |                   URL                    |   PROTOCOL    | PUBLIC | STATIC |
++-----------------+------------------------------------------+---------------+--------+--------+
+| local (default) | unix://                                  | lxd           | NO     | YES    |
++-----------------+------------------------------------------+---------------+--------+--------+
+| ubuntu          | https://cloud-images.ubuntu.com/releases | simplestreams | YES    | YES    |
++-----------------+------------------------------------------+---------------+--------+--------+
+| ubuntu-daily    | https://cloud-images.ubuntu.com/daily    | simplestreams | YES    | YES    |
++-----------------+------------------------------------------+---------------+--------+--------+
+```
+
+Adding a new remote image distributor is easy with the `lxc remote add <alias>
+<remote URL/FQDN>` command:
+
+```
+$ lxc remote add lxc-org images.linuxcontainers.org
+$ lxc remote list
++-----------------+------------------------------------------+---------------+--------+--------+
+|      NAME       |                   URL                    |   PROTOCOL    | PUBLIC | STATIC |
++-----------------+------------------------------------------+---------------+--------+--------+
+| local (default) | unix://                                  | lxd           | NO     | YES    |
++-----------------+------------------------------------------+---------------+--------+--------+
+| lxc-org         | https://images.linuxcontainers.org:8443  | lxd           | YES    | NO     |
++-----------------+------------------------------------------+---------------+--------+--------+
+| ubuntu          | https://cloud-images.ubuntu.com/releases | simplestreams | YES    | YES    |
++-----------------+------------------------------------------+---------------+--------+--------+
+| ubuntu-daily    | https://cloud-images.ubuntu.com/daily    | simplestreams | YES    | YES    |
++-----------------+------------------------------------------+---------------+--------+--------+
+```
+
+Additionally you can remove local remotes with `lxc remote remove <alias>`
+(e.g. `lxc remote remove lxc-org`).
+
+*** Managing container images
+
+You can see a list of locally managed images with `lxc image list`.  If you
+wanted to see a list of remotely accessible images you can slightly modify the
+same command: `lxc image list lxc-org:`.
+
+Filtering the image list is as simple as adding `<keyphrase>` or
+`<key>=<value>` pairs.  Keyphrases will filter based on alias or fingerprint by
+default.  E.g. `lxc image list lxc-org amd64 ubuntu` or `lxc image list lxc-org
+os=ubuntu` (property based filtering is not working a/o 4/19/2016)
+
+Although not required, you can copy images between LXD managers:
+
+```
+$ lxc image copy lxc-org:/ubuntu/trusty/amd64 local: --alias=t/amd64
+Image copied successfully!
+$ lxc image list
++---------+--------------+--------+----------------------------------------+--------+---------+-------------------------------+
+|  ALIAS  | FINGERPRINT  | PUBLIC |              DESCRIPTION               |  ARCH  |  SIZE   |          UPLOAD DATE          |
++---------+--------------+--------+----------------------------------------+--------+---------+-------------------------------+
+| t/amd64 | f3c0869f392c | no     | Ubuntu trusty (amd64) (20160419_03:49) | x86_64 | 75.69MB | Apr 19, 2016 at 10:34pm (UTC) |
++---------+--------------+--------+----------------------------------------+--------+---------+-------------------------------+
+```
+
+Removing images is simple: `lxc image delete t/amd64`.
+
+And editing is also simple: `lxc image edit t/amd64`. 
+(https://github.com/lxc/lxd/blob/master/doc/configuration.md#container-configuration)
+
+*** Creating/Removing a container
+
+Creating a container really is simple.  The simplest is to "launch" a container
+from a previously downloaded image (`lxc launch <image name> <container name>`):
+
+```
+$ lxc launch t trusty64
+# This will create a new container using the 't' image from 'local:' and it
+# will use the default profile.
+$ lxc list
++----------+---------+------+------+------------+-----------+
+|   NAME   |  STATE  | IPV4 | IPV6 |    TYPE    | SNAPSHOTS |
++----------+---------+------+------+------------+-----------+
+| trusty64 | RUNNING |      |      | PERSISTENT | 0         |
++----------+---------+------+------+------------+-----------+
+```
+
+You don't have to use local images and can create containers with fully
+qualified remote paths instead.  An equivalent container would be:
+
+```
+$ lxc launch lxc-org:ubuntu/trusty/amd64 trusty64
+# If you don't want to start the container, replace 'launch' with 'init'.
+```
+
+Removing a container is two parts: Stopping the container, deleting the container.
+
+```
+$ lxc stop trusty64
+$ lxc delete trusty64
+```
+
+*** Creating container images with publish
+
+One you have configured a container just how you would like, you can turn any
+container into an image with the following command:
+
+```
+$ lxc publish trusty64 --alias my-new-image
+Container published with fingerprint: \
+2b3eb41708dfb2358eb52b2dca885aef48bdeda61fb461289b233376ba731536
+# This might take some time as lxd gathers all of the required meta
+# information, configs, and config settings.
+```
+
+Containers have to be stopped in order for `lxc publish` to work.
+
+You can even create images from snapshots:
+
+```
+$ lxc publish trusty64/snapshot-name --alias my-new-image
+```
+
+Now if you list the images on your local machine, you will see your new image:
+
+```
+$ lxc image list
++----------+--------------+--------+-------------+--------+----------+------------------------------+
+| ALIAS    | FINGERPRINT  | PUBLIC | DESCRIPTION |  ARCH  |   SIZE   |         UPLOAD DATE          |
++----------+--------------+--------+-------------+--------+----------+------------------------------+
+| trusty64 | 2b3eb41708df | no     |             | x86_64 | 115.86MB | Apr 21, 2016 at 6:35pm (UTC) |
++----------+--------------+--------+-------------+--------+----------+------------------------------+
+```
+
+When you publish a new container with the same alias, the old one will be
+retained, but the alias will be removed and the new one will be given
+precidence:
+
+```
+gshulegaard@ronin:~$ lxc image list
++----------+--------------+--------+-------------+--------+----------+------------------------------+
+| ALIAS    | FINGERPRINT  | PUBLIC | DESCRIPTION |  ARCH  |   SIZE   |         UPLOAD DATE          |
++----------+--------------+--------+-------------+--------+----------+------------------------------+
+| trusty64 | 3b7baca4c90b | no     |             | x86_64 | 115.85MB | Apr 21, 2016 at 6:41pm (UTC) |
++----------+--------------+--------+-------------+--------+----------+------------------------------+
+|          | 2b3eb41708df | no     |             | x86_64 | 115.86MB | Apr 21, 2016 at 6:35pm (UTC) |
++----------+--------------+--------+-------------+--------+----------+------------------------------+
+```
+
+In order to remove old containers without alias you will have to use their
+fingerprint (e.g. `lxc image delete 2b3eb41708df`).
+
+When publishing container images, it is important to inspect the
+`metadata.yaml` and templates which can be found in
+`/var/lib/lxd/containers/<my-container>`.  The template handling is powerful
+but can lead to unexpected results when distributing/creating containers.
+
+Publishing containers apparently read user-defined properties from
+`metadate.yaml` at the moment, so as a work-around you can edit the container
+image information after publishing with `lxc image edit <image-identifier>`.
+In most cases, simply adding/copying a `properties:` block is sufficient.
+

@@ -1,0 +1,47 @@
+architecture: x86_64
+creation_date: 1461210540
+properties:
+  architecture: x86_64
+  description: Ubuntu 14.04 (Trusty Tahr) x86_64
+  os: ubuntu
+  release: trusty
+  base_image: lxc-org:ubuntu/trusty/amd64
+templates:
+  /etc/hostname:
+    template: hostname.tpl
+    when:
+      - create
+      - copy
+      - rename
+  /etc/hosts:
+    template: hosts.tpl
+    when:
+      - create
+      - copy
+      - rename
+  /etc/init/console.override:
+    template: upstart-override.tpl
+    when:
+      - create
+  /etc/init/tty1.override:
+    template: upstart-override.tpl
+    when:
+      - create
+  /etc/init/tty2.override:
+    template: upstart-override.tpl
+    when:
+      - create
+  /etc/init/tty3.override:
+    template: upstart-override.tpl
+    when:
+      - create
+  /etc/init/tty4.override:
+    template: upstart-override.tpl
+    when:
+      - create
+  /etc/network/interfaces:
+    template: interfaces.tpl
+    when:
+      - create
+      - copy
+    create_only: false
